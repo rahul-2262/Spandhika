@@ -296,24 +296,21 @@ function Hero() {
             <span className="absolute inset-0 rounded-full bg-tertiary-fixed/50 ring-pulse" style={{ animationDelay: "1.2s" }} />
           </div>
 
-          <div className="float-slow">
-            <FloatingCard
-              className="top-4 left-2 sm:top-8 sm:-left-3 lg:-left-10"
-              label="Live Pressure"
-              value="38.2"
-              unit="kPa"
-              sub="Heel · Right"
-              accent
-            />
-          </div>
-          <div className="float-slow-rev">
-            <FloatingCard
-              className="bottom-4 right-2 sm:bottom-8 sm:-right-3 lg:-right-6"
-              label="Gait Balance"
-              value="94%"
-              sub="Symmetry score"
-            />
-          </div>
+          <FloatingCard
+            className="top-4 left-2 sm:top-8 sm:-left-3 lg:-left-10 float-slow"
+            label="Live Pressure"
+            value="38.2"
+            unit="kPa"
+            sub="Heel · Right"
+            accent
+          />
+          <FloatingCard
+            className="bottom-4 right-2 sm:bottom-8 sm:-right-3 lg:-right-6 float-slow-rev"
+            label="Gait Balance"
+            value="94%"
+            sub="Symmetry score"
+          />
+
         </div>
       </div>
     </section>

@@ -201,7 +201,7 @@ function Hero() {
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/40 via-transparent to-transparent" />
           </div>
           <FloatingCard
-            className="top-6 -left-2 sm:top-8 sm:-left-3 lg:-left-10"
+            className="top-4 left-2 sm:top-8 sm:-left-3 lg:-left-10"
             label="Live Pressure"
             value="38.2"
             unit="kPa"

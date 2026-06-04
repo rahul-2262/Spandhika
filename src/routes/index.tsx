@@ -455,7 +455,7 @@ function Range() {
           {showAll ? "Show less" : `View all ${orthotics.length}`}
           <Icon name={showAll ? "expand_less" : "expand_more"} className="text-base" />
         </button>
-        {void visible}
+        
       </div>
     </section>
   );

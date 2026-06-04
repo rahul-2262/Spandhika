@@ -101,17 +101,17 @@ function FloatingCard({
 }) {
   return (
     <div
-      className={`absolute rounded-2xl bg-card/90 backdrop-blur-md shadow-xl border border-outline-variant/60 p-3 sm:p-4 w-36 sm:w-44 ${className ?? ""}`}
+      className={`absolute rounded-2xl bg-card/90 backdrop-blur-md shadow-xl border border-outline-variant/60 p-3 sm:p-4 w-32 sm:w-44 ${className ?? ""}`}
     >
-      <div className="flex items-center gap-2 label-caps text-on-surface-variant">
-        <span className={`w-2 h-2 rounded-full ${accent ? "bg-tertiary-fixed-dim pressure-pulse" : "bg-primary"}`} />
+      <div className="flex items-center gap-2 label-caps text-on-surface-variant whitespace-nowrap text-[10px] sm:text-xs">
+        <span className={`w-2 h-2 rounded-full shrink-0 ${accent ? "bg-tertiary-fixed-dim pressure-pulse" : "bg-primary"}`} />
         {label}
       </div>
       <div className="mt-2 flex items-baseline gap-1">
-        <span className="text-xl sm:text-2xl font-semibold text-primary">{value}</span>
+        <span className="text-lg sm:text-2xl font-semibold text-primary">{value}</span>
         {unit && <span className="text-xs text-on-surface-variant">{unit}</span>}
       </div>
-      <div className="text-xs text-on-surface-variant mt-1">{sub}</div>
+      <div className="text-[11px] sm:text-xs text-on-surface-variant mt-1">{sub}</div>
     </div>
   );
 }
@@ -189,7 +189,7 @@ function Hero() {
           </div>
         </div>
 
-        <div className="relative h-[360px] sm:h-[460px] lg:h-[560px] order-first lg:order-none">
+        <div className="relative h-[340px] sm:h-[460px] lg:h-[560px] order-first lg:order-none mx-1 sm:mx-0">
           <div className="absolute inset-0 rounded-[2rem] overflow-hidden bg-primary">
             <img
               src={heroFoot}
@@ -201,7 +201,7 @@ function Hero() {
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/40 via-transparent to-transparent" />
           </div>
           <FloatingCard
-            className="top-6 -left-2 sm:top-8 sm:-left-3 lg:-left-10"
+            className="top-4 left-2 sm:top-8 sm:-left-3 lg:-left-10"
             label="Live Pressure"
             value="38.2"
             unit="kPa"
@@ -209,7 +209,7 @@ function Hero() {
             accent
           />
           <FloatingCard
-            className="bottom-6 -right-2 sm:bottom-8 sm:-right-3 lg:-right-6"
+            className="bottom-4 right-2 sm:bottom-8 sm:-right-3 lg:-right-6"
             label="Gait Balance"
             value="94%"
             sub="Symmetry score"
@@ -609,7 +609,7 @@ function Footer() {
 
 function Index() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Nav />
       <main>
         <Hero />

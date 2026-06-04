@@ -172,10 +172,10 @@ function Hero() {
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 pt-12 pb-20 sm:pt-16 sm:pb-24 lg:pt-28 lg:pb-32 grid lg:grid-cols-2 gap-10 lg:gap-12 items-center relative">
         <div>
           <Eyebrow>Smart orthotic insoles</Eyebrow>
-          <h1 className="mt-5 sm:mt-6 text-[34px] sm:text-5xl lg:text-[64px] leading-[1.05] tracking-[-0.02em] font-bold text-primary">
+          <h1 className="mt-5 sm:mt-6 text-[30px] sm:text-5xl lg:text-[64px] leading-[1.05] tracking-[-0.02em] font-bold text-primary">
             Better movement starts from your feet.
           </h1>
-          <p className="mt-5 sm:mt-6 text-base sm:text-lg text-on-surface-variant max-w-xl leading-relaxed">
+          <p className="mt-5 sm:mt-6 text-[15px] sm:text-lg text-on-surface-variant max-w-xl leading-relaxed">
             Most people ignore foot problems until they affect posture, comfort, and daily life.
             Spandhika is a smart orthotic insole that listens to how you walk — and helps you move better.
           </p>
@@ -280,16 +280,16 @@ const signs = [
 
 function Problem() {
   return (
-    <section id="problem" className="py-16 sm:py-20 lg:py-32 bg-surface-container-low">
+    <section id="problem" className="py-14 sm:py-20 lg:py-32 bg-surface-container-low">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
         <Eyebrow>The signs</Eyebrow>
-        <h2 className="mt-4 max-w-2xl text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
+        <h2 className="mt-4 max-w-2xl text-[26px] sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
           You might be ignoring the signs.
         </h2>
-        <p className="mt-5 max-w-2xl text-on-surface-variant text-base sm:text-lg">
+        <p className="mt-5 max-w-2xl text-on-surface-variant text-[15px] sm:text-lg">
           Small discomforts are usually the first chapter of a bigger story. Here's what your feet might be trying to tell you.
         </p>
-        <div className="mt-10 sm:mt-12 grid sm:grid-cols-2 gap-4 sm:gap-5">
+        <div className="mt-8 sm:mt-12 grid sm:grid-cols-2 gap-4 sm:gap-5">
           {signs.map((s) => (
             <div
               key={s.title}
@@ -328,7 +328,7 @@ const features = [
 
 function Features() {
   return (
-    <section id="features" className="py-16 sm:py-20 lg:py-32 bg-primary text-primary-foreground relative overflow-hidden">
+    <section id="features" className="py-14 sm:py-20 lg:py-32 bg-primary text-primary-foreground relative overflow-hidden">
       <div className="blob bg-tertiary-fixed w-[500px] h-[500px] -bottom-40 -right-40 opacity-20" />
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 relative">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
@@ -337,17 +337,17 @@ function Features() {
               <span className="h-px w-6 bg-tertiary-fixed-dim" />
               Flagship innovation
             </div>
-            <h2 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
+            <h2 className="mt-4 text-[32px] sm:text-5xl lg:text-6xl font-bold tracking-tight">
               Meet SAARTHI<span className="text-tertiary-fixed-dim">™</span>
             </h2>
           </div>
-          <p className="lg:col-span-5 text-base sm:text-lg text-on-primary-container leading-relaxed">
+          <p className="lg:col-span-5 text-[15px] sm:text-lg text-on-primary-container leading-relaxed">
             The world's most advanced smart insole system. SAARTHI™ doesn't just cushion your step; it understands it.
           </p>
         </div>
 
         {/* Exploded insole visual */}
-        <div className="mt-12 lg:mt-16 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="mt-10 lg:mt-16 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           <div className="lg:col-span-6 relative">
             <div className="absolute inset-0 -m-6 rounded-[2rem] bg-tertiary-fixed/10 blur-3xl" />
             <div className="relative rounded-[2rem] overflow-hidden bg-[#f4f1e6] border border-on-primary-container/20">
@@ -379,7 +379,7 @@ function Features() {
               <li key={l.layer} className="flex items-start gap-4 rounded-2xl bg-primary-container/40 p-4 border border-on-primary-container/15">
                 <span className="label-caps text-tertiary-fixed-dim mt-1">{l.layer}</span>
                 <div>
-                  <div className="text-base sm:text-lg font-semibold">{l.name}</div>
+                  <div className="text-[15px] sm:text-lg font-semibold">{l.name}</div>
                   <div className="text-sm text-on-primary-container/90">{l.desc}</div>
                 </div>
               </li>
@@ -417,16 +417,16 @@ const orthotics = [
 
 function Range() {
   return (
-    <section className="py-16 sm:py-20 lg:py-32">
+    <section className="py-14 sm:py-20 lg:py-32">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
         <Eyebrow>Problems we are solving</Eyebrow>
         <div className="mt-4 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary flex items-center gap-3">
+          <h2 className="text-[26px] sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary flex items-center gap-3">
             <Icon name="footprint" className="text-4xl text-tertiary-fixed-dim" />
             Orthotics Range
           </h2>
         </div>
-        <div className="mt-10 sm:mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="mt-8 sm:mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {orthotics.map((o) => (
             <div
               key={o.title}
@@ -477,16 +477,16 @@ const audiences = [
 
 function Audience() {
   return (
-    <section id="audience" className="py-16 sm:py-20 lg:py-32 bg-surface-container-low">
+    <section id="audience" className="py-14 sm:py-20 lg:py-32 bg-surface-container-low">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
         <Eyebrow>Applications</Eyebrow>
-        <h2 className="mt-4 max-w-2xl text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
+        <h2 className="mt-4 max-w-2xl text-[26px] sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
           Designed for everyday movement.
         </h2>
-        <p className="mt-5 max-w-2xl text-on-surface-variant text-base sm:text-lg">
+        <p className="mt-5 max-w-2xl text-on-surface-variant text-[15px] sm:text-lg">
           Built for anyone whose day depends on their feet — which is to say, almost everyone.
         </p>
-        <div className="mt-10 sm:mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <div className="mt-8 sm:mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {audiences.map((a) => (
             <div key={a.title} className="rounded-2xl overflow-hidden bg-card border border-outline-variant/60 hover:shadow-lg transition flex flex-col">
               <div className="relative h-40 sm:h-44 overflow-hidden bg-primary-container">
@@ -527,26 +527,26 @@ const pillars = [
 
 function Trust() {
   return (
-    <section className="py-16 sm:py-20 lg:py-32">
+    <section className="py-14 sm:py-20 lg:py-32">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
         <Eyebrow>Why trust Spandhika</Eyebrow>
-        <h2 className="mt-4 max-w-3xl text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
+        <h2 className="mt-4 max-w-3xl text-[26px] sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
           Built with research. Designed for real life.
         </h2>
-        <p className="mt-5 max-w-3xl text-on-surface-variant text-base sm:text-lg">
+        <p className="mt-5 max-w-3xl text-on-surface-variant text-[15px] sm:text-lg">
           Inspired by biomechanics and shaped by real-world movement challenges. We're combining what scientists know about gait with what people actually feel at the end of a long day.
         </p>
 
-        <div className="mt-10 sm:mt-12 grid grid-cols-3 gap-4 sm:gap-8 border-y border-outline-variant py-8 sm:py-10">
+        <div className="mt-8 sm:mt-12 grid grid-cols-3 gap-4 sm:gap-8 border-y border-outline-variant py-8 sm:py-10">
           {stats.map((s) => (
             <div key={s.label}>
-              <div className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-primary">{s.value}</div>
+              <div className="text-[28px] sm:text-5xl lg:text-6xl font-bold tracking-tight text-primary">{s.value}</div>
               <div className="mt-2 label-caps text-on-surface-variant">{s.label}</div>
             </div>
           ))}
         </div>
 
-        <div className="mt-10 sm:mt-12 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
+        <div className="mt-8 sm:mt-12 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
           {pillars.map((p) => (
             <div key={p.title} className="rounded-2xl p-6 sm:p-7 bg-surface-container-low">
               <Icon name={p.icon} className="text-3xl text-primary" />
@@ -557,7 +557,7 @@ function Trust() {
         </div>
 
         <blockquote className="mt-12 sm:mt-16 max-w-4xl">
-          <p className="text-xl sm:text-3xl lg:text-4xl font-medium text-primary leading-snug tracking-tight">
+          <p className="text-[20px] sm:text-3xl lg:text-4xl font-medium text-primary leading-snug tracking-tight">
             "We started Spandhika because the most invisible part of our body — the soles of our feet — quietly shapes everything above them."
           </p>
           <footer className="mt-4 text-on-surface-variant label-caps">— The Spandhika team</footer>
@@ -569,17 +569,17 @@ function Trust() {
 
 function Purpose() {
   return (
-    <section id="purpose" className="py-16 sm:py-20 lg:py-32 bg-primary text-primary-foreground relative overflow-hidden">
+    <section id="purpose" className="py-14 sm:py-20 lg:py-32 bg-primary text-primary-foreground relative overflow-hidden">
       <div className="blob bg-tertiary-fixed w-[600px] h-[600px] -top-60 left-1/2 -translate-x-1/2 opacity-20" />
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 relative text-center">
         <div className="inline-flex items-center gap-2 label-caps text-tertiary-fixed-dim justify-center">
           <span className="h-px w-6 bg-tertiary-fixed-dim" />
           Brand purpose
         </div>
-        <h2 className="mt-4 text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight max-w-3xl mx-auto">
+        <h2 className="mt-4 text-[28px] sm:text-5xl lg:text-6xl font-bold tracking-tight max-w-3xl mx-auto">
           We're not just building insoles.
         </h2>
-        <p className="mt-6 text-base sm:text-lg text-on-primary-container max-w-2xl mx-auto leading-relaxed">
+        <p className="mt-6 text-[15px] sm:text-lg text-on-primary-container max-w-2xl mx-auto leading-relaxed">
           We're building confidence, comfort, and better movement for everyday life — quietly, underfoot, for the people who carry the world on theirs.
         </p>
         <a

@@ -502,7 +502,7 @@ function Audience() {
         </p>
         <div className="mt-8 sm:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
           {audiences.map((a) => (
-            <div key={a.title} className="rounded-2xl overflow-hidden bg-card border border-outline-variant/60 hover:shadow-lg transition flex flex-col">
+            <div key={a.title} className="rounded-2xl overflow-hidden glass hover:shadow-xl transition flex flex-col">
               <div className="relative h-24 sm:h-44 overflow-hidden bg-primary-container">
                 <img
                   src={a.image}

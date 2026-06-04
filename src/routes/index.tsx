@@ -704,6 +704,148 @@ function Trust() {
   );
 }
 
+function Contact() {
+  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+  const [sent, setSent] = useState(false);
+
+  function onSubmit(e: FormEvent) {
+    e.preventDefault();
+    setSent(true);
+  }
+
+  return (
+    <section id="contact" className="py-14 sm:py-20 lg:py-32">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
+        <Eyebrow>Get in touch</Eyebrow>
+        <h2 className="mt-4 max-w-2xl text-[26px] sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
+          We'd love to hear from you.
+        </h2>
+        <p className="mt-5 max-w-2xl text-on-surface-variant text-[15px] sm:text-lg">
+          Whether you have questions about SAARTHI, want to partner with us, or just want to say hello — drop us a message.
+        </p>
+
+        <div className="mt-10 lg:mt-16 grid lg:grid-cols-2 gap-8 lg:gap-12">
+          {/* Contact info + Map */}
+          <Reveal className="space-y-6">
+            <div className="rounded-2xl overflow-hidden h-64 sm:h-80 glass-strong border border-outline-variant">
+              <iframe
+                src="https://www.openstreetmap.org/export/embed.html?bbox=77.1%2C28.5%2C77.3%2C28.7&layer=mapnik"
+                width="100%"
+                height="100%"
+                style={{ border: 0, filter: "grayscale(30%) contrast(1.1)" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Spandhika location map"
+              />
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="rounded-2xl glass p-5 sm:p-6 hover-lift">
+                <div className="w-10 h-10 rounded-xl bg-secondary-container text-primary flex items-center justify-center">
+                  <Icon name="mail" />
+                </div>
+                <div className="mt-3 label-caps text-on-surface-variant">Email</div>
+                <a href="mailto:spandhikaorthotics@gmail.com" className="mt-1 text-primary font-medium hover:opacity-80 break-all">
+                  spandhikaorthotics@gmail.com
+                </a>
+              </div>
+              <div className="rounded-2xl glass p-5 sm:p-6 hover-lift">
+                <div className="w-10 h-10 rounded-xl bg-secondary-container text-primary flex items-center justify-center">
+                  <Icon name="chat" />
+                </div>
+                <div className="mt-3 label-caps text-on-surface-variant">Social</div>
+                <a href="https://www.linkedin.com/company/spandhika-orthotics" target="_blank" rel="noopener noreferrer" className="mt-1 text-primary font-medium hover:opacity-80">
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Message form */}
+          <Reveal delay={120} className="rounded-2xl glass-strong p-6 sm:p-8 border border-outline-variant">
+            {sent ? (
+              <div className="h-full flex flex-col items-center justify-center text-center py-12">
+                <div className="w-16 h-16 rounded-full bg-tertiary-fixed/20 flex items-center justify-center">
+                  <Icon name="check_circle" className="text-4xl text-tertiary-fixed-dim" />
+                </div>
+                <h3 className="mt-6 text-xl font-semibold text-primary">Message sent!</h3>
+                <p className="mt-2 text-on-surface-variant">We'll get back to you as soon as possible.</p>
+                <button
+                  onClick={() => setSent(false)}
+                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm font-medium hover:opacity-90 transition"
+                >
+                  Send another
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={onSubmit} className="space-y-5">
+                <h3 className="text-lg sm:text-xl font-semibold text-primary">Send us a message</h3>
+                <div className="grid sm:grid-cols-2 gap-5">
+                  <div>
+                    <label htmlFor="contact-name" className="label-caps text-on-surface-variant mb-2 block">Name</label>
+                    <input
+                      id="contact-name"
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full rounded-xl glass px-4 py-3 text-base placeholder:text-on-surface-variant/70 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="contact-email" className="label-caps text-on-surface-variant mb-2 block">Email</label>
+                    <input
+                      id="contact-email"
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full rounded-xl glass px-4 py-3 text-base placeholder:text-on-surface-variant/70 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                      placeholder="you@example.com"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="contact-subject" className="label-caps text-on-surface-variant mb-2 block">Subject</label>
+                  <input
+                    id="contact-subject"
+                    type="text"
+                    required
+                    value={formData.subject}
+                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    className="w-full rounded-xl glass px-4 py-3 text-base placeholder:text-on-surface-variant/70 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                    placeholder="How can we help?"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="contact-message" className="label-caps text-on-surface-variant mb-2 block">Message</label>
+                  <textarea
+                    id="contact-message"
+                    required
+                    rows={4}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full rounded-xl glass px-4 py-3 text-base placeholder:text-on-surface-variant/70 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition resize-none"
+                    placeholder="Tell us what's on your mind..."
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3.5 font-medium shadow-lg shadow-primary/20 hover:scale-[1.01] hover:shadow-primary/30 transition-all"
+                >
+                  Send message
+                  <Icon name="send" className="text-base" />
+                </button>
+              </form>
+            )}
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Purpose() {
   return (
     <section id="purpose" className="py-14 sm:py-20 lg:py-32 bg-primary text-primary-foreground relative overflow-hidden">

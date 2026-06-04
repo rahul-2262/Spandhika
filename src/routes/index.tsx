@@ -223,14 +223,14 @@ function Hero() {
           </div>
         </div>
 
-        <div className="relative h-[260px] sm:h-[460px] lg:h-[560px] order-2 lg:order-none mx-1 sm:mx-0">
+        <div className="relative h-[200px] sm:h-[460px] lg:h-[560px] order-2 lg:order-none mx-1 sm:mx-0">
           <div className="absolute inset-0 rounded-[2rem] overflow-hidden bg-primary">
             <img
               src={heroFoot}
               alt="Foot pressure heatmap visualization"
               width={1024}
               height={1280}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-center scale-[1.35] sm:scale-100 origin-center"
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/40 via-transparent to-transparent" />
           </div>
@@ -416,6 +416,7 @@ const orthotics = [
 ];
 
 function Range() {
+  const [showAll, setShowAll] = useState(false);
   return (
     <section className="py-14 sm:py-20 lg:py-32">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
@@ -427,10 +428,13 @@ function Range() {
           </h2>
         </div>
         <div className="mt-8 sm:mt-12 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
-          {orthotics.map((o) => (
+          {/* On mobile: 4 items + toggle. On sm+: show all */}
+          {orthotics.map((o, i) => (
             <div
               key={o.title}
-              className="group rounded-2xl bg-surface-container-low p-4 sm:p-7 hover:bg-secondary-container transition-colors border border-transparent hover:border-primary/20"
+              className={`group rounded-2xl bg-surface-container-low p-4 sm:p-7 hover:bg-secondary-container transition-colors border border-transparent hover:border-primary/20 ${
+                !showAll && i >= 4 ? "hidden sm:block" : ""
+              }`}
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary to-primary-container text-tertiary-fixed flex items-center justify-center shadow-md">
@@ -443,10 +447,20 @@ function Range() {
             </div>
           ))}
         </div>
+        {/* Mobile-only toggle */}
+        <button
+          onClick={() => setShowAll((v) => !v)}
+          className="sm:hidden mt-5 w-full inline-flex items-center justify-center gap-2 rounded-full border border-primary/20 bg-card text-primary px-4 py-3 text-sm font-medium hover:bg-secondary-container transition"
+        >
+          {showAll ? "Show less" : `View all ${orthotics.length}`}
+          <Icon name={showAll ? "expand_less" : "expand_more"} className="text-base" />
+        </button>
+        
       </div>
     </section>
   );
 }
+
 
 const audiences = [
   {

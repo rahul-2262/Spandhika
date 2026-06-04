@@ -546,26 +546,27 @@ function Range() {
             Orthotics Range
           </h2>
         </div>
-        <div className="mt-8 sm:mt-12 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
+        <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
           {/* On mobile: 4 items + toggle. On sm+: show all */}
           {orthotics.map((o, i) => (
             <div
               key={o.title}
-              className={`group rounded-2xl glass p-4 sm:p-7 hover:shadow-xl transition-all ${
+              className={`group rounded-2xl glass p-4 sm:p-7 hover-lift hover:shadow-xl ${
                 !showAll && i >= 4 ? "hidden sm:block" : ""
               }`}
             >
               <div className="flex items-start justify-between gap-2">
-                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary to-primary-container text-tertiary-fixed flex items-center justify-center shadow-md">
+                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary to-primary-container text-tertiary-fixed flex items-center justify-center shadow-md transition-transform group-hover:scale-110 group-hover:rotate-6">
                   <Icon name={o.icon} className="text-xl sm:text-3xl" />
                 </div>
-                <Icon name="arrow_outward" className="text-primary opacity-0 group-hover:opacity-100 transition text-base sm:text-xl mt-1" />
+                <Icon name="arrow_outward" className="text-primary opacity-0 -translate-x-1 -translate-y-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all text-base sm:text-xl mt-1" />
               </div>
               <h3 className="mt-3 sm:mt-5 text-sm sm:text-xl font-semibold text-primary leading-snug">{o.title}</h3>
               <p className="mt-1.5 sm:mt-2 text-xs sm:text-base text-on-surface-variant leading-relaxed">{o.desc}</p>
             </div>
           ))}
-        </div>
+        </Reveal>
+
         {/* Mobile-only toggle */}
         <button
           onClick={() => setShowAll((v) => !v)}

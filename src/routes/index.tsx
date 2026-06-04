@@ -486,10 +486,10 @@ function Audience() {
         <p className="mt-5 max-w-2xl text-on-surface-variant text-[15px] sm:text-lg">
           Built for anyone whose day depends on their feet — which is to say, almost everyone.
         </p>
-        <div className="mt-8 sm:mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <div className="mt-8 sm:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
           {audiences.map((a) => (
             <div key={a.title} className="rounded-2xl overflow-hidden bg-card border border-outline-variant/60 hover:shadow-lg transition flex flex-col">
-              <div className="relative h-40 sm:h-44 overflow-hidden bg-primary-container">
+              <div className="relative h-24 sm:h-44 overflow-hidden bg-primary-container">
                 <img
                   src={a.image}
                   alt={a.title}
@@ -497,13 +497,13 @@ function Audience() {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-primary/10 to-transparent" />
-                <div className="absolute top-3 left-3 w-10 h-10 rounded-xl bg-card/95 text-primary flex items-center justify-center shadow">
-                  <Icon name={a.icon} />
+                <div className="absolute top-2 left-2 sm:top-3 sm:left-3 w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-card/95 text-primary flex items-center justify-center shadow">
+                  <Icon name={a.icon} className="text-base sm:text-xl" />
                 </div>
               </div>
-              <div className="p-5 sm:p-6 flex-1">
-                <h3 className="text-lg font-semibold text-primary">{a.title}</h3>
-                <p className="mt-2 text-sm text-on-surface-variant leading-relaxed">{a.body}</p>
+              <div className="p-3 sm:p-6 flex-1">
+                <h3 className="text-sm sm:text-lg font-semibold text-primary leading-snug">{a.title}</h3>
+                <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-on-surface-variant leading-relaxed">{a.body}</p>
               </div>
             </div>
           ))}

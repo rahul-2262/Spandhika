@@ -426,20 +426,20 @@ function Range() {
             Orthotics Range
           </h2>
         </div>
-        <div className="mt-8 sm:mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="mt-8 sm:mt-12 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
           {orthotics.map((o) => (
             <div
               key={o.title}
-              className="group rounded-2xl bg-surface-container-low p-6 sm:p-7 hover:bg-secondary-container transition-colors border border-transparent hover:border-primary/20"
+              className="group rounded-2xl bg-surface-container-low p-4 sm:p-7 hover:bg-secondary-container transition-colors border border-transparent hover:border-primary/20"
             >
-              <div className="flex items-start justify-between gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary-container text-tertiary-fixed flex items-center justify-center shadow-md">
-                  <Icon name={o.icon} className="text-3xl" />
+              <div className="flex items-start justify-between gap-2">
+                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary to-primary-container text-tertiary-fixed flex items-center justify-center shadow-md">
+                  <Icon name={o.icon} className="text-xl sm:text-3xl" />
                 </div>
-                <Icon name="arrow_outward" className="text-primary opacity-0 group-hover:opacity-100 transition mt-2" />
+                <Icon name="arrow_outward" className="text-primary opacity-0 group-hover:opacity-100 transition text-base sm:text-xl mt-1" />
               </div>
-              <h3 className="mt-5 text-lg sm:text-xl font-semibold text-primary">{o.title}</h3>
-              <p className="mt-2 text-on-surface-variant">{o.desc}</p>
+              <h3 className="mt-3 sm:mt-5 text-sm sm:text-xl font-semibold text-primary leading-snug">{o.title}</h3>
+              <p className="mt-1.5 sm:mt-2 text-xs sm:text-base text-on-surface-variant leading-relaxed">{o.desc}</p>
             </div>
           ))}
         </div>

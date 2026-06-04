@@ -610,7 +610,7 @@ function Purpose() {
 
 function Footer() {
   return (
-    <footer className="bg-surface-container-low border-t border-outline-variant">
+    <footer className="glass border-t border-white/40">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 py-12 sm:py-16 grid md:grid-cols-3 gap-10">
         <div>
           <div className="flex items-center gap-2 font-semibold text-primary">

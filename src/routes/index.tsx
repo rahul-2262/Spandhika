@@ -42,7 +42,7 @@ function Reveal({
   const Tag = as as "div";
   return (
     <Tag
-      ref={ref as React.Ref<HTMLDivElement>}
+      ref={ref as unknown as React.Ref<HTMLDivElement>}
       className={`${stagger ? "stagger" : "reveal"} ${inView ? "is-visible" : ""} ${className}`}
       style={delay != null ? { transitionDelay: `${delay}ms` } : undefined}
     >

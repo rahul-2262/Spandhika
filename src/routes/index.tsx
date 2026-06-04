@@ -404,20 +404,21 @@ function Problem() {
         <p className="mt-5 max-w-2xl text-on-surface-variant text-[15px] sm:text-lg">
           Small discomforts are usually the first chapter of a bigger story. Here's what your feet might be trying to tell you.
         </p>
-        <div className="mt-8 sm:mt-12 grid grid-cols-2 gap-3 sm:gap-5">
+        <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-2 gap-3 sm:gap-5">
           {signs.map((s) => (
             <div
               key={s.title}
-              className="group rounded-2xl glass p-4 sm:p-7 hover:shadow-xl transition-all"
+              className="group rounded-2xl glass p-4 sm:p-7 hover-lift hover:shadow-xl"
             >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-secondary-container text-primary flex items-center justify-center">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-secondary-container text-primary flex items-center justify-center transition-transform group-hover:scale-110 group-hover:rotate-3">
                 <Icon name={s.icon} className="text-xl sm:text-2xl" />
               </div>
               <h3 className="mt-3 sm:mt-5 text-sm sm:text-xl font-semibold text-primary leading-snug">{s.title}</h3>
               <p className="mt-1.5 sm:mt-2 text-xs sm:text-base text-on-surface-variant leading-relaxed">{s.body}</p>
             </div>
           ))}
-        </div>
+        </Reveal>
+
       </div>
     </section>
   );

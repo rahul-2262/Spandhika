@@ -562,7 +562,7 @@ function Trust() {
 
         <div className="mt-8 sm:mt-12 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
           {pillars.map((p) => (
-            <div key={p.title} className="rounded-2xl p-6 sm:p-7 bg-surface-container-low">
+            <div key={p.title} className="rounded-2xl p-6 sm:p-7 glass">
               <Icon name={p.icon} className="text-3xl text-primary" />
               <h3 className="mt-4 text-lg sm:text-xl font-semibold text-primary">{p.title}</h3>
               <p className="mt-2 text-on-surface-variant leading-relaxed">{p.body}</p>

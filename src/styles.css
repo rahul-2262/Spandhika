@@ -113,6 +113,11 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(60rem 40rem at -10% -10%, color-mix(in oklab, var(--tertiary-fixed) 22%, transparent), transparent 60%),
+      radial-gradient(50rem 35rem at 110% 10%, color-mix(in oklab, var(--primary) 18%, transparent), transparent 60%),
+      radial-gradient(55rem 40rem at 50% 110%, color-mix(in oklab, var(--secondary-container) 65%, transparent), transparent 60%);
+    background-attachment: fixed;
   }
 
   .material-symbols-outlined {
@@ -143,6 +148,33 @@
 @keyframes pulse-ambient {
   0%, 100% { opacity: 0.45; transform: scale(1); }
   50% { opacity: 0.25; transform: scale(1.08); }
+}
+
+@utility glass {
+  background-color: color-mix(in oklab, var(--card) 55%, transparent);
+  backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid color-mix(in oklab, white 55%, transparent);
+  box-shadow:
+    0 1px 0 0 color-mix(in oklab, white 60%, transparent) inset,
+    0 10px 30px -12px color-mix(in oklab, var(--primary) 25%, transparent);
+}
+
+@utility glass-strong {
+  background-color: color-mix(in oklab, var(--card) 72%, transparent);
+  backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid color-mix(in oklab, white 60%, transparent);
+  box-shadow:
+    0 1px 0 0 color-mix(in oklab, white 70%, transparent) inset,
+    0 20px 50px -20px color-mix(in oklab, var(--primary) 30%, transparent);
+}
+
+@utility glass-dark {
+  background-color: color-mix(in oklab, var(--primary) 55%, transparent);
+  backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid color-mix(in oklab, var(--tertiary-fixed) 25%, transparent);
+  box-shadow:
+    0 1px 0 0 color-mix(in oklab, white 10%, transparent) inset,
+    0 20px 50px -20px color-mix(in oklab, black 50%, transparent);
 }
 
 @utility blob {

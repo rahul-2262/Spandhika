@@ -34,7 +34,7 @@ function Nav() {
     { href: "#purpose", label: "Purpose" },
   ];
   return (
-    <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-outline-variant/60">
+    <header className="sticky top-0 z-50 glass border-b border-white/40">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 flex items-center justify-between h-14 sm:h-20">
         <a href="#top" className="flex items-center gap-2 font-semibold tracking-tight text-primary" onClick={() => setOpen(false)}>
           <img src={logoAsset.url} alt="Spandhika Orthotics" className="h-9 sm:h-12 w-auto" />
@@ -72,7 +72,7 @@ function Nav() {
         <div className="absolute inset-0 bg-primary/40 backdrop-blur-sm" />
       </div>
       <aside
-        className={`md:hidden fixed top-0 right-0 z-50 h-[100dvh] w-[82%] max-w-sm bg-background border-l border-outline-variant shadow-2xl transform transition-transform duration-300 ease-out ${open ? "translate-x-0" : "translate-x-full"}`}
+        className={`md:hidden fixed top-0 right-0 z-50 h-[100dvh] w-[82%] max-w-sm glass-strong border-l border-white/40 transform transition-transform duration-300 ease-out ${open ? "translate-x-0" : "translate-x-full"}`}
         aria-hidden={!open}
       >
         <div className="flex items-center justify-between h-14 px-4 border-b border-outline-variant">
@@ -135,7 +135,7 @@ function FloatingCard({
 }) {
   return (
     <div
-      className={`absolute rounded-2xl bg-card/90 backdrop-blur-md shadow-xl border border-outline-variant/60 p-3 sm:p-4 w-32 sm:w-44 ${className ?? ""}`}
+      className={`absolute rounded-2xl glass-strong p-3 sm:p-4 w-32 sm:w-44 ${className ?? ""}`}
     >
       <div className="flex items-center gap-2 label-caps text-on-surface-variant whitespace-nowrap text-[10px] sm:text-xs">
         <span className={`w-2 h-2 rounded-full shrink-0 ${accent ? "bg-tertiary-fixed-dim pressure-pulse" : "bg-primary"}`} />
@@ -280,7 +280,7 @@ const signs = [
 
 function Problem() {
   return (
-    <section id="problem" className="py-14 sm:py-20 lg:py-32 bg-surface-container-low">
+    <section id="problem" className="py-14 sm:py-20 lg:py-32">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
         <Eyebrow>The signs</Eyebrow>
         <h2 className="mt-4 max-w-2xl text-[26px] sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
@@ -293,7 +293,7 @@ function Problem() {
           {signs.map((s) => (
             <div
               key={s.title}
-              className="group rounded-2xl bg-card p-4 sm:p-7 border border-outline-variant/60 hover:border-primary/40 hover:shadow-lg transition-all"
+              className="group rounded-2xl glass p-4 sm:p-7 hover:shadow-xl transition-all"
             >
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-secondary-container text-primary flex items-center justify-center">
                 <Icon name={s.icon} className="text-xl sm:text-2xl" />
@@ -360,7 +360,7 @@ function Features() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="hidden sm:flex absolute -bottom-4 -right-4 rounded-2xl bg-card text-on-surface px-4 py-3 shadow-xl border border-outline-variant/60 items-center gap-3">
+            <div className="hidden sm:flex absolute -bottom-4 -right-4 rounded-2xl glass-strong text-on-surface px-4 py-3 items-center gap-3">
               <span className="w-2 h-2 rounded-full bg-tertiary-fixed-dim pressure-pulse" />
               <div>
                 <div className="label-caps text-on-surface-variant">Sensor array</div>
@@ -391,7 +391,7 @@ function Features() {
           {features.map((f) => (
             <div
               key={f.title}
-              className="rounded-2xl bg-primary-container/60 backdrop-blur p-6 sm:p-7 border border-on-primary-container/20 hover:bg-primary-container transition"
+              className="rounded-2xl glass-dark p-6 sm:p-7 text-primary-foreground hover:brightness-110 transition"
             >
               <div className="w-12 h-12 rounded-xl bg-tertiary-fixed text-primary flex items-center justify-center">
                 <Icon name={f.icon} />
@@ -432,7 +432,7 @@ function Range() {
           {orthotics.map((o, i) => (
             <div
               key={o.title}
-              className={`group rounded-2xl bg-surface-container-low p-4 sm:p-7 hover:bg-secondary-container transition-colors border border-transparent hover:border-primary/20 ${
+              className={`group rounded-2xl glass p-4 sm:p-7 hover:shadow-xl transition-all ${
                 !showAll && i >= 4 ? "hidden sm:block" : ""
               }`}
             >
@@ -491,7 +491,7 @@ const audiences = [
 
 function Audience() {
   return (
-    <section id="audience" className="py-14 sm:py-20 lg:py-32 bg-surface-container-low">
+    <section id="audience" className="py-14 sm:py-20 lg:py-32">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
         <Eyebrow>Applications</Eyebrow>
         <h2 className="mt-4 max-w-2xl text-[26px] sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
@@ -502,7 +502,7 @@ function Audience() {
         </p>
         <div className="mt-8 sm:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
           {audiences.map((a) => (
-            <div key={a.title} className="rounded-2xl overflow-hidden bg-card border border-outline-variant/60 hover:shadow-lg transition flex flex-col">
+            <div key={a.title} className="rounded-2xl overflow-hidden glass hover:shadow-xl transition flex flex-col">
               <div className="relative h-24 sm:h-44 overflow-hidden bg-primary-container">
                 <img
                   src={a.image}
@@ -562,7 +562,7 @@ function Trust() {
 
         <div className="mt-8 sm:mt-12 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
           {pillars.map((p) => (
-            <div key={p.title} className="rounded-2xl p-6 sm:p-7 bg-surface-container-low">
+            <div key={p.title} className="rounded-2xl p-6 sm:p-7 glass">
               <Icon name={p.icon} className="text-3xl text-primary" />
               <h3 className="mt-4 text-lg sm:text-xl font-semibold text-primary">{p.title}</h3>
               <p className="mt-2 text-on-surface-variant leading-relaxed">{p.body}</p>
@@ -610,7 +610,7 @@ function Purpose() {
 
 function Footer() {
   return (
-    <footer className="bg-surface-container-low border-t border-outline-variant">
+    <footer className="glass border-t border-white/40">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 py-12 sm:py-16 grid md:grid-cols-3 gap-10">
         <div>
           <div className="flex items-center gap-2 font-semibold text-primary">
@@ -657,7 +657,7 @@ function Footer() {
 
 function Index() {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen text-foreground overflow-x-hidden">
       <Nav />
       <main>
         <Hero />

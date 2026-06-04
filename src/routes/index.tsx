@@ -518,7 +518,8 @@ function Features() {
               <p className="mt-2 text-on-primary-container leading-relaxed">{f.body}</p>
             </div>
           ))}
-        </div>
+        </Reveal>
+
       </div>
     </section>
   );

@@ -506,8 +506,8 @@ function Footer() {
             <Icon name="mail" className="text-base group-hover:scale-110 transition" />
             spandhikaorthotics@gmail.com
           </a>
-          <div className="mt-4">
-            <a href="#" className="text-on-surface-variant hover:text-primary">LinkedIn</a>
+<div className="mt-4">
+            <a href="https://www.linkedin.com/company/spandhika-orthotics" target="_blank" rel="noopener noreferrer" className="text-on-surface-variant hover:text-primary">LinkedIn</a>
           </div>
           <p className="mt-4 text-sm text-on-surface-variant">For press, partnerships, and early access.</p>
         </div>

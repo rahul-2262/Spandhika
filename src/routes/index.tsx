@@ -35,8 +35,7 @@ function Nav() {
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-outline-variant/60">
       <div className="mx-auto max-w-[1280px] px-6 lg:px-20 flex items-center justify-between h-16">
         <a href="#top" className="flex items-center gap-2 font-semibold tracking-tight text-primary">
-          <span className="inline-block w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim" />
-          spandhika
+          <img src={logoAsset.url} alt="Spandhika Orthotics" className="h-9 w-auto" />
         </a>
         <nav className="hidden md:flex items-center gap-8 text-sm text-on-surface-variant">
           {links.map((l) => (

@@ -1,5 +1,57 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type FormEvent, type ReactNode } from "react";
+import React, { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+
+function useInView<T extends HTMLElement>() {
+  const ref = useRef<T | null>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setInView(true);
+            io.disconnect();
+            break;
+          }
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return { ref, inView };
+}
+
+function Reveal({
+  children,
+  className = "",
+  delay,
+  stagger = false,
+  as = "div",
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+  stagger?: boolean;
+  as?: "div" | "ul" | "section";
+}) {
+  const { ref, inView } = useInView<HTMLElement>();
+  const Tag = as as "div";
+  return (
+    <Tag
+      ref={ref as unknown as React.Ref<HTMLDivElement>}
+      className={`${stagger ? "stagger" : "reveal"} ${inView ? "is-visible" : ""} ${className}`}
+      style={delay != null ? { transitionDelay: `${delay}ms` } : undefined}
+    >
+      {children}
+    </Tag>
+  );
+}
+
+
 import logoAsset from "@/assets/spandhika-logo.png.asset.json";
 import heroFootAsset from "@/assets/hero-foot-heatmap.png.asset.json";
 const heroFoot = heroFootAsset.url;
@@ -352,20 +404,21 @@ function Problem() {
         <p className="mt-5 max-w-2xl text-on-surface-variant text-[15px] sm:text-lg">
           Small discomforts are usually the first chapter of a bigger story. Here's what your feet might be trying to tell you.
         </p>
-        <div className="mt-8 sm:mt-12 grid grid-cols-2 gap-3 sm:gap-5">
+        <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-2 gap-3 sm:gap-5">
           {signs.map((s) => (
             <div
               key={s.title}
-              className="group rounded-2xl glass p-4 sm:p-7 hover:shadow-xl transition-all"
+              className="group rounded-2xl glass p-4 sm:p-7 hover-lift hover:shadow-xl"
             >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-secondary-container text-primary flex items-center justify-center">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-secondary-container text-primary flex items-center justify-center transition-transform group-hover:scale-110 group-hover:rotate-3">
                 <Icon name={s.icon} className="text-xl sm:text-2xl" />
               </div>
               <h3 className="mt-3 sm:mt-5 text-sm sm:text-xl font-semibold text-primary leading-snug">{s.title}</h3>
               <p className="mt-1.5 sm:mt-2 text-xs sm:text-base text-on-surface-variant leading-relaxed">{s.body}</p>
             </div>
           ))}
-        </div>
+        </Reveal>
+
       </div>
     </section>
   );
@@ -431,7 +484,7 @@ function Features() {
               </div>
             </div>
           </div>
-          <ul className="lg:col-span-6 space-y-4">
+          <Reveal as="ul" stagger className="lg:col-span-6 space-y-4">
             {[
               { layer: "01", name: "Breathable top cover", desc: "Moisture-wicking, antimicrobial fabric." },
               { layer: "02", name: "Pressure sensor array", desc: "32 zones reading at 200 Hz across the foot." },
@@ -439,7 +492,7 @@ function Features() {
               { layer: "04", name: "Carbon arch plate", desc: "Lightweight stability where it matters most." },
               { layer: "05", name: "Anti-slip base", desc: "Fits inside the shoes you already own." },
             ].map((l) => (
-              <li key={l.layer} className="flex items-start gap-4 rounded-2xl bg-primary-container/40 p-4 border border-on-primary-container/15">
+              <li key={l.layer} className="flex items-start gap-4 rounded-2xl bg-primary-container/40 p-4 border border-on-primary-container/15 hover-lift hover:border-tertiary-fixed/40">
                 <span className="label-caps text-tertiary-fixed-dim mt-1">{l.layer}</span>
                 <div>
                   <div className="text-[15px] sm:text-lg font-semibold">{l.name}</div>
@@ -447,23 +500,26 @@ function Features() {
                 </div>
               </li>
             ))}
-          </ul>
+          </Reveal>
+
         </div>
 
-        <div className="mt-14 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
+        <Reveal stagger className="mt-14 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
           {features.map((f) => (
             <div
               key={f.title}
-              className="rounded-2xl glass-dark p-6 sm:p-7 text-primary-foreground hover:brightness-110 transition"
+              className="group rounded-2xl glass-dark p-6 sm:p-7 text-primary-foreground hover-lift hover:brightness-110"
             >
-              <div className="w-12 h-12 rounded-xl bg-tertiary-fixed text-primary flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl bg-tertiary-fixed text-primary flex items-center justify-center transition-transform group-hover:scale-110 group-hover:-rotate-3">
                 <Icon name={f.icon} />
               </div>
               <h3 className="mt-5 text-lg sm:text-xl font-semibold">{f.title}</h3>
+
               <p className="mt-2 text-on-primary-container leading-relaxed">{f.body}</p>
             </div>
           ))}
-        </div>
+        </Reveal>
+
       </div>
     </section>
   );
@@ -490,26 +546,27 @@ function Range() {
             Orthotics Range
           </h2>
         </div>
-        <div className="mt-8 sm:mt-12 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
+        <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
           {/* On mobile: 4 items + toggle. On sm+: show all */}
           {orthotics.map((o, i) => (
             <div
               key={o.title}
-              className={`group rounded-2xl glass p-4 sm:p-7 hover:shadow-xl transition-all ${
+              className={`group rounded-2xl glass p-4 sm:p-7 hover-lift hover:shadow-xl ${
                 !showAll && i >= 4 ? "hidden sm:block" : ""
               }`}
             >
               <div className="flex items-start justify-between gap-2">
-                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary to-primary-container text-tertiary-fixed flex items-center justify-center shadow-md">
+                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary to-primary-container text-tertiary-fixed flex items-center justify-center shadow-md transition-transform group-hover:scale-110 group-hover:rotate-6">
                   <Icon name={o.icon} className="text-xl sm:text-3xl" />
                 </div>
-                <Icon name="arrow_outward" className="text-primary opacity-0 group-hover:opacity-100 transition text-base sm:text-xl mt-1" />
+                <Icon name="arrow_outward" className="text-primary opacity-0 -translate-x-1 -translate-y-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all text-base sm:text-xl mt-1" />
               </div>
               <h3 className="mt-3 sm:mt-5 text-sm sm:text-xl font-semibold text-primary leading-snug">{o.title}</h3>
               <p className="mt-1.5 sm:mt-2 text-xs sm:text-base text-on-surface-variant leading-relaxed">{o.desc}</p>
             </div>
           ))}
-        </div>
+        </Reveal>
+
         {/* Mobile-only toggle */}
         <button
           onClick={() => setShowAll((v) => !v)}
@@ -563,18 +620,18 @@ function Audience() {
         <p className="mt-5 max-w-2xl text-on-surface-variant text-[15px] sm:text-lg">
           Built for anyone whose day depends on their feet — which is to say, almost everyone.
         </p>
-        <div className="mt-8 sm:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+        <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
           {audiences.map((a) => (
-            <div key={a.title} className="rounded-2xl overflow-hidden glass hover:shadow-xl transition flex flex-col">
+            <div key={a.title} className="group rounded-2xl overflow-hidden glass hover-lift hover:shadow-xl flex flex-col">
               <div className="relative h-24 sm:h-44 overflow-hidden bg-primary-container">
                 <img
                   src={a.image}
                   alt={a.title}
                   loading="lazy"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-primary/10 to-transparent" />
-                <div className="absolute top-2 left-2 sm:top-3 sm:left-3 w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-card/95 text-primary flex items-center justify-center shadow">
+                <div className="absolute top-2 left-2 sm:top-3 sm:left-3 w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-card/95 text-primary flex items-center justify-center shadow transition-transform group-hover:-rotate-6">
                   <Icon name={a.icon} className="text-base sm:text-xl" />
                 </div>
               </div>
@@ -584,7 +641,8 @@ function Audience() {
               </div>
             </div>
           ))}
-        </div>
+        </Reveal>
+
       </div>
     </section>
   );
@@ -614,24 +672,25 @@ function Trust() {
           Inspired by biomechanics and shaped by real-world movement challenges. We're combining what scientists know about gait with what people actually feel at the end of a long day.
         </p>
 
-        <div className="mt-8 sm:mt-12 grid grid-cols-3 gap-4 sm:gap-8 border-y border-outline-variant py-8 sm:py-10">
+        <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-3 gap-4 sm:gap-8 border-y border-outline-variant py-8 sm:py-10">
           {stats.map((s) => (
             <div key={s.label}>
-              <div className="text-[28px] sm:text-5xl lg:text-6xl font-bold tracking-tight text-primary">{s.value}</div>
+              <div className="text-[28px] sm:text-5xl lg:text-6xl font-bold tracking-tight text-gradient-primary">{s.value}</div>
               <div className="mt-2 label-caps text-on-surface-variant">{s.label}</div>
             </div>
           ))}
-        </div>
+        </Reveal>
 
-        <div className="mt-8 sm:mt-12 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
+        <Reveal stagger className="mt-8 sm:mt-12 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
           {pillars.map((p) => (
-            <div key={p.title} className="rounded-2xl p-6 sm:p-7 glass">
-              <Icon name={p.icon} className="text-3xl text-primary" />
+            <div key={p.title} className="group rounded-2xl p-6 sm:p-7 glass hover-lift hover:shadow-xl">
+              <Icon name={p.icon} className="text-3xl text-primary transition-transform group-hover:scale-110 group-hover:-rotate-6" />
               <h3 className="mt-4 text-lg sm:text-xl font-semibold text-primary">{p.title}</h3>
               <p className="mt-2 text-on-surface-variant leading-relaxed">{p.body}</p>
             </div>
           ))}
-        </div>
+        </Reveal>
+
 
         <blockquote className="mt-12 sm:mt-16 max-w-4xl">
           <p className="text-[20px] sm:text-3xl lg:text-4xl font-medium text-primary leading-snug tracking-tight">

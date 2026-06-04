@@ -360,7 +360,7 @@ function Features() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="hidden sm:flex absolute -bottom-4 -right-4 rounded-2xl bg-card text-on-surface px-4 py-3 shadow-xl border border-outline-variant/60 items-center gap-3">
+            <div className="hidden sm:flex absolute -bottom-4 -right-4 rounded-2xl glass-strong text-on-surface px-4 py-3 items-center gap-3">
               <span className="w-2 h-2 rounded-full bg-tertiary-fixed-dim pressure-pulse" />
               <div>
                 <div className="label-caps text-on-surface-variant">Sensor array</div>

@@ -672,24 +672,25 @@ function Trust() {
           Inspired by biomechanics and shaped by real-world movement challenges. We're combining what scientists know about gait with what people actually feel at the end of a long day.
         </p>
 
-        <div className="mt-8 sm:mt-12 grid grid-cols-3 gap-4 sm:gap-8 border-y border-outline-variant py-8 sm:py-10">
+        <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-3 gap-4 sm:gap-8 border-y border-outline-variant py-8 sm:py-10">
           {stats.map((s) => (
             <div key={s.label}>
-              <div className="text-[28px] sm:text-5xl lg:text-6xl font-bold tracking-tight text-primary">{s.value}</div>
+              <div className="text-[28px] sm:text-5xl lg:text-6xl font-bold tracking-tight text-gradient-primary">{s.value}</div>
               <div className="mt-2 label-caps text-on-surface-variant">{s.label}</div>
             </div>
           ))}
-        </div>
+        </Reveal>
 
-        <div className="mt-8 sm:mt-12 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
+        <Reveal stagger className="mt-8 sm:mt-12 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
           {pillars.map((p) => (
-            <div key={p.title} className="rounded-2xl p-6 sm:p-7 glass">
-              <Icon name={p.icon} className="text-3xl text-primary" />
+            <div key={p.title} className="group rounded-2xl p-6 sm:p-7 glass hover-lift hover:shadow-xl">
+              <Icon name={p.icon} className="text-3xl text-primary transition-transform group-hover:scale-110 group-hover:-rotate-6" />
               <h3 className="mt-4 text-lg sm:text-xl font-semibold text-primary">{p.title}</h3>
               <p className="mt-2 text-on-surface-variant leading-relaxed">{p.body}</p>
             </div>
           ))}
-        </div>
+        </Reveal>
+
 
         <blockquote className="mt-12 sm:mt-16 max-w-4xl">
           <p className="text-[20px] sm:text-3xl lg:text-4xl font-medium text-primary leading-snug tracking-tight">

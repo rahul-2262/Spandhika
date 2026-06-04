@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent, type ReactNode } from "react";
 import logoAsset from "@/assets/spandhika-logo.png.asset.json";
-import heroFoot from "@/assets/hero-foot-heatmap.jpg";
+import heroFootAsset from "@/assets/hero-foot-heatmap.png.asset.json";
+const heroFoot = heroFootAsset.url;
 import explodedInsole from "@/assets/exploded-insole.jpg";
 
 export const Route = createFileRoute("/")({

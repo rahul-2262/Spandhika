@@ -1,5 +1,53 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+
+function useInView<T extends HTMLElement>() {
+  const ref = useRef<T | null>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setInView(true);
+            io.disconnect();
+            break;
+          }
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return { ref, inView };
+}
+
+function Reveal({
+  children,
+  className = "",
+  delay,
+  stagger = false,
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+  stagger?: boolean;
+}) {
+  const { ref, inView } = useInView<HTMLDivElement>();
+  return (
+    <div
+      ref={ref}
+      className={`${stagger ? "stagger" : "reveal"} ${inView ? "is-visible" : ""} ${className}`}
+      style={delay != null ? { transitionDelay: `${delay}ms` } : undefined}
+    >
+      {children}
+    </div>
+  );
+}
+
 import logoAsset from "@/assets/spandhika-logo.png.asset.json";
 import heroFootAsset from "@/assets/hero-foot-heatmap.png.asset.json";
 const heroFoot = heroFootAsset.url;

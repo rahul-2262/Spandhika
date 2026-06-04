@@ -417,7 +417,6 @@ const orthotics = [
 
 function Range() {
   const [showAll, setShowAll] = useState(false);
-  const visible = showAll ? orthotics : orthotics.slice(0, 4);
   return (
     <section className="py-14 sm:py-20 lg:py-32">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">

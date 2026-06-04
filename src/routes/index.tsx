@@ -223,14 +223,14 @@ function Hero() {
           </div>
         </div>
 
-        <div className="relative h-[260px] sm:h-[460px] lg:h-[560px] order-2 lg:order-none mx-1 sm:mx-0">
+        <div className="relative h-[200px] sm:h-[460px] lg:h-[560px] order-2 lg:order-none mx-1 sm:mx-0">
           <div className="absolute inset-0 rounded-[2rem] overflow-hidden bg-primary">
             <img
               src={heroFoot}
               alt="Foot pressure heatmap visualization"
               width={1024}
               height={1280}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-center scale-[1.35] sm:scale-100 origin-center"
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/40 via-transparent to-transparent" />
           </div>

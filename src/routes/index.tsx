@@ -168,15 +168,26 @@ function Hero() {
   }
   return (
     <section id="top" className="relative overflow-hidden">
-      <div className="blob bg-tertiary-fixed-dim w-[420px] h-[420px] -top-32 -right-24" />
-      <div className="blob bg-secondary-container w-[380px] h-[380px] top-40 -left-32" style={{ animationDelay: "2s" }} />
+      <div className="blob bg-tertiary-fixed-dim w-[460px] h-[460px] -top-32 -right-24" />
+      <div className="blob bg-secondary-container w-[420px] h-[420px] top-40 -left-32" style={{ animationDelay: "2s" }} />
+      <div className="blob bg-on-primary-container/40 w-[360px] h-[360px] bottom-0 left-1/3" style={{ animationDelay: "4s" }} />
+
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 pt-12 pb-20 sm:pt-16 sm:pb-24 lg:pt-28 lg:pb-32 grid lg:grid-cols-2 gap-10 lg:gap-12 items-center relative">
         <div>
-          <Eyebrow>Smart orthotic insoles</Eyebrow>
-          <h1 className="mt-5 sm:mt-6 text-[30px] sm:text-5xl lg:text-[64px] leading-[1.05] tracking-[-0.02em] font-bold text-primary">
-            Better movement starts from your feet.
+          <div className="fade-up" style={{ animationDelay: "60ms" }}>
+            <Eyebrow>Smart orthotic insoles</Eyebrow>
+          </div>
+          <h1
+            className="mt-5 sm:mt-6 text-[30px] sm:text-5xl lg:text-[64px] leading-[1.05] tracking-[-0.02em] font-bold text-primary fade-up"
+            style={{ animationDelay: "120ms" }}
+          >
+            Better movement starts from{" "}
+            <span className="text-gradient-primary">your feet.</span>
           </h1>
-          <p className="mt-5 sm:mt-6 text-[15px] sm:text-lg text-on-surface-variant max-w-xl leading-relaxed">
+          <p
+            className="mt-5 sm:mt-6 text-[15px] sm:text-lg text-on-surface-variant max-w-xl leading-relaxed fade-up"
+            style={{ animationDelay: "220ms" }}
+          >
             Most people ignore foot problems until they affect posture, comfort, and daily life.
             Spandhika is a smart orthotic insole that listens to how you walk — and helps you move better.
           </p>
@@ -184,7 +195,8 @@ function Hero() {
           <form
             id="waitlist"
             onSubmit={onSubmit}
-            className="mt-7 sm:mt-8 flex flex-col sm:flex-row gap-3 max-w-lg"
+            className="mt-7 sm:mt-8 flex flex-col sm:flex-row gap-3 max-w-lg fade-up"
+            style={{ animationDelay: "320ms" }}
           >
             <label className="sr-only" htmlFor="email">Email</label>
             <input
@@ -194,18 +206,21 @@ function Hero() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              className="flex-1 rounded-full bg-card border border-outline-variant px-5 py-3.5 text-base placeholder:text-on-surface-variant/70 focus:outline-none focus:border-primary transition"
+              className="flex-1 rounded-full glass px-5 py-3.5 text-base placeholder:text-on-surface-variant/70 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
             />
             <button
               type="submit"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3.5 font-medium hover:opacity-90 transition"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3.5 font-medium shadow-lg shadow-primary/20 hover:scale-[1.02] hover:shadow-primary/30 transition-all"
             >
               {submitted ? "You're in" : "Join Waitlist"}
               <Icon name={submitted ? "check" : "arrow_forward"} className="text-base" />
             </button>
           </form>
 
-          <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-on-surface-variant">
+          <div
+            className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-on-surface-variant fade-up"
+            style={{ animationDelay: "400ms" }}
+          >
             <a href="#features" className="inline-flex items-center gap-1 text-primary font-medium group">
               Learn more
               <Icon name="arrow_forward" className="text-base group-hover:translate-x-0.5 transition-transform" />
@@ -214,47 +229,97 @@ function Hero() {
           </div>
 
           {/* Trust analytics strip */}
-          <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-xl border-t border-outline-variant pt-6">
-            {heroStats.map((s) => (
-              <div key={s.label}>
-                <div className="text-2xl sm:text-3xl font-bold tracking-tight text-primary">{s.value}</div>
+          <div
+            className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-xl border-t border-outline-variant/60 pt-6 fade-up"
+            style={{ animationDelay: "500ms" }}
+          >
+            {heroStats.map((s, i) => (
+              <div
+                key={s.label}
+                className="fade-up"
+                style={{ animationDelay: `${560 + i * 80}ms` }}
+              >
+                <div className="text-2xl sm:text-3xl font-bold tracking-tight text-gradient-primary">{s.value}</div>
                 <div className="mt-1 label-caps text-on-surface-variant text-[10px]">{s.label}</div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="relative h-[200px] sm:h-[460px] lg:h-[560px] order-2 lg:order-none mx-1 sm:mx-0">
-          <div className="absolute inset-0 rounded-[2rem] overflow-hidden bg-primary">
+        <div
+          className="relative h-[220px] sm:h-[480px] lg:h-[580px] order-2 lg:order-none mx-1 sm:mx-0 fade-up"
+          style={{ animationDelay: "180ms" }}
+        >
+          {/* Ambient glow ring */}
+          <div className="absolute inset-6 rounded-full bg-tertiary-fixed/20 blur-3xl pointer-events-none" />
+
+          <div className="absolute inset-0 rounded-[2.25rem] overflow-hidden glass-strong">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-container to-primary" />
             <img
               src={heroFoot}
               alt="Foot pressure heatmap visualization"
               width={1024}
               height={1280}
-              className="w-full h-full object-cover object-center scale-[1.35] sm:scale-100 origin-center"
+              className="relative w-full h-full object-contain object-center scale-[1.05] sm:scale-100 drop-shadow-2xl"
             />
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary/40 via-transparent to-transparent" />
+
+            {/* Subtle grid overlay */}
+            <div
+              className="absolute inset-0 opacity-[0.08] mix-blend-overlay pointer-events-none"
+              style={{
+                backgroundImage:
+                  "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+                backgroundSize: "32px 32px",
+              }}
+            />
+
+            {/* Scan line sweep */}
+            <div
+              className="absolute left-0 right-0 h-24 -top-24 scan-sweep pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(to bottom, transparent, color-mix(in oklab, var(--tertiary-fixed) 35%, transparent), transparent)",
+              }}
+            />
+
+            {/* Top gradient veil */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 via-transparent to-transparent pointer-events-none" />
           </div>
-          <FloatingCard
-            className="top-4 left-2 sm:top-8 sm:-left-3 lg:-left-10"
-            label="Live Pressure"
-            value="38.2"
-            unit="kPa"
-            sub="Heel · Right"
-            accent
-          />
-          <FloatingCard
-            className="bottom-4 right-2 sm:bottom-8 sm:-right-3 lg:-right-6"
-            label="Gait Balance"
-            value="94%"
-            sub="Symmetry score"
-          />
-          <div className="absolute bottom-1/2 left-1/2 w-3 h-3 rounded-full bg-tertiary-fixed pressure-pulse" />
+
+          {/* Pulsing sensor dots */}
+          <div className="absolute top-[38%] left-[38%] pointer-events-none">
+            <span className="block w-2.5 h-2.5 rounded-full bg-tertiary-fixed shadow-[0_0_18px_var(--tertiary-fixed)]" />
+            <span className="absolute inset-0 rounded-full bg-tertiary-fixed/60 ring-pulse" />
+          </div>
+          <div className="absolute top-[64%] left-[58%] pointer-events-none">
+            <span className="block w-2 h-2 rounded-full bg-tertiary-fixed-dim shadow-[0_0_14px_var(--tertiary-fixed)]" />
+            <span className="absolute inset-0 rounded-full bg-tertiary-fixed/50 ring-pulse" style={{ animationDelay: "1.2s" }} />
+          </div>
+
+          <div className="float-slow">
+            <FloatingCard
+              className="top-4 left-2 sm:top-8 sm:-left-3 lg:-left-10"
+              label="Live Pressure"
+              value="38.2"
+              unit="kPa"
+              sub="Heel · Right"
+              accent
+            />
+          </div>
+          <div className="float-slow-rev">
+            <FloatingCard
+              className="bottom-4 right-2 sm:bottom-8 sm:-right-3 lg:-right-6"
+              label="Gait Balance"
+              value="94%"
+              sub="Symmetry score"
+            />
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 const signs = [
   {

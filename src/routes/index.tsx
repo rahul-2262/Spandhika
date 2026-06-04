@@ -293,7 +293,7 @@ function Problem() {
           {signs.map((s) => (
             <div
               key={s.title}
-              className="group rounded-2xl bg-card p-4 sm:p-7 border border-outline-variant/60 hover:border-primary/40 hover:shadow-lg transition-all"
+              className="group rounded-2xl glass p-4 sm:p-7 hover:shadow-xl transition-all"
             >
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-secondary-container text-primary flex items-center justify-center">
                 <Icon name={s.icon} className="text-xl sm:text-2xl" />

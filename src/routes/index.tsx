@@ -486,8 +486,7 @@ function Footer() {
       <div className="mx-auto max-w-[1280px] px-6 lg:px-20 py-16 grid md:grid-cols-3 gap-10">
         <div>
           <div className="flex items-center gap-2 font-semibold text-primary">
-            <span className="inline-block w-2.5 h-2.5 rounded-full bg-tertiary-fixed-dim" />
-            spandhika orthotics
+            <img src={logoAsset.url} alt="Spandhika Orthotics" className="h-12 w-auto" />
           </div>
           <p className="mt-4 text-on-surface-variant max-w-sm leading-relaxed">
             Smart orthotic insoles designed for better movement, posture, and everyday comfort.

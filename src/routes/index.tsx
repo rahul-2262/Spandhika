@@ -432,7 +432,7 @@ function Range() {
           {orthotics.map((o, i) => (
             <div
               key={o.title}
-              className={`group rounded-2xl bg-surface-container-low p-4 sm:p-7 hover:bg-secondary-container transition-colors border border-transparent hover:border-primary/20 ${
+              className={`group rounded-2xl glass p-4 sm:p-7 hover:shadow-xl transition-all ${
                 !showAll && i >= 4 ? "hidden sm:block" : ""
               }`}
             >

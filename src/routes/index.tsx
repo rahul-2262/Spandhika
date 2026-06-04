@@ -484,7 +484,7 @@ function Features() {
               </div>
             </div>
           </div>
-          <ul className="lg:col-span-6 space-y-4">
+          <Reveal as="ul" stagger className="lg:col-span-6 space-y-4">
             {[
               { layer: "01", name: "Breathable top cover", desc: "Moisture-wicking, antimicrobial fabric." },
               { layer: "02", name: "Pressure sensor array", desc: "32 zones reading at 200 Hz across the foot." },
@@ -492,7 +492,7 @@ function Features() {
               { layer: "04", name: "Carbon arch plate", desc: "Lightweight stability where it matters most." },
               { layer: "05", name: "Anti-slip base", desc: "Fits inside the shoes you already own." },
             ].map((l) => (
-              <li key={l.layer} className="flex items-start gap-4 rounded-2xl bg-primary-container/40 p-4 border border-on-primary-container/15">
+              <li key={l.layer} className="flex items-start gap-4 rounded-2xl bg-primary-container/40 p-4 border border-on-primary-container/15 hover-lift hover:border-tertiary-fixed/40">
                 <span className="label-caps text-tertiary-fixed-dim mt-1">{l.layer}</span>
                 <div>
                   <div className="text-[15px] sm:text-lg font-semibold">{l.name}</div>
@@ -500,7 +500,8 @@ function Features() {
                 </div>
               </li>
             ))}
-          </ul>
+          </Reveal>
+
         </div>
 
         <div className="mt-14 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">

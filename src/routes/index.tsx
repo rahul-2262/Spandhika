@@ -223,7 +223,7 @@ function Hero() {
           </div>
         </div>
 
-        <div className="relative h-[340px] sm:h-[460px] lg:h-[560px] order-first lg:order-none mx-1 sm:mx-0">
+        <div className="relative h-[260px] sm:h-[460px] lg:h-[560px] order-2 lg:order-none mx-1 sm:mx-0">
           <div className="absolute inset-0 rounded-[2rem] overflow-hidden bg-primary">
             <img
               src={heroFoot}

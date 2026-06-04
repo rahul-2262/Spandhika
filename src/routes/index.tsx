@@ -30,23 +30,27 @@ function Reveal({
   className = "",
   delay,
   stagger = false,
+  as = "div",
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   stagger?: boolean;
+  as?: "div" | "ul" | "section";
 }) {
-  const { ref, inView } = useInView<HTMLDivElement>();
+  const { ref, inView } = useInView<HTMLElement>();
+  const Tag = as as "div";
   return (
-    <div
-      ref={ref}
+    <Tag
+      ref={ref as React.Ref<HTMLDivElement>}
       className={`${stagger ? "stagger" : "reveal"} ${inView ? "is-visible" : ""} ${className}`}
       style={delay != null ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}
-    </div>
+    </Tag>
   );
 }
+
 
 import logoAsset from "@/assets/spandhika-logo.png.asset.json";
 import heroFootAsset from "@/assets/hero-foot-heatmap.png.asset.json";

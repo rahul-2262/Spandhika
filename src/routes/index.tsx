@@ -101,17 +101,17 @@ function FloatingCard({
 }) {
   return (
     <div
-      className={`absolute rounded-2xl bg-card/90 backdrop-blur-md shadow-xl border border-outline-variant/60 p-3 sm:p-4 w-36 sm:w-44 ${className ?? ""}`}
+      className={`absolute rounded-2xl bg-card/90 backdrop-blur-md shadow-xl border border-outline-variant/60 p-3 sm:p-4 w-32 sm:w-44 ${className ?? ""}`}
     >
-      <div className="flex items-center gap-2 label-caps text-on-surface-variant">
-        <span className={`w-2 h-2 rounded-full ${accent ? "bg-tertiary-fixed-dim pressure-pulse" : "bg-primary"}`} />
+      <div className="flex items-center gap-2 label-caps text-on-surface-variant whitespace-nowrap text-[10px] sm:text-xs">
+        <span className={`w-2 h-2 rounded-full shrink-0 ${accent ? "bg-tertiary-fixed-dim pressure-pulse" : "bg-primary"}`} />
         {label}
       </div>
       <div className="mt-2 flex items-baseline gap-1">
-        <span className="text-xl sm:text-2xl font-semibold text-primary">{value}</span>
+        <span className="text-lg sm:text-2xl font-semibold text-primary">{value}</span>
         {unit && <span className="text-xs text-on-surface-variant">{unit}</span>}
       </div>
-      <div className="text-xs text-on-surface-variant mt-1">{sub}</div>
+      <div className="text-[11px] sm:text-xs text-on-surface-variant mt-1">{sub}</div>
     </div>
   );
 }

@@ -34,10 +34,10 @@ function Nav() {
     { href: "#purpose", label: "Purpose" },
   ];
   return (
-    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-outline-variant/60">
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 flex items-center justify-between h-16 sm:h-20">
-        <a href="#top" className="flex items-center gap-2 font-semibold tracking-tight text-primary">
-          <img src={logoAsset.url} alt="Spandhika Orthotics" className="h-11 sm:h-12 w-auto" />
+    <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-outline-variant/60">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 flex items-center justify-between h-14 sm:h-20">
+        <a href="#top" className="flex items-center gap-2 font-semibold tracking-tight text-primary" onClick={() => setOpen(false)}>
+          <img src={logoAsset.url} alt="Spandhika Orthotics" className="h-9 sm:h-12 w-auto" />
         </a>
         <nav className="hidden md:flex items-center gap-8 text-sm text-on-surface-variant">
           {links.map((l) => (
@@ -55,31 +55,65 @@ function Nav() {
           </a>
           <button
             onClick={() => setOpen((v) => !v)}
-            className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-outline-variant"
+            className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-outline-variant text-primary"
             aria-label="Toggle menu"
+            aria-expanded={open}
           >
             <Icon name={open ? "close" : "menu"} />
           </button>
         </div>
       </div>
-      {open && (
-        <div className="md:hidden border-t border-outline-variant bg-background">
-          <div className="px-4 py-4 flex flex-col gap-3">
-            {links.map((l) => (
-              <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="py-2 text-on-surface">
-                {l.label}
-              </a>
-            ))}
-            <a
-              href="#waitlist"
-              onClick={() => setOpen(false)}
-              className="mt-2 inline-flex justify-center rounded-full bg-primary text-primary-foreground px-4 py-3 font-medium"
-            >
-              Join waitlist
-            </a>
-          </div>
+
+      {/* Mobile drawer */}
+      <div
+        className={`md:hidden fixed inset-0 z-40 transition-opacity duration-300 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        onClick={() => setOpen(false)}
+      >
+        <div className="absolute inset-0 bg-primary/40 backdrop-blur-sm" />
+      </div>
+      <aside
+        className={`md:hidden fixed top-0 right-0 z-50 h-[100dvh] w-[82%] max-w-sm bg-background border-l border-outline-variant shadow-2xl transform transition-transform duration-300 ease-out ${open ? "translate-x-0" : "translate-x-full"}`}
+        aria-hidden={!open}
+      >
+        <div className="flex items-center justify-between h-14 px-4 border-b border-outline-variant">
+          <img src={logoAsset.url} alt="Spandhika Orthotics" className="h-9 w-auto" />
+          <button
+            onClick={() => setOpen(false)}
+            className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-outline-variant text-primary"
+            aria-label="Close menu"
+          >
+            <Icon name="close" />
+          </button>
         </div>
-      )}
+        <nav className="px-5 py-6 flex flex-col">
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-between py-4 text-lg font-medium text-on-surface border-b border-outline-variant/60 hover:text-primary transition-colors"
+            >
+              <span>{l.label}</span>
+              <Icon name="arrow_forward" className="text-base text-on-surface-variant" />
+            </a>
+          ))}
+          <a
+            href="#waitlist"
+            onClick={() => setOpen(false)}
+            className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-5 py-3.5 font-medium"
+          >
+            Join waitlist
+            <Icon name="arrow_forward" className="text-base" />
+          </a>
+          <a
+            href="mailto:spandhikaorthotics@gmail.com"
+            className="mt-4 inline-flex items-center justify-center gap-2 text-sm text-on-surface-variant"
+          >
+            <Icon name="mail" className="text-sm" />
+            spandhikaorthotics@gmail.com
+          </a>
+        </nav>
+      </aside>
     </header>
   );
 }

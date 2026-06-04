@@ -85,6 +85,7 @@ function Nav() {
     { href: "#features", label: "Features" },
     { href: "#audience", label: "Who it's for" },
     { href: "#purpose", label: "Purpose" },
+    { href: "#contact", label: "Contact" },
   ];
   return (
     <header className="sticky top-0 z-50 glass border-b border-white/40">

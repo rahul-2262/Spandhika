@@ -209,7 +209,7 @@ function Hero() {
             accent
           />
           <FloatingCard
-            className="bottom-6 -right-2 sm:bottom-8 sm:-right-3 lg:-right-6"
+            className="bottom-4 right-2 sm:bottom-8 sm:-right-3 lg:-right-6"
             label="Gait Balance"
             value="94%"
             sub="Symmetry score"

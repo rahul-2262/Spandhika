@@ -504,16 +504,17 @@ function Features() {
 
         </div>
 
-        <div className="mt-14 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
+        <Reveal stagger className="mt-14 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
           {features.map((f) => (
             <div
               key={f.title}
-              className="rounded-2xl glass-dark p-6 sm:p-7 text-primary-foreground hover:brightness-110 transition"
+              className="group rounded-2xl glass-dark p-6 sm:p-7 text-primary-foreground hover-lift hover:brightness-110"
             >
-              <div className="w-12 h-12 rounded-xl bg-tertiary-fixed text-primary flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl bg-tertiary-fixed text-primary flex items-center justify-center transition-transform group-hover:scale-110 group-hover:-rotate-3">
                 <Icon name={f.icon} />
               </div>
               <h3 className="mt-5 text-lg sm:text-xl font-semibold">{f.title}</h3>
+
               <p className="mt-2 text-on-primary-container leading-relaxed">{f.body}</p>
             </div>
           ))}

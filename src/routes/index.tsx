@@ -135,7 +135,7 @@ function FloatingCard({
 }) {
   return (
     <div
-      className={`absolute rounded-2xl bg-card/90 backdrop-blur-md shadow-xl border border-outline-variant/60 p-3 sm:p-4 w-32 sm:w-44 ${className ?? ""}`}
+      className={`absolute rounded-2xl glass-strong p-3 sm:p-4 w-32 sm:w-44 ${className ?? ""}`}
     >
       <div className="flex items-center gap-2 label-caps text-on-surface-variant whitespace-nowrap text-[10px] sm:text-xs">
         <span className={`w-2 h-2 rounded-full shrink-0 ${accent ? "bg-tertiary-fixed-dim pressure-pulse" : "bg-primary"}`} />

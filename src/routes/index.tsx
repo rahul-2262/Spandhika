@@ -491,7 +491,7 @@ const audiences = [
 
 function Audience() {
   return (
-    <section id="audience" className="py-14 sm:py-20 lg:py-32 bg-surface-container-low">
+    <section id="audience" className="py-14 sm:py-20 lg:py-32">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
         <Eyebrow>Applications</Eyebrow>
         <h2 className="mt-4 max-w-2xl text-[26px] sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">

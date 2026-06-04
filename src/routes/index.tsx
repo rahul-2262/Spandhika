@@ -391,7 +391,7 @@ function Features() {
           {features.map((f) => (
             <div
               key={f.title}
-              className="rounded-2xl bg-primary-container/60 backdrop-blur p-6 sm:p-7 border border-on-primary-container/20 hover:bg-primary-container transition"
+              className="rounded-2xl glass-dark p-6 sm:p-7 text-primary-foreground hover:brightness-110 transition"
             >
               <div className="w-12 h-12 rounded-xl bg-tertiary-fixed text-primary flex items-center justify-center">
                 <Icon name={f.icon} />

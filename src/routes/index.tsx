@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent, type ReactNode } from "react";
 import logoAsset from "@/assets/spandhika-logo.png.asset.json";
+import heroFoot from "@/assets/hero-foot-heatmap.jpg";
+import explodedInsole from "@/assets/exploded-insole.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -17,7 +19,7 @@ function Icon({ name, className = "" }: { name: string; className?: string }) {
 function Eyebrow({ children }: { children: ReactNode }) {
   return (
     <div className="inline-flex items-center gap-2 label-caps text-on-surface-variant">
-      <span className="h-px w-6 bg-outline-variant" />
+      <span className="h-px w-6 bg-tertiary-fixed-dim" />
       {children}
     </div>
   );
@@ -33,9 +35,9 @@ function Nav() {
   ];
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-outline-variant/60">
-      <div className="mx-auto max-w-[1280px] px-6 lg:px-20 flex items-center justify-between h-16">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 flex items-center justify-between h-16 sm:h-20">
         <a href="#top" className="flex items-center gap-2 font-semibold tracking-tight text-primary">
-          <img src={logoAsset.url} alt="Spandhika Orthotics" className="h-9 w-auto" />
+          <img src={logoAsset.url} alt="Spandhika Orthotics" className="h-11 sm:h-12 w-auto" />
         </a>
         <nav className="hidden md:flex items-center gap-8 text-sm text-on-surface-variant">
           {links.map((l) => (
@@ -62,7 +64,7 @@ function Nav() {
       </div>
       {open && (
         <div className="md:hidden border-t border-outline-variant bg-background">
-          <div className="px-6 py-4 flex flex-col gap-3">
+          <div className="px-4 py-4 flex flex-col gap-3">
             {links.map((l) => (
               <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="py-2 text-on-surface">
                 {l.label}
@@ -99,20 +101,27 @@ function FloatingCard({
 }) {
   return (
     <div
-      className={`absolute rounded-2xl bg-card/90 backdrop-blur-md shadow-xl border border-outline-variant/60 p-4 w-44 ${className ?? ""}`}
+      className={`absolute rounded-2xl bg-card/90 backdrop-blur-md shadow-xl border border-outline-variant/60 p-3 sm:p-4 w-36 sm:w-44 ${className ?? ""}`}
     >
       <div className="flex items-center gap-2 label-caps text-on-surface-variant">
         <span className={`w-2 h-2 rounded-full ${accent ? "bg-tertiary-fixed-dim pressure-pulse" : "bg-primary"}`} />
         {label}
       </div>
       <div className="mt-2 flex items-baseline gap-1">
-        <span className="text-2xl font-semibold text-primary">{value}</span>
+        <span className="text-xl sm:text-2xl font-semibold text-primary">{value}</span>
         {unit && <span className="text-xs text-on-surface-variant">{unit}</span>}
       </div>
       <div className="text-xs text-on-surface-variant mt-1">{sub}</div>
     </div>
   );
 }
+
+const heroStats = [
+  { value: "32", label: "Pressure zones" },
+  { value: "24", label: "Gait variables" },
+  { value: "94%", label: "Balance accuracy" },
+  { value: "1M+", label: "Data points / day" },
+];
 
 function Hero() {
   const [email, setEmail] = useState("");
@@ -126,13 +135,13 @@ function Hero() {
     <section id="top" className="relative overflow-hidden">
       <div className="blob bg-tertiary-fixed-dim w-[420px] h-[420px] -top-32 -right-24" />
       <div className="blob bg-secondary-container w-[380px] h-[380px] top-40 -left-32" style={{ animationDelay: "2s" }} />
-      <div className="mx-auto max-w-[1280px] px-6 lg:px-20 pt-16 pb-24 lg:pt-28 lg:pb-32 grid lg:grid-cols-2 gap-12 items-center relative">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 pt-12 pb-20 sm:pt-16 sm:pb-24 lg:pt-28 lg:pb-32 grid lg:grid-cols-2 gap-10 lg:gap-12 items-center relative">
         <div>
           <Eyebrow>Smart orthotic insoles</Eyebrow>
-          <h1 className="mt-6 text-[40px] sm:text-5xl lg:text-[64px] leading-[1.05] tracking-[-0.02em] font-bold text-primary">
+          <h1 className="mt-5 sm:mt-6 text-[34px] sm:text-5xl lg:text-[64px] leading-[1.05] tracking-[-0.02em] font-bold text-primary">
             Better movement starts from your feet.
           </h1>
-          <p className="mt-6 text-lg text-on-surface-variant max-w-xl leading-relaxed">
+          <p className="mt-5 sm:mt-6 text-base sm:text-lg text-on-surface-variant max-w-xl leading-relaxed">
             Most people ignore foot problems until they affect posture, comfort, and daily life.
             Spandhika is a smart orthotic insole that listens to how you walk — and helps you move better.
           </p>
@@ -140,7 +149,7 @@ function Hero() {
           <form
             id="waitlist"
             onSubmit={onSubmit}
-            className="mt-8 flex flex-col sm:flex-row gap-3 max-w-lg"
+            className="mt-7 sm:mt-8 flex flex-col sm:flex-row gap-3 max-w-lg"
           >
             <label className="sr-only" htmlFor="email">Email</label>
             <input
@@ -168,19 +177,31 @@ function Hero() {
             </a>
             <span>No spam · Launching 2026</span>
           </div>
+
+          {/* Trust analytics strip */}
+          <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-xl border-t border-outline-variant pt-6">
+            {heroStats.map((s) => (
+              <div key={s.label}>
+                <div className="text-2xl sm:text-3xl font-bold tracking-tight text-primary">{s.value}</div>
+                <div className="mt-1 label-caps text-on-surface-variant text-[10px]">{s.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="relative h-[460px] lg:h-[560px]">
-          <div className="absolute inset-0 rounded-[2rem] overflow-hidden bg-primary-container">
+        <div className="relative h-[360px] sm:h-[460px] lg:h-[560px] order-first lg:order-none">
+          <div className="absolute inset-0 rounded-[2rem] overflow-hidden bg-primary">
             <img
-              src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1200&q=80"
-              alt="Athletic shoe sole"
-              className="w-full h-full object-cover opacity-90 mix-blend-luminosity"
+              src={heroFoot}
+              alt="Foot pressure heatmap visualization"
+              width={1024}
+              height={1280}
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary/60 via-primary/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary/40 via-transparent to-transparent" />
           </div>
           <FloatingCard
-            className="top-8 -left-3 lg:-left-10"
+            className="top-6 -left-2 sm:top-8 sm:-left-3 lg:-left-10"
             label="Live Pressure"
             value="38.2"
             unit="kPa"
@@ -188,7 +209,7 @@ function Hero() {
             accent
           />
           <FloatingCard
-            className="bottom-8 -right-3 lg:-right-6"
+            className="bottom-6 -right-2 sm:bottom-8 sm:-right-3 lg:-right-6"
             label="Gait Balance"
             value="94%"
             sub="Symmetry score"
@@ -225,25 +246,25 @@ const signs = [
 
 function Problem() {
   return (
-    <section id="problem" className="py-20 lg:py-32 bg-surface-container-low">
-      <div className="mx-auto max-w-[1280px] px-6 lg:px-20">
+    <section id="problem" className="py-16 sm:py-20 lg:py-32 bg-surface-container-low">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
         <Eyebrow>The signs</Eyebrow>
         <h2 className="mt-4 max-w-2xl text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
           You might be ignoring the signs.
         </h2>
-        <p className="mt-5 max-w-2xl text-on-surface-variant text-lg">
+        <p className="mt-5 max-w-2xl text-on-surface-variant text-base sm:text-lg">
           Small discomforts are usually the first chapter of a bigger story. Here's what your feet might be trying to tell you.
         </p>
-        <div className="mt-12 grid sm:grid-cols-2 gap-5">
+        <div className="mt-10 sm:mt-12 grid sm:grid-cols-2 gap-4 sm:gap-5">
           {signs.map((s) => (
             <div
               key={s.title}
-              className="group rounded-2xl bg-card p-7 border border-outline-variant/60 hover:border-primary/40 hover:shadow-lg transition-all"
+              className="group rounded-2xl bg-card p-6 sm:p-7 border border-outline-variant/60 hover:border-primary/40 hover:shadow-lg transition-all"
             >
               <div className="w-12 h-12 rounded-xl bg-secondary-container text-primary flex items-center justify-center">
                 <Icon name={s.icon} />
               </div>
-              <h3 className="mt-5 text-xl font-semibold text-primary">{s.title}</h3>
+              <h3 className="mt-5 text-lg sm:text-xl font-semibold text-primary">{s.title}</h3>
               <p className="mt-2 text-on-surface-variant leading-relaxed">{s.body}</p>
             </div>
           ))}
@@ -273,10 +294,10 @@ const features = [
 
 function Features() {
   return (
-    <section id="features" className="py-20 lg:py-32 bg-primary text-primary-foreground relative overflow-hidden">
+    <section id="features" className="py-16 sm:py-20 lg:py-32 bg-primary text-primary-foreground relative overflow-hidden">
       <div className="blob bg-tertiary-fixed w-[500px] h-[500px] -bottom-40 -right-40 opacity-20" />
-      <div className="mx-auto max-w-[1280px] px-6 lg:px-20 relative">
-        <div className="grid lg:grid-cols-12 gap-10 items-end">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 relative">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
           <div className="lg:col-span-7">
             <div className="inline-flex items-center gap-2 label-caps text-tertiary-fixed-dim">
               <span className="h-px w-6 bg-tertiary-fixed-dim" />
@@ -286,21 +307,62 @@ function Features() {
               Meet SAARTHI<span className="text-tertiary-fixed-dim">™</span>
             </h2>
           </div>
-          <p className="lg:col-span-5 text-lg text-on-primary-container leading-relaxed">
+          <p className="lg:col-span-5 text-base sm:text-lg text-on-primary-container leading-relaxed">
             The world's most advanced smart insole system. SAARTHI™ doesn't just cushion your step; it understands it.
           </p>
         </div>
 
-        <div className="mt-14 grid md:grid-cols-3 gap-5">
+        {/* Exploded insole visual */}
+        <div className="mt-12 lg:mt-16 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="lg:col-span-6 relative">
+            <div className="absolute inset-0 -m-6 rounded-[2rem] bg-tertiary-fixed/10 blur-3xl" />
+            <div className="relative rounded-[2rem] overflow-hidden bg-[#f4f1e6] border border-on-primary-container/20">
+              <img
+                src={explodedInsole}
+                alt="Exploded view of the SAARTHI smart insole showing fabric cover, sensor array, foam, carbon arch plate, and base"
+                width={1280}
+                height={1024}
+                loading="lazy"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="hidden sm:flex absolute -bottom-4 -right-4 rounded-2xl bg-card text-on-surface px-4 py-3 shadow-xl border border-outline-variant/60 items-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-tertiary-fixed-dim pressure-pulse" />
+              <div>
+                <div className="label-caps text-on-surface-variant">Sensor array</div>
+                <div className="text-sm font-semibold text-primary">32-channel · 200Hz</div>
+              </div>
+            </div>
+          </div>
+          <ul className="lg:col-span-6 space-y-4">
+            {[
+              { layer: "01", name: "Breathable top cover", desc: "Moisture-wicking, antimicrobial fabric." },
+              { layer: "02", name: "Pressure sensor array", desc: "32 zones reading at 200 Hz across the foot." },
+              { layer: "03", name: "Adaptive foam", desc: "Energy-return cushioning tuned to your gait." },
+              { layer: "04", name: "Carbon arch plate", desc: "Lightweight stability where it matters most." },
+              { layer: "05", name: "Anti-slip base", desc: "Fits inside the shoes you already own." },
+            ].map((l) => (
+              <li key={l.layer} className="flex items-start gap-4 rounded-2xl bg-primary-container/40 p-4 border border-on-primary-container/15">
+                <span className="label-caps text-tertiary-fixed-dim mt-1">{l.layer}</span>
+                <div>
+                  <div className="text-base sm:text-lg font-semibold">{l.name}</div>
+                  <div className="text-sm text-on-primary-container/90">{l.desc}</div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mt-14 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
           {features.map((f) => (
             <div
               key={f.title}
-              className="rounded-2xl bg-primary-container/60 backdrop-blur p-7 border border-on-primary-container/20 hover:bg-primary-container transition"
+              className="rounded-2xl bg-primary-container/60 backdrop-blur p-6 sm:p-7 border border-on-primary-container/20 hover:bg-primary-container transition"
             >
               <div className="w-12 h-12 rounded-xl bg-tertiary-fixed text-primary flex items-center justify-center">
                 <Icon name={f.icon} />
               </div>
-              <h3 className="mt-5 text-xl font-semibold">{f.title}</h3>
+              <h3 className="mt-5 text-lg sm:text-xl font-semibold">{f.title}</h3>
               <p className="mt-2 text-on-primary-container leading-relaxed">{f.body}</p>
             </div>
           ))}
@@ -311,18 +373,18 @@ function Features() {
 }
 
 const orthotics = [
-  { title: "Ball of Foot Pain", desc: "Targeted metatarsal support" },
-  { title: "Bunions", desc: "Pressure relief and alignment" },
-  { title: "Diabetic Foot", desc: "Maximum cushioning and care" },
-  { title: "Fallen Arches", desc: "Firm medial arch elevation" },
-  { title: "Flat Feet", desc: "Structured stability control" },
-  { title: "Heel Pain", desc: "Deep heel cup and shock absorption" },
+  { title: "Ball of Foot Pain", desc: "Targeted metatarsal support", icon: "radio_button_checked" },
+  { title: "Bunions", desc: "Pressure relief and alignment", icon: "adjust" },
+  { title: "Diabetic Foot", desc: "Maximum cushioning and care", icon: "favorite" },
+  { title: "Fallen Arches", desc: "Firm medial arch elevation", icon: "show_chart" },
+  { title: "Flat Feet", desc: "Structured stability control", icon: "horizontal_rule" },
+  { title: "Heel Pain", desc: "Deep heel cup and shock absorption", icon: "vertical_align_bottom" },
 ];
 
 function Range() {
   return (
-    <section className="py-20 lg:py-32">
-      <div className="mx-auto max-w-[1280px] px-6 lg:px-20">
+    <section className="py-16 sm:py-20 lg:py-32">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
         <Eyebrow>Problems we are solving</Eyebrow>
         <div className="mt-4 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary flex items-center gap-3">
@@ -330,17 +392,20 @@ function Range() {
             Orthotics Range
           </h2>
         </div>
-        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="mt-10 sm:mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {orthotics.map((o) => (
             <div
               key={o.title}
-              className="group rounded-2xl bg-surface-container-low p-7 hover:bg-secondary-container transition-colors border border-transparent hover:border-primary/20"
+              className="group rounded-2xl bg-surface-container-low p-6 sm:p-7 hover:bg-secondary-container transition-colors border border-transparent hover:border-primary/20"
             >
-              <div className="flex items-center justify-between">
-                <h3 className="text-xl font-semibold text-primary">{o.title}</h3>
-                <Icon name="arrow_outward" className="text-primary opacity-0 group-hover:opacity-100 transition" />
+              <div className="flex items-start justify-between gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary-container text-tertiary-fixed flex items-center justify-center shadow-md">
+                  <Icon name={o.icon} className="text-3xl" />
+                </div>
+                <Icon name="arrow_outward" className="text-primary opacity-0 group-hover:opacity-100 transition mt-2" />
               </div>
-              <p className="mt-3 text-on-surface-variant">{o.desc}</p>
+              <h3 className="mt-5 text-lg sm:text-xl font-semibold text-primary">{o.title}</h3>
+              <p className="mt-2 text-on-surface-variant">{o.desc}</p>
             </div>
           ))}
         </div>
@@ -354,43 +419,58 @@ const audiences = [
     icon: "work",
     title: "Working professionals",
     body: "Long hours on hard floors. End the day without dragging your feet.",
+    image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80",
   },
   {
     icon: "directions_run",
     title: "Athletes",
     body: "Better load distribution. Better recovery. Better performance.",
+    image: "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&w=800&q=80",
   },
   {
     icon: "healing",
     title: "People with foot pain",
     body: "Targeted support for plantar fasciitis, fatigue, and recurring discomfort.",
+    image: "https://images.unsplash.com/photo-1559757175-7cb056fba93d?auto=format&fit=crop&w=800&q=80",
   },
   {
     icon: "groups",
     title: "People standing long hours",
     body: "Teachers, nurses, retail, hospitality — comfort that lasts the whole shift.",
+    image: "https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&w=800&q=80",
   },
 ];
 
 function Audience() {
   return (
-    <section id="audience" className="py-20 lg:py-32 bg-surface-container-low">
-      <div className="mx-auto max-w-[1280px] px-6 lg:px-20">
+    <section id="audience" className="py-16 sm:py-20 lg:py-32 bg-surface-container-low">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
         <Eyebrow>Applications</Eyebrow>
         <h2 className="mt-4 max-w-2xl text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
           Designed for everyday movement.
         </h2>
-        <p className="mt-5 max-w-2xl text-on-surface-variant text-lg">
+        <p className="mt-5 max-w-2xl text-on-surface-variant text-base sm:text-lg">
           Built for anyone whose day depends on their feet — which is to say, almost everyone.
         </p>
-        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="mt-10 sm:mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {audiences.map((a) => (
-            <div key={a.title} className="rounded-2xl bg-card p-6 border border-outline-variant/60 hover:shadow-md transition">
-              <div className="w-11 h-11 rounded-xl bg-primary text-primary-foreground flex items-center justify-center">
-                <Icon name={a.icon} />
+            <div key={a.title} className="rounded-2xl overflow-hidden bg-card border border-outline-variant/60 hover:shadow-lg transition flex flex-col">
+              <div className="relative h-40 sm:h-44 overflow-hidden bg-primary-container">
+                <img
+                  src={a.image}
+                  alt={a.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-primary/10 to-transparent" />
+                <div className="absolute top-3 left-3 w-10 h-10 rounded-xl bg-card/95 text-primary flex items-center justify-center shadow">
+                  <Icon name={a.icon} />
+                </div>
               </div>
-              <h3 className="mt-5 text-lg font-semibold text-primary">{a.title}</h3>
-              <p className="mt-2 text-sm text-on-surface-variant leading-relaxed">{a.body}</p>
+              <div className="p-5 sm:p-6 flex-1">
+                <h3 className="text-lg font-semibold text-primary">{a.title}</h3>
+                <p className="mt-2 text-sm text-on-surface-variant leading-relaxed">{a.body}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -413,37 +493,37 @@ const pillars = [
 
 function Trust() {
   return (
-    <section className="py-20 lg:py-32">
-      <div className="mx-auto max-w-[1280px] px-6 lg:px-20">
+    <section className="py-16 sm:py-20 lg:py-32">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
         <Eyebrow>Why trust Spandhika</Eyebrow>
         <h2 className="mt-4 max-w-3xl text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
           Built with research. Designed for real life.
         </h2>
-        <p className="mt-5 max-w-3xl text-on-surface-variant text-lg">
+        <p className="mt-5 max-w-3xl text-on-surface-variant text-base sm:text-lg">
           Inspired by biomechanics and shaped by real-world movement challenges. We're combining what scientists know about gait with what people actually feel at the end of a long day.
         </p>
 
-        <div className="mt-12 grid grid-cols-3 gap-4 sm:gap-8 border-y border-outline-variant py-10">
+        <div className="mt-10 sm:mt-12 grid grid-cols-3 gap-4 sm:gap-8 border-y border-outline-variant py-8 sm:py-10">
           {stats.map((s) => (
             <div key={s.label}>
-              <div className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-primary">{s.value}</div>
+              <div className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-primary">{s.value}</div>
               <div className="mt-2 label-caps text-on-surface-variant">{s.label}</div>
             </div>
           ))}
         </div>
 
-        <div className="mt-12 grid md:grid-cols-3 gap-5">
+        <div className="mt-10 sm:mt-12 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
           {pillars.map((p) => (
-            <div key={p.title} className="rounded-2xl p-7 bg-surface-container-low">
+            <div key={p.title} className="rounded-2xl p-6 sm:p-7 bg-surface-container-low">
               <Icon name={p.icon} className="text-3xl text-primary" />
-              <h3 className="mt-4 text-xl font-semibold text-primary">{p.title}</h3>
+              <h3 className="mt-4 text-lg sm:text-xl font-semibold text-primary">{p.title}</h3>
               <p className="mt-2 text-on-surface-variant leading-relaxed">{p.body}</p>
             </div>
           ))}
         </div>
 
-        <blockquote className="mt-16 max-w-4xl">
-          <p className="text-2xl sm:text-3xl lg:text-4xl font-medium text-primary leading-snug tracking-tight">
+        <blockquote className="mt-12 sm:mt-16 max-w-4xl">
+          <p className="text-xl sm:text-3xl lg:text-4xl font-medium text-primary leading-snug tracking-tight">
             "We started Spandhika because the most invisible part of our body — the soles of our feet — quietly shapes everything above them."
           </p>
           <footer className="mt-4 text-on-surface-variant label-caps">— The Spandhika team</footer>
@@ -455,9 +535,9 @@ function Trust() {
 
 function Purpose() {
   return (
-    <section id="purpose" className="py-20 lg:py-32 bg-primary text-primary-foreground relative overflow-hidden">
+    <section id="purpose" className="py-16 sm:py-20 lg:py-32 bg-primary text-primary-foreground relative overflow-hidden">
       <div className="blob bg-tertiary-fixed w-[600px] h-[600px] -top-60 left-1/2 -translate-x-1/2 opacity-20" />
-      <div className="mx-auto max-w-[1280px] px-6 lg:px-20 relative text-center">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 relative text-center">
         <div className="inline-flex items-center gap-2 label-caps text-tertiary-fixed-dim justify-center">
           <span className="h-px w-6 bg-tertiary-fixed-dim" />
           Brand purpose
@@ -465,7 +545,7 @@ function Purpose() {
         <h2 className="mt-4 text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight max-w-3xl mx-auto">
           We're not just building insoles.
         </h2>
-        <p className="mt-6 text-lg text-on-primary-container max-w-2xl mx-auto leading-relaxed">
+        <p className="mt-6 text-base sm:text-lg text-on-primary-container max-w-2xl mx-auto leading-relaxed">
           We're building confidence, comfort, and better movement for everyday life — quietly, underfoot, for the people who carry the world on theirs.
         </p>
         <a
@@ -483,10 +563,10 @@ function Purpose() {
 function Footer() {
   return (
     <footer className="bg-surface-container-low border-t border-outline-variant">
-      <div className="mx-auto max-w-[1280px] px-6 lg:px-20 py-16 grid md:grid-cols-3 gap-10">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 py-12 sm:py-16 grid md:grid-cols-3 gap-10">
         <div>
           <div className="flex items-center gap-2 font-semibold text-primary">
-            <img src={logoAsset.url} alt="Spandhika Orthotics" className="h-12 w-auto" />
+            <img src={logoAsset.url} alt="Spandhika Orthotics" className="h-14 sm:h-16 w-auto" />
           </div>
           <p className="mt-4 text-on-surface-variant max-w-sm leading-relaxed">
             Smart orthotic insoles designed for better movement, posture, and everyday comfort.
@@ -500,12 +580,12 @@ function Footer() {
           <div className="label-caps text-on-surface-variant">Contact</div>
           <a
             href="mailto:spandhikaorthotics@gmail.com"
-            className="mt-3 inline-flex items-center gap-2 text-primary hover:opacity-80 group"
+            className="mt-3 inline-flex items-center gap-2 text-primary hover:opacity-80 group break-all"
           >
             <Icon name="mail" className="text-base group-hover:scale-110 transition" />
             spandhikaorthotics@gmail.com
           </a>
-<div className="mt-4">
+          <div className="mt-4">
             <a href="https://www.linkedin.com/company/spandhika-orthotics" target="_blank" rel="noopener noreferrer" className="text-on-surface-variant hover:text-primary">LinkedIn</a>
           </div>
           <p className="mt-4 text-sm text-on-surface-variant">For press, partnerships, and early access.</p>
@@ -519,7 +599,7 @@ function Footer() {
         </div>
       </div>
       <div className="border-t border-outline-variant">
-        <div className="mx-auto max-w-[1280px] px-6 lg:px-20 py-6 text-sm text-on-surface-variant">
+        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 py-6 text-sm text-on-surface-variant">
           © 2026 Spandhika. All rights reserved.
         </div>
       </div>

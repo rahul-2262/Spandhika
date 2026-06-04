@@ -223,7 +223,7 @@ function Hero() {
           </div>
         </div>
 
-        <div className="relative h-[340px] sm:h-[460px] lg:h-[560px] order-first lg:order-none mx-1 sm:mx-0">
+        <div className="relative h-[260px] sm:h-[460px] lg:h-[560px] order-2 lg:order-none mx-1 sm:mx-0">
           <div className="absolute inset-0 rounded-[2rem] overflow-hidden bg-primary">
             <img
               src={heroFoot}
@@ -289,17 +289,17 @@ function Problem() {
         <p className="mt-5 max-w-2xl text-on-surface-variant text-[15px] sm:text-lg">
           Small discomforts are usually the first chapter of a bigger story. Here's what your feet might be trying to tell you.
         </p>
-        <div className="mt-8 sm:mt-12 grid sm:grid-cols-2 gap-4 sm:gap-5">
+        <div className="mt-8 sm:mt-12 grid grid-cols-2 gap-3 sm:gap-5">
           {signs.map((s) => (
             <div
               key={s.title}
-              className="group rounded-2xl bg-card p-6 sm:p-7 border border-outline-variant/60 hover:border-primary/40 hover:shadow-lg transition-all"
+              className="group rounded-2xl bg-card p-4 sm:p-7 border border-outline-variant/60 hover:border-primary/40 hover:shadow-lg transition-all"
             >
-              <div className="w-12 h-12 rounded-xl bg-secondary-container text-primary flex items-center justify-center">
-                <Icon name={s.icon} />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-secondary-container text-primary flex items-center justify-center">
+                <Icon name={s.icon} className="text-xl sm:text-2xl" />
               </div>
-              <h3 className="mt-5 text-lg sm:text-xl font-semibold text-primary">{s.title}</h3>
-              <p className="mt-2 text-on-surface-variant leading-relaxed">{s.body}</p>
+              <h3 className="mt-3 sm:mt-5 text-sm sm:text-xl font-semibold text-primary leading-snug">{s.title}</h3>
+              <p className="mt-1.5 sm:mt-2 text-xs sm:text-base text-on-surface-variant leading-relaxed">{s.body}</p>
             </div>
           ))}
         </div>
@@ -426,20 +426,20 @@ function Range() {
             Orthotics Range
           </h2>
         </div>
-        <div className="mt-8 sm:mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="mt-8 sm:mt-12 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
           {orthotics.map((o) => (
             <div
               key={o.title}
-              className="group rounded-2xl bg-surface-container-low p-6 sm:p-7 hover:bg-secondary-container transition-colors border border-transparent hover:border-primary/20"
+              className="group rounded-2xl bg-surface-container-low p-4 sm:p-7 hover:bg-secondary-container transition-colors border border-transparent hover:border-primary/20"
             >
-              <div className="flex items-start justify-between gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary-container text-tertiary-fixed flex items-center justify-center shadow-md">
-                  <Icon name={o.icon} className="text-3xl" />
+              <div className="flex items-start justify-between gap-2">
+                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary to-primary-container text-tertiary-fixed flex items-center justify-center shadow-md">
+                  <Icon name={o.icon} className="text-xl sm:text-3xl" />
                 </div>
-                <Icon name="arrow_outward" className="text-primary opacity-0 group-hover:opacity-100 transition mt-2" />
+                <Icon name="arrow_outward" className="text-primary opacity-0 group-hover:opacity-100 transition text-base sm:text-xl mt-1" />
               </div>
-              <h3 className="mt-5 text-lg sm:text-xl font-semibold text-primary">{o.title}</h3>
-              <p className="mt-2 text-on-surface-variant">{o.desc}</p>
+              <h3 className="mt-3 sm:mt-5 text-sm sm:text-xl font-semibold text-primary leading-snug">{o.title}</h3>
+              <p className="mt-1.5 sm:mt-2 text-xs sm:text-base text-on-surface-variant leading-relaxed">{o.desc}</p>
             </div>
           ))}
         </div>
@@ -486,10 +486,10 @@ function Audience() {
         <p className="mt-5 max-w-2xl text-on-surface-variant text-[15px] sm:text-lg">
           Built for anyone whose day depends on their feet — which is to say, almost everyone.
         </p>
-        <div className="mt-8 sm:mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <div className="mt-8 sm:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
           {audiences.map((a) => (
             <div key={a.title} className="rounded-2xl overflow-hidden bg-card border border-outline-variant/60 hover:shadow-lg transition flex flex-col">
-              <div className="relative h-40 sm:h-44 overflow-hidden bg-primary-container">
+              <div className="relative h-24 sm:h-44 overflow-hidden bg-primary-container">
                 <img
                   src={a.image}
                   alt={a.title}
@@ -497,13 +497,13 @@ function Audience() {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-primary/10 to-transparent" />
-                <div className="absolute top-3 left-3 w-10 h-10 rounded-xl bg-card/95 text-primary flex items-center justify-center shadow">
-                  <Icon name={a.icon} />
+                <div className="absolute top-2 left-2 sm:top-3 sm:left-3 w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-card/95 text-primary flex items-center justify-center shadow">
+                  <Icon name={a.icon} className="text-base sm:text-xl" />
                 </div>
               </div>
-              <div className="p-5 sm:p-6 flex-1">
-                <h3 className="text-lg font-semibold text-primary">{a.title}</h3>
-                <p className="mt-2 text-sm text-on-surface-variant leading-relaxed">{a.body}</p>
+              <div className="p-3 sm:p-6 flex-1">
+                <h3 className="text-sm sm:text-lg font-semibold text-primary leading-snug">{a.title}</h3>
+                <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-on-surface-variant leading-relaxed">{a.body}</p>
               </div>
             </div>
           ))}

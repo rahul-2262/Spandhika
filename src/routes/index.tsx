@@ -931,6 +931,7 @@ function Index() {
         <Range />
         <Audience />
         <Trust />
+        <Contact />
         <Purpose />
       </main>
       <Footer />

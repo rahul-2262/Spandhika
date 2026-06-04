@@ -34,7 +34,7 @@ function Nav() {
     { href: "#purpose", label: "Purpose" },
   ];
   return (
-    <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-outline-variant/60">
+    <header className="sticky top-0 z-50 glass border-b border-white/40">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 flex items-center justify-between h-14 sm:h-20">
         <a href="#top" className="flex items-center gap-2 font-semibold tracking-tight text-primary" onClick={() => setOpen(false)}>
           <img src={logoAsset.url} alt="Spandhika Orthotics" className="h-9 sm:h-12 w-auto" />

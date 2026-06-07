@@ -548,7 +548,7 @@ const signs = [
 
 function Problem() {
   return (
-    <section id="problem" className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
+    <section id="problem" className="scroll-mt-20 sm:scroll-mt-24 py-12 sm:py-16 lg:py-24 relative overflow-hidden">
       <div className="blob bg-secondary-container w-[420px] h-[420px] -top-32 -left-24 opacity-60" />
       <div className="blob bg-tertiary-fixed-dim w-[360px] h-[360px] bottom-0 -right-24 opacity-40" style={{ animationDelay: "3s" }} />
 
@@ -595,7 +595,7 @@ const features = [
 
 function Features() {
   return (
-    <section id="features" className="py-12 sm:py-16 lg:py-24 bg-primary text-primary-foreground relative overflow-hidden">
+    <section id="features" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-20 lg:py-28 bg-primary text-primary-foreground relative overflow-hidden before:absolute before:inset-x-0 before:-top-px before:h-12 before:bg-gradient-to-b before:from-background before:to-transparent before:pointer-events-none after:absolute after:inset-x-0 after:-bottom-px after:h-12 after:bg-gradient-to-t after:from-background after:to-transparent after:pointer-events-none">
       <div className="blob bg-tertiary-fixed w-[500px] h-[500px] -bottom-40 -right-40 opacity-20" />
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 relative">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
@@ -736,7 +736,7 @@ const orthotics = [
 function Range() {
   const [showAll, setShowAll] = useState(false);
   return (
-    <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
+    <section className="scroll-mt-20 sm:scroll-mt-24 py-12 sm:py-16 lg:py-24 relative overflow-hidden">
       <div className="blob bg-tertiary-fixed-dim w-[420px] h-[420px] -top-32 -right-24 opacity-40" />
       <div className="blob bg-secondary-container w-[360px] h-[360px] bottom-0 -left-24 opacity-50" style={{ animationDelay: "2.5s" }} />
 
@@ -802,7 +802,7 @@ const audiences = [
 
 function Audience() {
   return (
-    <section id="audience" className="py-12 sm:py-16 lg:py-24">
+    <section id="audience" className="scroll-mt-20 sm:scroll-mt-24 py-12 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
         <Eyebrow>Applications</Eyebrow>
         <h2 className="mt-4 max-w-2xl text-[26px] sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
@@ -853,7 +853,7 @@ const pillars = [
 
 function Trust() {
   return (
-    <section className="py-12 sm:py-16 lg:py-24">
+    <section className="scroll-mt-20 sm:scroll-mt-24 py-12 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
         <Eyebrow>Why trust Spandhika</Eyebrow>
         <h2 className="mt-4 max-w-3xl text-[26px] sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
@@ -961,7 +961,7 @@ function Contact() {
   }
 
   return (
-    <section id="contact" className="py-12 sm:py-16 lg:py-24">
+    <section id="contact" className="scroll-mt-20 sm:scroll-mt-24 py-12 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
         <Eyebrow>Get in touch</Eyebrow>
         <h2 className="mt-4 max-w-2xl text-[26px] sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
@@ -1152,7 +1152,7 @@ function Contact() {
 
 function Purpose() {
   return (
-    <section id="purpose" className="py-12 sm:py-16 lg:py-24 bg-primary text-primary-foreground relative overflow-hidden">
+    <section id="purpose" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-20 lg:py-28 bg-primary text-primary-foreground relative overflow-hidden before:absolute before:inset-x-0 before:-top-px before:h-12 before:bg-gradient-to-b before:from-background before:to-transparent before:pointer-events-none after:absolute after:inset-x-0 after:-bottom-px after:h-12 after:bg-gradient-to-t after:from-background after:to-transparent after:pointer-events-none">
       <div className="blob bg-tertiary-fixed w-[600px] h-[600px] -top-60 left-1/2 -translate-x-1/2 opacity-20" />
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 relative text-center">
         <div className="inline-flex items-center gap-2 label-caps text-tertiary-fixed-dim justify-center">

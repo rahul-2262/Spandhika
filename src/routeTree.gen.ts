@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogCustomVsOffTheShelfOrthoticsRouteImport } from './routes/blog.custom-vs-off-the-shelf-orthotics'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -22,31 +23,45 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogCustomVsOffTheShelfOrthoticsRoute =
+  BlogCustomVsOffTheShelfOrthoticsRouteImport.update({
+    id: '/blog/custom-vs-off-the-shelf-orthotics',
+    path: '/blog/custom-vs-off-the-shelf-orthotics',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blog/custom-vs-off-the-shelf-orthotics': typeof BlogCustomVsOffTheShelfOrthoticsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blog/custom-vs-off-the-shelf-orthotics': typeof BlogCustomVsOffTheShelfOrthoticsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blog/custom-vs-off-the-shelf-orthotics': typeof BlogCustomVsOffTheShelfOrthoticsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sitemap.xml'
+  fullPaths: '/' | '/sitemap.xml' | '/blog/custom-vs-off-the-shelf-orthotics'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sitemap.xml'
-  id: '__root__' | '/' | '/sitemap.xml'
+  to: '/' | '/sitemap.xml' | '/blog/custom-vs-off-the-shelf-orthotics'
+  id:
+    | '__root__'
+    | '/'
+    | '/sitemap.xml'
+    | '/blog/custom-vs-off-the-shelf-orthotics'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  BlogCustomVsOffTheShelfOrthoticsRoute: typeof BlogCustomVsOffTheShelfOrthoticsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +80,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/custom-vs-off-the-shelf-orthotics': {
+      id: '/blog/custom-vs-off-the-shelf-orthotics'
+      path: '/blog/custom-vs-off-the-shelf-orthotics'
+      fullPath: '/blog/custom-vs-off-the-shelf-orthotics'
+      preLoaderRoute: typeof BlogCustomVsOffTheShelfOrthoticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  BlogCustomVsOffTheShelfOrthoticsRoute: BlogCustomVsOffTheShelfOrthoticsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

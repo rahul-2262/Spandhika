@@ -53,7 +53,7 @@ function Reveal({
 
 
 import logoAsset from "@/assets/spandhika-logo.png.asset.json";
-import heroFootAsset from "@/assets/hero-foot-heatmap.png.asset.json";
+import heroFootAsset from "@/assets/hero-foot-pressure.png.asset.json";
 const heroFoot = heroFootAsset.url;
 import explodedInsole from "@/assets/exploded-insole.jpg";
 
@@ -307,21 +307,21 @@ function Hero() {
           <div className="absolute inset-6 rounded-full bg-tertiary-fixed/20 blur-3xl pointer-events-none" />
 
           <div className="absolute inset-0 rounded-[2.25rem] overflow-hidden glass-strong">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-container to-primary" />
+            <div className="absolute inset-0 bg-gradient-to-br from-white via-secondary-container/40 to-tertiary-fixed/30" />
             <img
               src={heroFoot}
-              alt="Foot pressure heatmap visualization"
+              alt="Foot pressure heatmap with live readings"
               width={1024}
-              height={1280}
-              className="relative w-full h-full object-contain object-center scale-[1.05] sm:scale-100 drop-shadow-2xl"
+              height={1024}
+              className="relative w-full h-full object-contain object-center scale-[1.02] sm:scale-100 drop-shadow-2xl float-slow"
             />
 
             {/* Subtle grid overlay */}
             <div
-              className="absolute inset-0 opacity-[0.08] mix-blend-overlay pointer-events-none"
+              className="absolute inset-0 opacity-[0.06] pointer-events-none"
               style={{
                 backgroundImage:
-                  "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+                  "linear-gradient(to right, var(--primary) 1px, transparent 1px), linear-gradient(to bottom, var(--primary) 1px, transparent 1px)",
                 backgroundSize: "32px 32px",
               }}
             />
@@ -331,34 +331,23 @@ function Hero() {
               className="absolute left-0 right-0 h-24 -top-24 scan-sweep pointer-events-none"
               style={{
                 background:
-                  "linear-gradient(to bottom, transparent, color-mix(in oklab, var(--tertiary-fixed) 35%, transparent), transparent)",
+                  "linear-gradient(to bottom, transparent, color-mix(in oklab, var(--primary) 22%, transparent), transparent)",
               }}
             />
-
-            {/* Top gradient veil */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 via-transparent to-transparent pointer-events-none" />
           </div>
 
           {/* Pulsing sensor dots */}
-          <div className="absolute top-[38%] left-[38%] pointer-events-none">
-            <span className="block w-2.5 h-2.5 rounded-full bg-tertiary-fixed shadow-[0_0_18px_var(--tertiary-fixed)]" />
-            <span className="absolute inset-0 rounded-full bg-tertiary-fixed/60 ring-pulse" />
+          <div className="absolute top-[42%] left-[34%] pointer-events-none">
+            <span className="block w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_18px_var(--primary)]" />
+            <span className="absolute inset-0 rounded-full bg-primary/50 ring-pulse" />
           </div>
-          <div className="absolute top-[64%] left-[58%] pointer-events-none">
+          <div className="absolute top-[70%] left-[60%] pointer-events-none">
             <span className="block w-2 h-2 rounded-full bg-tertiary-fixed-dim shadow-[0_0_14px_var(--tertiary-fixed)]" />
             <span className="absolute inset-0 rounded-full bg-tertiary-fixed/50 ring-pulse" style={{ animationDelay: "1.2s" }} />
           </div>
 
           <FloatingCard
-            className="top-4 left-2 sm:top-8 sm:-left-3 lg:-left-10 float-slow"
-            label="Live Pressure"
-            value="38.2"
-            unit="kPa"
-            sub="Heel · Right"
-            accent
-          />
-          <FloatingCard
-            className="bottom-4 right-2 sm:bottom-8 sm:-right-3 lg:-right-6 float-slow-rev"
+            className="bottom-4 left-2 sm:bottom-8 sm:-left-6 lg:-left-10 float-slow-rev"
             label="Gait Balance"
             value="94%"
             sub="Symmetry score"

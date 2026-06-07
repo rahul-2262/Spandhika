@@ -59,6 +59,27 @@ import explodedInsole from "@/assets/exploded-insole.jpg";
 import footPainImg from "@/assets/foot-pain.jpg";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Spandhika — Smart Orthotic Insoles for Better Movement" },
+      { name: "description", content: "SAARTHI by Spandhika is a smart orthotic insole that maps pressure, detects gait issues, and helps improve posture, comfort, and everyday movement." },
+      { property: "og:title", content: "Spandhika — Smart Orthotic Insoles for Better Movement" },
+      { property: "og:description", content: "SAARTHI maps pressure, detects gait issues, and helps you move better — every step." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://spandhikaorthotics.in/" },
+      { property: "og:image", content: "https://spandhikaorthotics.in/og-spandhika.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Spandhika SAARTHI smart orthotic insole" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Spandhika — Smart Orthotic Insoles for Better Movement" },
+      { name: "twitter:description", content: "SAARTHI maps pressure, detects gait issues, and helps you move better — every step." },
+      { name: "twitter:image", content: "https://spandhikaorthotics.in/og-spandhika.jpg" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://spandhikaorthotics.in/" },
+    ],
+  }),
   component: Index,
 });
 

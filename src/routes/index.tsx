@@ -276,7 +276,7 @@ function Hero() {
             style={{ animationDelay: "400ms" }}
           >
             <a href="#features" className="inline-flex items-center gap-1 text-primary font-medium group">
-              Learn more
+              Learn about SAARTHI features
               <Icon name="arrow_forward" className="text-base group-hover:translate-x-0.5 transition-transform" />
             </a>
             <span>No spam · Launching 2026</span>

@@ -1,0 +1,15 @@
+# Spandhika Orthotics
+
+> Spandhika makes SAARTHI, a smart orthotic insole that listens to how you walk and helps you move better — improving posture, comfort, and everyday movement.
+
+Spandhika is an Indian orthotics brand building smart, sensor-equipped insoles. The SAARTHI insole maps foot pressure, detects gait issues, and helps users address common foot pain, posture problems, and movement imbalances.
+
+## Pages
+
+- [Home](/): Overview of Spandhika, the SAARTHI smart insole, features, common foot problems it helps with, and waitlist signup.
+
+## Optional
+
+- [Features](/#features): How the SAARTHI smart insole works.
+- [Problems we help with](/#problems): Foot, posture, and movement issues SAARTHI addresses.
+- [Waitlist](/#waitlist): Join the 2026 launch waitlist.

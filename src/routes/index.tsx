@@ -393,26 +393,65 @@ const signs = [
 
 function Problem() {
   return (
-    <section id="problem" className="py-14 sm:py-20 lg:py-32">
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
-        <Eyebrow>The signs</Eyebrow>
-        <h2 className="mt-4 max-w-2xl text-[26px] sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
-          You might be ignoring the signs.
-        </h2>
-        <p className="mt-5 max-w-2xl text-on-surface-variant text-[15px] sm:text-lg">
-          Small discomforts are usually the first chapter of a bigger story. Here's what your feet might be trying to tell you.
-        </p>
-        <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-2 gap-3 sm:gap-5">
-          {signs.map((s) => (
+    <section id="problem" className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
+      <div className="blob bg-secondary-container w-[420px] h-[420px] -top-32 -left-24 opacity-60" />
+      <div className="blob bg-tertiary-fixed-dim w-[360px] h-[360px] bottom-0 -right-24 opacity-40" style={{ animationDelay: "3s" }} />
+
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 relative">
+        <div className="max-w-2xl">
+          <Eyebrow>The signs</Eyebrow>
+          <h2 className="mt-4 text-[28px] sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
+            You might be ignoring{" "}
+            <span className="text-gradient-primary">the signs.</span>
+          </h2>
+          <p className="mt-5 text-on-surface-variant text-[15px] sm:text-lg leading-relaxed">
+            Small discomforts are usually the first chapter of a bigger story. Here's what your feet might be trying to tell you.
+          </p>
+        </div>
+
+        <Reveal stagger className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          {signs.map((s, i) => (
             <div
               key={s.title}
-              className="group rounded-2xl glass p-4 sm:p-7 hover-lift hover:shadow-xl"
+              className="group relative rounded-3xl p-5 sm:p-7 bg-surface/70 backdrop-blur border border-outline-variant/60 hover-lift hover:shadow-2xl hover:border-primary/30 transition-all overflow-hidden"
             >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-secondary-container text-primary flex items-center justify-center transition-transform group-hover:scale-110 group-hover:rotate-3">
-                <Icon name={s.icon} className="text-xl sm:text-2xl" />
+              {/* Index ribbon */}
+              <div className="absolute top-4 right-4 sm:top-5 sm:right-5 label-caps text-on-surface-variant/60 text-[10px] tracking-[0.2em]">
+                0{i + 1}
               </div>
-              <h3 className="mt-3 sm:mt-5 text-sm sm:text-xl font-semibold text-primary leading-snug">{s.title}</h3>
-              <p className="mt-1.5 sm:mt-2 text-xs sm:text-base text-on-surface-variant leading-relaxed">{s.body}</p>
+
+              {/* Hover glow */}
+              <div className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{
+                  background: "radial-gradient(60% 60% at 50% 0%, color-mix(in oklab, var(--primary) 18%, transparent), transparent 70%)",
+                }}
+              />
+
+              {/* Icon */}
+              <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-secondary-container to-tertiary-fixed/40 text-primary flex items-center justify-center shadow-inner shadow-white/40 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 group-hover:shadow-lg group-hover:shadow-primary/20">
+                <Icon name={s.icon} className="text-2xl sm:text-3xl" />
+                <span className="absolute inset-0 rounded-2xl ring-1 ring-primary/10" />
+              </div>
+
+              <h3 className="relative mt-5 sm:mt-6 text-base sm:text-xl font-semibold text-primary leading-snug">
+                {s.title}
+              </h3>
+              <p className="relative mt-2 sm:mt-2.5 text-sm sm:text-base text-on-surface-variant leading-relaxed">
+                {s.body}
+              </p>
+
+              {/* Bottom accent line that grows on hover */}
+              <div className="relative mt-5 h-px bg-outline-variant/60 overflow-hidden">
+                <div className="absolute inset-y-0 left-0 w-0 bg-gradient-to-r from-primary to-tertiary-fixed-dim group-hover:w-full transition-[width] duration-700 ease-out" />
+              </div>
+
+              {/* Footer cue */}
+              <div className="relative mt-4 flex items-center justify-between">
+                <span className="label-caps text-[10px] text-on-surface-variant">Early signal</span>
+                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/5 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                  <Icon name="arrow_outward" className="text-base group-hover:rotate-12 transition-transform" />
+                </span>
+              </div>
             </div>
           ))}
         </Reveal>

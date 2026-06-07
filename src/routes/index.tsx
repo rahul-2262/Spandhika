@@ -605,12 +605,60 @@ function Features() {
 }
 
 const orthotics = [
-  { title: "Ball of Foot Pain", desc: "Targeted metatarsal support", icon: "radio_button_checked" },
-  { title: "Bunions", desc: "Pressure relief and alignment", icon: "adjust" },
-  { title: "Diabetic Foot", desc: "Maximum cushioning and care", icon: "favorite" },
-  { title: "Fallen Arches", desc: "Firm medial arch elevation", icon: "show_chart" },
-  { title: "Flat Feet", desc: "Structured stability control", icon: "horizontal_rule" },
-  { title: "Heel Pain", desc: "Deep heel cup and shock absorption", icon: "vertical_align_bottom" },
+  {
+    title: "Ball of Foot Pain",
+    desc: "Targeted metatarsal support",
+    icon: "radio_button_checked",
+    details:
+      "Metatarsalgia is sharp, burning, or aching pain under the ball of the foot, often from overloading the metatarsal heads during walking, running, or long standing hours.",
+    causes: ["High-impact activity", "Tight calves", "High heels", "Morton's neuroma"],
+    solution: "A pre-metatarsal pad that offloads the metatarsal heads, paired with a deep forefoot cushion to absorb peak pressure.",
+  },
+  {
+    title: "Bunions",
+    desc: "Pressure relief and alignment",
+    icon: "adjust",
+    details:
+      "A bunion (hallux valgus) is a bony bump at the base of the big toe caused by gradual misalignment of the first metatarsal joint, often worsened by narrow footwear.",
+    causes: ["Narrow toe boxes", "Genetic foot structure", "Overpronation", "Weak intrinsic muscles"],
+    solution: "Soft cushioning around the joint plus a medial flare that re-centers the big toe and reduces lateral pressure.",
+  },
+  {
+    title: "Diabetic Foot",
+    desc: "Maximum cushioning and care",
+    icon: "favorite",
+    details:
+      "Diabetic neuropathy reduces sensation in the feet, so small pressure points and friction can develop into ulcers without warning. Even pressure distribution is critical.",
+    causes: ["Peripheral neuropathy", "Reduced circulation", "Calluses", "Foot deformities"],
+    solution: "Multi-density EVA with seamless top cover and a 32-zone pressure map to flag high-load areas before tissue damage starts.",
+  },
+  {
+    title: "Fallen Arches",
+    desc: "Firm medial arch elevation",
+    icon: "show_chart",
+    details:
+      "Fallen arches (acquired flatfoot) develop when the posterior tibial tendon weakens, letting the midfoot collapse inward and causing pain along the arch and ankle.",
+    causes: ["Aging", "Excess body load", "Tendon injury", "Repetitive impact"],
+    solution: "Firm medial arch lift with a heel-stabilizing cup that supports the posterior tibial tendon through the gait cycle.",
+  },
+  {
+    title: "Flat Feet",
+    desc: "Structured stability control",
+    icon: "horizontal_rule",
+    details:
+      "Flat feet collapse the arch on weight-bearing, leading to overpronation. Over time this rotates the knee and hip inward, straining the medial chain.",
+    causes: ["Hereditary structure", "Ligament laxity", "Childhood foot development", "Overpronation"],
+    solution: "Carbon arch plate plus a stability frame that controls medial roll while keeping forefoot flexibility intact.",
+  },
+  {
+    title: "Heel Pain",
+    desc: "Deep heel cup and shock absorption",
+    icon: "vertical_align_bottom",
+    details:
+      "Heel pain typically stems from plantar fasciitis, fat pad atrophy, or heel spurs. Repeated impact without cushioning inflames the tissue at the heel insertion.",
+    causes: ["Plantar fasciitis", "Fat pad thinning", "Heel spurs", "Hard, flat shoes"],
+    solution: "Deep heel cup that cradles the fat pad, plus a viscoelastic insert that absorbs heel-strike shock at every step.",
+  },
 ];
 
 function Range() {
@@ -632,28 +680,9 @@ function Range() {
           </p>
         </div>
 
-        <Reveal stagger className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <Reveal stagger className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 items-start">
           {orthotics.map((o, i) => (
-            <div
-              key={o.title}
-              className={`group relative rounded-2xl p-6 sm:p-7 glass hover-lift hover:shadow-xl hover:border-primary/20 transition-all duration-500 ${
-                !showAll && i >= 4 ? "hidden sm:block" : ""
-              }`}
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-secondary-container text-primary flex items-center justify-center transition-transform duration-500 group-hover:-rotate-6">
-                  <Icon name={o.icon} className="text-2xl sm:text-3xl" />
-                </div>
-                <span className="label-caps text-[10px] text-on-surface-variant/70">0{i + 1}</span>
-              </div>
-
-              <h3 className="mt-5 sm:mt-6 text-lg sm:text-xl font-semibold text-primary leading-snug tracking-tight">
-                {o.title}
-              </h3>
-              <p className="mt-2 text-[14px] sm:text-[15px] text-on-surface-variant leading-relaxed">
-                {o.desc}
-              </p>
-            </div>
+            <OrthoticCard key={o.title} item={o} index={i} hidden={!showAll && i >= 4} />
           ))}
         </Reveal>
 

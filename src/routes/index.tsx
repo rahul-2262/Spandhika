@@ -368,6 +368,71 @@ function Hero() {
   );
 }
 
+function SignCard({ sign, index }: { sign: (typeof signs)[number]; index: number }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div
+      className={`group relative rounded-3xl p-5 sm:p-7 bg-surface/70 backdrop-blur border border-outline-variant/60 hover:shadow-2xl hover:border-primary/30 transition-all overflow-hidden ${open ? "shadow-2xl border-primary/30" : ""}`}
+    >
+      <div className="absolute top-4 right-4 sm:top-5 sm:right-5 label-caps text-on-surface-variant/60 text-[10px] tracking-[0.2em]">
+        0{index + 1}
+      </div>
+      <div className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{ background: "radial-gradient(60% 60% at 50% 0%, color-mix(in oklab, var(--primary) 14%, transparent), transparent 70%)" }}
+      />
+      <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-secondary-container to-tertiary-fixed/40 text-primary flex items-center justify-center shadow-inner shadow-white/40 transition-all duration-500 group-hover:-rotate-6">
+        <Icon name={sign.icon} className="text-2xl sm:text-3xl" />
+        <span className="absolute inset-0 rounded-2xl ring-1 ring-primary/10" />
+      </div>
+      <h3 className="relative mt-5 sm:mt-6 text-base sm:text-xl font-semibold text-primary leading-snug">{sign.title}</h3>
+      <p className="relative mt-2 sm:mt-2.5 text-sm sm:text-base text-on-surface-variant leading-relaxed">{sign.body}</p>
+
+      <div
+        className="relative grid transition-all duration-500 ease-out"
+        style={{ gridTemplateRows: open ? "1fr" : "0fr", opacity: open ? 1 : 0, marginTop: open ? "1rem" : 0 }}
+      >
+        <div className="overflow-hidden">
+          <div className="rounded-2xl bg-secondary-container/50 border border-outline-variant/40 p-4 text-sm text-on-surface-variant leading-relaxed space-y-3">
+            <p>{sign.details}</p>
+            <div>
+              <div className="label-caps text-[10px] text-primary/70 mb-1.5">Common causes</div>
+              <ul className="flex flex-wrap gap-1.5">
+                {sign.causes.map((c) => (
+                  <li key={c} className="inline-flex items-center text-[11px] rounded-full bg-card/80 border border-outline-variant/60 px-2.5 py-1 text-primary">
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <div className="label-caps text-[10px] text-primary/70 mb-1">How SAARTHI helps</div>
+              <p className="text-[13px] text-on-surface">{sign.helps}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative mt-5 h-px bg-outline-variant/60 overflow-hidden">
+        <div className={`absolute inset-y-0 left-0 bg-gradient-to-r from-primary to-tertiary-fixed-dim transition-[width] duration-700 ease-out ${open ? "w-full" : "w-0 group-hover:w-full"}`} />
+      </div>
+
+      <div className="relative mt-4 flex items-center justify-between">
+        <span className="label-caps text-[10px] text-on-surface-variant">{open ? "Hide details" : "Early signal"}</span>
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          aria-label={open ? "Hide details" : "Show more details"}
+          className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/5 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+        >
+          <Icon name="expand_more" className={`text-base transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+
 
 const signs = [
   {

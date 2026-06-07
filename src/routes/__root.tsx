@@ -97,6 +97,38 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap",
       },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Spandhika Orthotics",
+          url: "https://spandhikaorthotics.in",
+          description: "Spandhika designs smart orthotic insoles that help people move and stand better.",
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Spandhika",
+          url: "https://spandhikaorthotics.in",
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: "SAARTHI Smart Orthotic Insole",
+          brand: { "@type": "Brand", name: "Spandhika" },
+          description: "SAARTHI is a smart orthotic insole that maps foot pressure, detects gait issues, and helps improve posture, comfort, and everyday movement.",
+          category: "Orthotic Insole",
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,

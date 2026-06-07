@@ -374,23 +374,40 @@ const signs = [
     icon: "accessible_forward",
     title: "Heel pain after waking up",
     body: "That first painful step in the morning is often plantar fasciitis — and it doesn't fix itself.",
+    details:
+      "The plantar fascia tightens overnight; the first weight-bearing steps re-stretch inflamed tissue, causing sharp heel pain. Persistent symptoms can lead to heel spurs, gait compensation, and knee or hip strain.",
+    causes: ["Poor arch support", "Long standing hours", "Sudden activity spikes", "Worn-out footwear"],
+    helps: "Deep heel cup, contoured medial arch, and shock-absorbing forefoot pad to redistribute load.",
   },
   {
     icon: "schedule",
     title: "Foot fatigue after long hours",
     body: "Burning, aching, heavy feet after work or a long day on your feet is a signal — not normal.",
+    details:
+      "Repetitive standing without cushioning overloads the metatarsals and intrinsic foot muscles, reducing circulation and triggering burning, swelling, and end-of-day fatigue.",
+    causes: ["Hard floors", "Flat shoe insoles", "Poor pressure distribution", "Weak foot musculature"],
+    helps: "Energy-return foam plus a 32-zone pressure map that balances load across the whole footprint.",
   },
   {
     icon: "swap_horiz",
     title: "Uneven shoe wear",
     body: "If one shoe wears down faster, your weight distribution is off — and your body is compensating.",
+    details:
+      "Asymmetric wear patterns reveal overpronation, supination, or a leg-length discrepancy. Untreated, the kinetic chain compensates upward — ankles, knees, hips, and lower back follow.",
+    causes: ["Overpronation", "Supination", "Leg-length difference", "Muscle imbalance"],
+    helps: "Adaptive arch support and a carbon stability plate that re-centers the strike pattern.",
   },
   {
     icon: "airline_seat_legroom_reduced",
     title: "Knee or lower back discomfort",
     body: "Pain that feels unrelated often starts at the ground. Your feet are the foundation of every step.",
+    details:
+      "Misaligned feet rotate the tibia and femur subtly with every step. Over thousands of steps a day, that small rotation becomes chronic knee, hip, and lumbar strain.",
+    causes: ["Collapsed arches", "Heel-strike imbalance", "Poor shock absorption", "Forward pelvic tilt"],
+    helps: "Posture-aware support that aligns the foot, shin, and hip through a neutral gait cycle.",
   },
 ];
+
 
 function Problem() {
   return (

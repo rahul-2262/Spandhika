@@ -707,10 +707,57 @@ function Trust() {
 function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [submitted, setSubmitted] = useState<(typeof formData & { ref: string; date: string }) | null>(null);
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
+    const ref = `SPD-${Date.now().toString(36).toUpperCase()}`;
+    const date = new Date().toLocaleString();
+    setSubmitted({ ...formData, ref, date });
     setSent(true);
+  }
+
+  function downloadReceipt() {
+    if (!submitted) return;
+    const lines = [
+      "SPANDHIKA ORTHOTICS — MESSAGE RECEIPT",
+      "=======================================",
+      "",
+      `Reference: ${submitted.ref}`,
+      `Date:      ${submitted.date}`,
+      "",
+      "FROM",
+      "----",
+      `Name:  ${submitted.name}`,
+      `Email: ${submitted.email}`,
+      "",
+      "SUBJECT",
+      "-------",
+      submitted.subject,
+      "",
+      "MESSAGE",
+      "-------",
+      submitted.message,
+      "",
+      "---",
+      "Thank you for reaching out. We'll respond to the email above shortly.",
+      "spandhikaorthotics@gmail.com",
+    ].join("\n");
+    const blob = new Blob([lines], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `spandhika-receipt-${submitted.ref}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function resetForm() {
+    setSent(false);
+    setSubmitted(null);
+    setFormData({ name: "", email: "", subject: "", message: "" });
   }
 
   return (
@@ -763,19 +810,61 @@ function Contact() {
 
           {/* Message form */}
           <Reveal delay={120} className="rounded-2xl glass-strong p-6 sm:p-8 border border-outline-variant">
-            {sent ? (
-              <div className="h-full flex flex-col items-center justify-center text-center py-12">
-                <div className="w-16 h-16 rounded-full bg-tertiary-fixed/20 flex items-center justify-center">
-                  <Icon name="check_circle" className="text-4xl text-tertiary-fixed-dim" />
+            {sent && submitted ? (
+              <div className="flex flex-col">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-full bg-tertiary-fixed/20 flex items-center justify-center shrink-0">
+                    <Icon name="check_circle" className="text-3xl text-tertiary-fixed-dim" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-primary">Message sent!</h3>
+                    <p className="text-sm text-on-surface-variant">We'll get back to you shortly.</p>
+                  </div>
                 </div>
-                <h3 className="mt-6 text-xl font-semibold text-primary">Message sent!</h3>
-                <p className="mt-2 text-on-surface-variant">We'll get back to you as soon as possible.</p>
-                <button
-                  onClick={() => setSent(false)}
-                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm font-medium hover:opacity-90 transition"
-                >
-                  Send another
-                </button>
+
+                <dl className="mt-6 rounded-xl glass p-5 space-y-3 text-sm">
+                  <div className="flex justify-between gap-4">
+                    <dt className="label-caps text-on-surface-variant">Reference</dt>
+                    <dd className="font-mono text-primary">{submitted.ref}</dd>
+                  </div>
+                  <div className="flex justify-between gap-4">
+                    <dt className="label-caps text-on-surface-variant">Date</dt>
+                    <dd className="text-primary">{submitted.date}</dd>
+                  </div>
+                  <div className="h-px bg-outline-variant" />
+                  <div>
+                    <dt className="label-caps text-on-surface-variant">Name</dt>
+                    <dd className="mt-1 text-primary">{submitted.name}</dd>
+                  </div>
+                  <div>
+                    <dt className="label-caps text-on-surface-variant">Email</dt>
+                    <dd className="mt-1 text-primary break-all">{submitted.email}</dd>
+                  </div>
+                  <div>
+                    <dt className="label-caps text-on-surface-variant">Subject</dt>
+                    <dd className="mt-1 text-primary">{submitted.subject}</dd>
+                  </div>
+                  <div>
+                    <dt className="label-caps text-on-surface-variant">Message</dt>
+                    <dd className="mt-1 text-primary whitespace-pre-wrap">{submitted.message}</dd>
+                  </div>
+                </dl>
+
+                <div className="mt-6 flex flex-col sm:flex-row gap-3">
+                  <button
+                    onClick={downloadReceipt}
+                    className="flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-5 py-3 text-sm font-medium hover:opacity-90 transition"
+                  >
+                    <Icon name="download" className="text-base" />
+                    Download receipt
+                  </button>
+                  <button
+                    onClick={resetForm}
+                    className="flex-1 inline-flex items-center justify-center gap-2 rounded-full glass border border-outline-variant text-primary px-5 py-3 text-sm font-medium hover:bg-secondary-container/50 transition"
+                  >
+                    Send another
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={onSubmit} className="space-y-5">

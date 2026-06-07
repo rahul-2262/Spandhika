@@ -1005,15 +1005,21 @@ function Contact() {
                   spandhikaorthotics@gmail.com
                 </a>
               </div>
-              <div className="rounded-2xl glass p-5 sm:p-6 hover-lift">
-                <div className="w-10 h-10 rounded-xl bg-secondary-container text-primary flex items-center justify-center">
-                  <Icon name="chat" />
+              <a
+                href="https://www.linkedin.com/company/spandhika-orthotics"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-2xl glass p-5 sm:p-6 hover-lift group"
+              >
+                <div className="w-10 h-10 rounded-xl bg-secondary-container text-primary flex items-center justify-center transition-transform group-hover:-rotate-6">
+                  <Icon name="link" />
                 </div>
                 <div className="mt-3 label-caps text-on-surface-variant">Social</div>
-                <a href="https://www.linkedin.com/company/spandhika-orthotics" target="_blank" rel="noopener noreferrer" className="mt-1 text-primary font-medium hover:opacity-80">
+                <div className="mt-1 inline-flex items-center gap-1 text-primary font-medium group-hover:opacity-80">
                   LinkedIn
-                </a>
-              </div>
+                  <Icon name="arrow_outward" className="text-base" />
+                </div>
+              </a>
             </div>
           </Reveal>
 

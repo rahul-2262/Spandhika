@@ -655,7 +655,7 @@ function Features() {
 
         </div>
 
-        <Reveal stagger className="mt-14 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
+        <Reveal stagger className="mt-14 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 items-start">
           {features.map((f) => (
             <div
               key={f.title}
@@ -811,7 +811,7 @@ function Audience() {
         <p className="mt-5 max-w-2xl text-on-surface-variant text-[15px] sm:text-lg">
           Built for anyone whose day depends on their feet — which is to say, almost everyone.
         </p>
-        <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-start">
           {audiences.map((a) => (
             <div key={a.title} className="group rounded-2xl overflow-hidden glass hover-lift hover:shadow-xl flex flex-col">
               <div className="relative aspect-[4/3] sm:aspect-[5/4] overflow-hidden bg-primary-container">
@@ -879,7 +879,7 @@ function Trust() {
           ))}
         </Reveal>
 
-        <Reveal stagger className="mt-8 sm:mt-12 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
+        <Reveal stagger className="mt-8 sm:mt-12 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 items-start">
           {pillars.map((p) => (
             <div
               key={p.title}

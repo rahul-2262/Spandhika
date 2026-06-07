@@ -56,6 +56,7 @@ import logoAsset from "@/assets/spandhika-logo.png.asset.json";
 import heroFootAsset from "@/assets/hero-foot-pressure.png.asset.json";
 const heroFoot = heroFootAsset.url;
 import explodedInsole from "@/assets/exploded-insole.jpg";
+import footPainImg from "@/assets/foot-pain.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -590,11 +591,11 @@ function Range() {
           </p>
         </div>
 
-        <Reveal stagger className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <Reveal stagger className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {orthotics.map((o, i) => (
             <div
               key={o.title}
-              className={`group relative rounded-3xl p-5 sm:p-7 bg-surface/70 backdrop-blur border border-outline-variant/60 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:border-transparent overflow-hidden ${
+              className={`group relative rounded-[28px] overflow-hidden bg-card border border-outline-variant/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_60px_-20px_color-mix(in_oklab,var(--primary)_45%,transparent)] hover:border-transparent ${
                 !showAll && i >= 4 ? "hidden sm:block" : ""
               }`}
             >
@@ -602,47 +603,77 @@ function Range() {
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{
                   background:
-                    "linear-gradient(135deg, color-mix(in oklab, var(--primary) 92%, black 0%) 0%, color-mix(in oklab, var(--primary-container) 70%, var(--primary) 30%) 100%)",
+                    "linear-gradient(150deg, var(--primary) 0%, color-mix(in oklab, var(--primary) 70%, black) 100%)",
+                }}
+              />
+              {/* Decorative dot grid (visible on default state, fades on hover) */}
+              <div className="absolute inset-0 opacity-40 group-hover:opacity-0 transition-opacity duration-500 pointer-events-none"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(color-mix(in oklab, var(--primary) 12%, transparent) 1px, transparent 1px)",
+                  backgroundSize: "16px 16px",
+                  maskImage: "radial-gradient(ellipse at top right, black 0%, transparent 65%)",
+                  WebkitMaskImage: "radial-gradient(ellipse at top right, black 0%, transparent 65%)",
                 }}
               />
               {/* Sheen */}
               <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] rotate-12 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                 style={{
                   background:
-                    "linear-gradient(90deg, transparent 40%, color-mix(in oklab, var(--tertiary-fixed) 35%, transparent) 50%, transparent 60%)",
+                    "linear-gradient(90deg, transparent 42%, color-mix(in oklab, var(--tertiary-fixed) 30%, transparent) 50%, transparent 58%)",
                 }}
               />
 
-              {/* Index */}
-              <div className="absolute top-4 right-4 sm:top-5 sm:right-5 label-caps text-[10px] tracking-[0.2em] text-on-surface-variant/60 group-hover:text-tertiary-fixed-dim transition-colors">
+              {/* Oversized numeral watermark */}
+              <div
+                className="pointer-events-none absolute -top-6 -right-2 sm:-top-8 sm:-right-3 select-none text-[140px] sm:text-[180px] leading-none font-bold tracking-tighter text-primary/[0.06] group-hover:text-white/10 transition-colors"
+                aria-hidden
+              >
                 0{i + 1}
               </div>
 
-              <div className="relative flex items-start gap-4">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-secondary-container to-tertiary-fixed/40 text-primary flex items-center justify-center shadow-inner shadow-white/40 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 group-hover:bg-white/95 group-hover:text-primary group-hover:shadow-lg group-hover:shadow-black/20">
-                  <Icon name={o.icon} className="text-2xl sm:text-3xl" />
+              <div className="relative p-6 sm:p-8 flex flex-col h-full">
+                {/* Header row */}
+                <div className="flex items-start justify-between gap-4">
+                  <div className="relative">
+                    <div
+                      className="absolute -inset-1.5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md"
+                      style={{ background: "color-mix(in oklab, var(--tertiary-fixed) 60%, transparent)" }}
+                    />
+                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-secondary-container to-tertiary-fixed/50 text-primary flex items-center justify-center shadow-inner shadow-white/40 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 group-hover:bg-white group-hover:shadow-lg group-hover:shadow-black/20">
+                      <Icon name={o.icon} className="text-3xl" />
+                    </div>
+                  </div>
+                  <span className="mt-2 label-caps text-[10px] tracking-[0.22em] text-on-surface-variant/70 group-hover:text-tertiary-fixed-dim transition-colors">
+                    Condition · 0{i + 1}
+                  </span>
                 </div>
-              </div>
 
-              <h3 className="relative mt-5 sm:mt-6 text-base sm:text-xl font-semibold text-primary leading-snug group-hover:text-primary-foreground transition-colors">
-                {o.title}
-              </h3>
-              <p className="relative mt-2 text-sm sm:text-base text-on-surface-variant leading-relaxed group-hover:text-primary-foreground/85 transition-colors">
-                {o.desc}
-              </p>
+                {/* Body */}
+                <h3 className="mt-6 sm:mt-7 text-xl sm:text-2xl font-semibold text-primary leading-[1.15] tracking-tight group-hover:text-primary-foreground transition-colors">
+                  {o.title}
+                </h3>
+                <p className="mt-2.5 text-[15px] sm:text-base text-on-surface-variant leading-relaxed group-hover:text-primary-foreground/85 transition-colors">
+                  {o.desc}
+                </p>
 
-              {/* Underline */}
-              <div className="relative mt-5 h-px bg-outline-variant/60 group-hover:bg-white/20 overflow-hidden transition-colors">
-                <div className="absolute inset-y-0 left-0 w-0 bg-gradient-to-r from-tertiary-fixed-dim to-white group-hover:w-full transition-[width] duration-700 ease-out" />
-              </div>
+                {/* Spacer */}
+                <div className="flex-1 min-h-[16px]" />
 
-              <div className="relative mt-4 flex items-center justify-between">
-                <span className="label-caps text-[10px] text-on-surface-variant group-hover:text-primary-foreground/70 transition-colors">
-                  Targeted support
-                </span>
-                <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-primary/5 text-primary group-hover:bg-white group-hover:text-primary transition-all duration-300 group-hover:rotate-12">
-                  <Icon name="arrow_outward" className="text-base" />
-                </span>
+                {/* Underline */}
+                <div className="mt-6 h-px bg-outline-variant/60 group-hover:bg-white/20 overflow-hidden transition-colors">
+                  <div className="h-full w-0 bg-gradient-to-r from-tertiary-fixed-dim to-white group-hover:w-full transition-[width] duration-700 ease-out" />
+                </div>
+
+                {/* Footer */}
+                <div className="mt-4 flex items-center justify-between">
+                  <span className="inline-flex items-center gap-2 text-sm font-medium text-primary group-hover:text-primary-foreground transition-colors">
+                    Explore solution
+                  </span>
+                  <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/5 text-primary group-hover:bg-white group-hover:text-primary transition-all duration-300 group-hover:rotate-12">
+                    <Icon name="arrow_outward" className="text-lg" />
+                  </span>
+                </div>
               </div>
             </div>
           ))}
@@ -680,7 +711,7 @@ const audiences = [
     icon: "healing",
     title: "People with foot pain",
     body: "Targeted support for plantar fasciitis, fatigue, and recurring discomfort.",
-    image: "https://images.unsplash.com/photo-1631815587646-b85a1bb027e1?auto=format&fit=crop&w=800&q=80",
+    image: footPainImg,
   },
   {
     icon: "groups",
@@ -701,24 +732,24 @@ function Audience() {
         <p className="mt-5 max-w-2xl text-on-surface-variant text-[15px] sm:text-lg">
           Built for anyone whose day depends on their feet — which is to say, almost everyone.
         </p>
-        <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+        <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {audiences.map((a) => (
             <div key={a.title} className="group rounded-2xl overflow-hidden glass hover-lift hover:shadow-xl flex flex-col">
-              <div className="relative h-24 sm:h-44 overflow-hidden bg-primary-container">
+              <div className="relative aspect-[4/3] sm:aspect-[5/4] overflow-hidden bg-primary-container">
                 <img
                   src={a.image}
                   alt={a.title}
                   loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="absolute inset-0 w-full h-full object-cover object-[center_35%] transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-primary/10 to-transparent" />
-                <div className="absolute top-2 left-2 sm:top-3 sm:left-3 w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-card/95 text-primary flex items-center justify-center shadow transition-transform group-hover:-rotate-6">
-                  <Icon name={a.icon} className="text-base sm:text-xl" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/55 via-primary/10 to-transparent" />
+                <div className="absolute top-3 left-3 w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-card/95 text-primary flex items-center justify-center shadow transition-transform group-hover:-rotate-6">
+                  <Icon name={a.icon} className="text-lg sm:text-xl" />
                 </div>
               </div>
-              <div className="p-3 sm:p-6 flex-1">
-                <h3 className="text-sm sm:text-lg font-semibold text-primary leading-snug">{a.title}</h3>
-                <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-on-surface-variant leading-relaxed">{a.body}</p>
+              <div className="p-4 sm:p-6 flex-1">
+                <h3 className="text-base sm:text-lg font-semibold text-primary leading-snug">{a.title}</h3>
+                <p className="mt-1.5 sm:mt-2 text-sm text-on-surface-variant leading-relaxed">{a.body}</p>
               </div>
             </div>
           ))}

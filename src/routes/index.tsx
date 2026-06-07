@@ -225,20 +225,20 @@ function Hero() {
       <div className="blob bg-secondary-container w-[420px] h-[420px] top-40 -left-32" style={{ animationDelay: "2s" }} />
       <div className="blob bg-on-primary-container/40 w-[360px] h-[360px] bottom-0 left-1/3" style={{ animationDelay: "4s" }} />
 
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 pt-12 pb-20 sm:pt-16 sm:pb-24 lg:pt-28 lg:pb-32 grid lg:grid-cols-2 gap-10 lg:gap-12 items-center relative">
-        <div>
-          <div className="fade-up" style={{ animationDelay: "60ms" }}>
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 pt-10 pb-16 sm:pt-16 sm:pb-24 lg:pt-28 lg:pb-32 grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center relative">
+        <div className="text-center lg:text-left order-2 lg:order-none">
+          <div className="fade-up flex justify-center lg:justify-start" style={{ animationDelay: "60ms" }}>
             <Eyebrow>Smart orthotic insoles</Eyebrow>
           </div>
           <h1
-            className="mt-5 sm:mt-6 text-[30px] sm:text-5xl lg:text-[64px] leading-[1.05] tracking-[-0.02em] font-bold text-primary fade-up"
+            className="mt-4 sm:mt-6 text-[34px] sm:text-5xl lg:text-[64px] leading-[1.08] tracking-[-0.02em] font-bold text-primary fade-up"
             style={{ animationDelay: "120ms" }}
           >
             Better movement starts from{" "}
             <span className="text-gradient-primary">your feet.</span>
           </h1>
           <p
-            className="mt-5 sm:mt-6 text-[15px] sm:text-lg text-on-surface-variant max-w-xl leading-relaxed fade-up"
+            className="mt-4 sm:mt-6 text-[15px] sm:text-lg text-on-surface-variant max-w-xl mx-auto lg:mx-0 leading-relaxed fade-up"
             style={{ animationDelay: "220ms" }}
           >
             Most people ignore foot problems until they affect posture, comfort, and daily life.
@@ -248,7 +248,7 @@ function Hero() {
           <form
             id="waitlist"
             onSubmit={onSubmit}
-            className="mt-7 sm:mt-8 flex flex-col sm:flex-row gap-3 max-w-lg fade-up"
+            className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto lg:mx-0 fade-up"
             style={{ animationDelay: "320ms" }}
           >
             <label className="sr-only" htmlFor="email">Email</label>
@@ -271,7 +271,7 @@ function Hero() {
           </form>
 
           <div
-            className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-on-surface-variant fade-up"
+            className="mt-5 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-sm text-on-surface-variant fade-up"
             style={{ animationDelay: "400ms" }}
           >
             <a href="#features" className="inline-flex items-center gap-1 text-primary font-medium group">
@@ -283,13 +283,13 @@ function Hero() {
 
           {/* Trust analytics strip */}
           <div
-            className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-xl border-t border-outline-variant/60 pt-6 fade-up"
+            className="mt-8 sm:mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-xl mx-auto lg:mx-0 border-t border-outline-variant/60 pt-6 fade-up"
             style={{ animationDelay: "500ms" }}
           >
             {heroStats.map((s, i) => (
               <div
                 key={s.label}
-                className="fade-up"
+                className="fade-up text-center sm:text-left"
                 style={{ animationDelay: `${560 + i * 80}ms` }}
               >
                 <div className="text-2xl sm:text-3xl font-bold tracking-tight text-gradient-primary">{s.value}</div>
@@ -300,7 +300,7 @@ function Hero() {
         </div>
 
         <div
-          className="relative h-[220px] sm:h-[480px] lg:h-[580px] order-2 lg:order-none mx-1 sm:mx-0 fade-up"
+          className="relative h-[340px] sm:h-[520px] lg:h-[600px] order-1 lg:order-none mx-auto w-full max-w-[440px] sm:max-w-none fade-up"
           style={{ animationDelay: "180ms" }}
         >
           {/* Ambient glow ring */}
@@ -313,7 +313,7 @@ function Hero() {
               alt="Foot pressure heatmap with live readings"
               width={1024}
               height={1024}
-              className="relative w-full h-full object-contain object-center scale-[1.02] sm:scale-100 drop-shadow-2xl float-slow"
+              className="relative w-full h-full object-contain object-center p-4 sm:p-6 drop-shadow-2xl float-slow"
             />
 
             {/* Subtle grid overlay */}
@@ -347,7 +347,15 @@ function Hero() {
           </div>
 
           <FloatingCard
-            className="bottom-4 left-2 sm:bottom-8 sm:-left-6 lg:-left-10 float-slow-rev"
+            className="top-2 right-2 sm:top-6 sm:-right-3 lg:-right-6 float-slow"
+            label="Live Pressure"
+            value="38.2"
+            unit="kPa"
+            sub="Heel · Right"
+            accent
+          />
+          <FloatingCard
+            className="bottom-2 left-2 sm:bottom-8 sm:-left-6 lg:-left-10 float-slow-rev"
             label="Gait Balance"
             value="94%"
             sub="Symmetry score"

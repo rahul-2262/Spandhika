@@ -1071,7 +1071,7 @@ function Index() {
   return (
     <div className="min-h-screen text-foreground overflow-x-hidden">
       <Nav />
-      <main>
+      <main className="pt-14 sm:pt-20 scroll-pt-14 sm:scroll-pt-20">
         <Hero />
         <Problem />
         <Features />

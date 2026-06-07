@@ -702,24 +702,24 @@ function Audience() {
         <p className="mt-5 max-w-2xl text-on-surface-variant text-[15px] sm:text-lg">
           Built for anyone whose day depends on their feet — which is to say, almost everyone.
         </p>
-        <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+        <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {audiences.map((a) => (
             <div key={a.title} className="group rounded-2xl overflow-hidden glass hover-lift hover:shadow-xl flex flex-col">
-              <div className="relative h-24 sm:h-44 overflow-hidden bg-primary-container">
+              <div className="relative aspect-[4/3] sm:aspect-[5/4] overflow-hidden bg-primary-container">
                 <img
                   src={a.image}
                   alt={a.title}
                   loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="absolute inset-0 w-full h-full object-cover object-[center_35%] transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-primary/10 to-transparent" />
-                <div className="absolute top-2 left-2 sm:top-3 sm:left-3 w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-card/95 text-primary flex items-center justify-center shadow transition-transform group-hover:-rotate-6">
-                  <Icon name={a.icon} className="text-base sm:text-xl" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/55 via-primary/10 to-transparent" />
+                <div className="absolute top-3 left-3 w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-card/95 text-primary flex items-center justify-center shadow transition-transform group-hover:-rotate-6">
+                  <Icon name={a.icon} className="text-lg sm:text-xl" />
                 </div>
               </div>
-              <div className="p-3 sm:p-6 flex-1">
-                <h3 className="text-sm sm:text-lg font-semibold text-primary leading-snug">{a.title}</h3>
-                <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-on-surface-variant leading-relaxed">{a.body}</p>
+              <div className="p-4 sm:p-6 flex-1">
+                <h3 className="text-base sm:text-lg font-semibold text-primary leading-snug">{a.title}</h3>
+                <p className="mt-1.5 sm:mt-2 text-sm text-on-surface-variant leading-relaxed">{a.body}</p>
               </div>
             </div>
           ))}

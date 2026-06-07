@@ -863,16 +863,16 @@ function Trust() {
           Inspired by biomechanics and shaped by real-world movement challenges. We're combining what scientists know about gait with what people actually feel at the end of a long day.
         </p>
 
-        <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-3 gap-4 sm:gap-8 border-y border-outline-variant py-8 sm:py-10">
+        <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-3 gap-3 sm:gap-6 lg:gap-8 border-y border-outline-variant py-8 sm:py-10">
           {stats.map((s) => (
             <div
               key={s.label}
-              className="group rounded-2xl p-3 sm:p-5 transition-all duration-500 hover-lift"
+              className="group rounded-2xl p-2 sm:p-4 lg:p-5 transition-all duration-500 hover-lift text-center sm:text-left"
             >
               <div className="text-[28px] sm:text-5xl lg:text-6xl font-bold tracking-tight text-gradient-primary">
                 {s.value}
               </div>
-              <div className="mt-2 label-caps text-on-surface-variant">
+              <div className="mt-2 label-caps text-on-surface-variant text-[10px] sm:text-xs whitespace-nowrap">
                 {s.label}
               </div>
             </div>
@@ -1005,15 +1005,21 @@ function Contact() {
                   spandhikaorthotics@gmail.com
                 </a>
               </div>
-              <div className="rounded-2xl glass p-5 sm:p-6 hover-lift">
-                <div className="w-10 h-10 rounded-xl bg-secondary-container text-primary flex items-center justify-center">
-                  <Icon name="chat" />
+              <a
+                href="https://www.linkedin.com/company/spandhika-orthotics"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-2xl glass p-5 sm:p-6 hover-lift group"
+              >
+                <div className="w-10 h-10 rounded-xl bg-secondary-container text-primary flex items-center justify-center transition-transform group-hover:-rotate-6">
+                  <Icon name="link" />
                 </div>
                 <div className="mt-3 label-caps text-on-surface-variant">Social</div>
-                <a href="https://www.linkedin.com/company/spandhika-orthotics" target="_blank" rel="noopener noreferrer" className="mt-1 text-primary font-medium hover:opacity-80">
+                <div className="mt-1 inline-flex items-center gap-1 text-primary font-medium group-hover:opacity-80">
                   LinkedIn
-                </a>
-              </div>
+                  <Icon name="arrow_outward" className="text-base" />
+                </div>
+              </a>
             </div>
           </Reveal>
 

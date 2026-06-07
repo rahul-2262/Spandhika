@@ -432,6 +432,78 @@ function SignCard({ sign, index }: { sign: (typeof signs)[number]; index: number
   );
 }
 
+function OrthoticCard({
+  item,
+  index,
+  hidden,
+}: {
+  item: (typeof orthotics)[number];
+  index: number;
+  hidden: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div
+      className={`group relative rounded-2xl p-6 sm:p-7 glass hover:shadow-xl hover:border-primary/20 transition-all duration-500 ${open ? "shadow-xl border-primary/20" : ""} ${hidden ? "hidden sm:block" : ""}`}
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-secondary-container text-primary flex items-center justify-center transition-transform duration-500 group-hover:-rotate-6">
+          <Icon name={item.icon} className="text-2xl sm:text-3xl" />
+        </div>
+        <span className="label-caps text-[10px] text-on-surface-variant/70">0{index + 1}</span>
+      </div>
+
+      <h3 className="mt-5 sm:mt-6 text-lg sm:text-xl font-semibold text-primary leading-snug tracking-tight">
+        {item.title}
+      </h3>
+      <p className="mt-2 text-[14px] sm:text-[15px] text-on-surface-variant leading-relaxed">
+        {item.desc}
+      </p>
+
+      <div
+        className="grid transition-all duration-500 ease-out"
+        style={{ gridTemplateRows: open ? "1fr" : "0fr", opacity: open ? 1 : 0, marginTop: open ? "1.25rem" : 0 }}
+      >
+        <div className="overflow-hidden">
+          <div className="rounded-xl bg-secondary-container/50 border border-outline-variant/40 p-4 text-sm text-on-surface-variant leading-relaxed space-y-3">
+            <p>{item.details}</p>
+            <div>
+              <div className="label-caps text-[10px] text-primary/70 mb-1.5">Common causes</div>
+              <ul className="flex flex-wrap gap-1.5">
+                {item.causes.map((c) => (
+                  <li key={c} className="inline-flex items-center text-[11px] rounded-full bg-card/80 border border-outline-variant/60 px-2.5 py-1 text-primary">
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <div className="label-caps text-[10px] text-primary/70 mb-1">Our solution</div>
+              <p className="text-[13px] text-on-surface">{item.solution}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-5 flex items-center justify-between">
+        <span className="label-caps text-[10px] text-on-surface-variant">
+          {open ? "Hide details" : "Targeted support"}
+        </span>
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          aria-label={open ? "Hide details" : "Show more details"}
+          className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-primary/5 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+        >
+          <Icon name="expand_more" className={`text-base transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+
 
 
 const signs = [

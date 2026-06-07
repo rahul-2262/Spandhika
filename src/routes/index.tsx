@@ -883,9 +883,9 @@ function Trust() {
           {pillars.map((p) => (
             <div
               key={p.title}
-              className="group rounded-2xl p-6 sm:p-7 glass hover-lift hover:shadow-xl hover:border-primary/20 transition-all duration-500"
+              className="group rounded-2xl p-6 sm:p-7 glass border border-white/40 transition-[background-color,box-shadow,backdrop-filter,transform,border-color] duration-500 ease-out hover:bg-card/70 hover:backdrop-blur-2xl hover:border-white/70 hover:shadow-[0_18px_40px_-22px_color-mix(in_oklab,var(--primary)_30%,transparent)] hover:-translate-y-1"
             >
-              <Icon name={p.icon} className="text-3xl text-primary transition-transform duration-500 group-hover:-rotate-6" />
+              <Icon name={p.icon} className="text-3xl text-primary transition-transform duration-500 group-hover:-rotate-3" />
               <h3 className="mt-4 text-lg sm:text-xl font-semibold text-primary">{p.title}</h3>
               <p className="mt-2 text-on-surface-variant leading-relaxed">{p.body}</p>
             </div>

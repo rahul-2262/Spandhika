@@ -574,32 +574,76 @@ const orthotics = [
 function Range() {
   const [showAll, setShowAll] = useState(false);
   return (
-    <section className="py-14 sm:py-20 lg:py-32">
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
+    <section className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
+      <div className="blob bg-tertiary-fixed-dim w-[420px] h-[420px] -top-32 -right-24 opacity-40" />
+      <div className="blob bg-secondary-container w-[360px] h-[360px] bottom-0 -left-24 opacity-50" style={{ animationDelay: "2.5s" }} />
+
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 relative">
         <Eyebrow>Problems we are solving</Eyebrow>
         <div className="mt-4 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-          <h2 className="text-[26px] sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary flex items-center gap-3">
+          <h2 className="text-[28px] sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary flex items-center gap-3">
             <Icon name="footprint" className="text-4xl text-tertiary-fixed-dim" />
-            Orthotics Range
+            <span>Orthotics <span className="text-gradient-primary">Range.</span></span>
           </h2>
+          <p className="max-w-md text-on-surface-variant text-[15px] sm:text-base">
+            Condition-specific support engineered around six of the most common foot complaints.
+          </p>
         </div>
-        <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
-          {/* On mobile: 4 items + toggle. On sm+: show all */}
+
+        <Reveal stagger className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {orthotics.map((o, i) => (
             <div
               key={o.title}
-              className={`group rounded-2xl glass p-4 sm:p-7 hover-lift hover:shadow-xl ${
+              className={`group relative rounded-3xl p-5 sm:p-7 bg-surface/70 backdrop-blur border border-outline-variant/60 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:border-transparent overflow-hidden ${
                 !showAll && i >= 4 ? "hidden sm:block" : ""
               }`}
             >
-              <div className="flex items-start justify-between gap-2">
-                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary to-primary-container text-tertiary-fixed flex items-center justify-center shadow-md transition-transform group-hover:scale-110 group-hover:rotate-6">
-                  <Icon name={o.icon} className="text-xl sm:text-3xl" />
-                </div>
-                <Icon name="arrow_outward" className="text-primary opacity-0 -translate-x-1 -translate-y-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all text-base sm:text-xl mt-1" />
+              {/* Green hover surface */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(135deg, color-mix(in oklab, var(--primary) 92%, black 0%) 0%, color-mix(in oklab, var(--primary-container) 70%, var(--primary) 30%) 100%)",
+                }}
+              />
+              {/* Sheen */}
+              <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] rotate-12 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(90deg, transparent 40%, color-mix(in oklab, var(--tertiary-fixed) 35%, transparent) 50%, transparent 60%)",
+                }}
+              />
+
+              {/* Index */}
+              <div className="absolute top-4 right-4 sm:top-5 sm:right-5 label-caps text-[10px] tracking-[0.2em] text-on-surface-variant/60 group-hover:text-tertiary-fixed-dim transition-colors">
+                0{i + 1}
               </div>
-              <h3 className="mt-3 sm:mt-5 text-sm sm:text-xl font-semibold text-primary leading-snug">{o.title}</h3>
-              <p className="mt-1.5 sm:mt-2 text-xs sm:text-base text-on-surface-variant leading-relaxed">{o.desc}</p>
+
+              <div className="relative flex items-start gap-4">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-secondary-container to-tertiary-fixed/40 text-primary flex items-center justify-center shadow-inner shadow-white/40 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 group-hover:bg-white/95 group-hover:text-primary group-hover:shadow-lg group-hover:shadow-black/20">
+                  <Icon name={o.icon} className="text-2xl sm:text-3xl" />
+                </div>
+              </div>
+
+              <h3 className="relative mt-5 sm:mt-6 text-base sm:text-xl font-semibold text-primary leading-snug group-hover:text-primary-foreground transition-colors">
+                {o.title}
+              </h3>
+              <p className="relative mt-2 text-sm sm:text-base text-on-surface-variant leading-relaxed group-hover:text-primary-foreground/85 transition-colors">
+                {o.desc}
+              </p>
+
+              {/* Underline */}
+              <div className="relative mt-5 h-px bg-outline-variant/60 group-hover:bg-white/20 overflow-hidden transition-colors">
+                <div className="absolute inset-y-0 left-0 w-0 bg-gradient-to-r from-tertiary-fixed-dim to-white group-hover:w-full transition-[width] duration-700 ease-out" />
+              </div>
+
+              <div className="relative mt-4 flex items-center justify-between">
+                <span className="label-caps text-[10px] text-on-surface-variant group-hover:text-primary-foreground/70 transition-colors">
+                  Targeted support
+                </span>
+                <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-primary/5 text-primary group-hover:bg-white group-hover:text-primary transition-all duration-300 group-hover:rotate-12">
+                  <Icon name="arrow_outward" className="text-base" />
+                </span>
+              </div>
             </div>
           ))}
         </Reveal>
@@ -612,7 +656,7 @@ function Range() {
           {showAll ? "Show less" : `View all ${orthotics.length}`}
           <Icon name={showAll ? "expand_less" : "expand_more"} className="text-base" />
         </button>
-        
+
       </div>
     </section>
   );
@@ -636,7 +680,7 @@ const audiences = [
     icon: "healing",
     title: "People with foot pain",
     body: "Targeted support for plantar fasciitis, fatigue, and recurring discomfort.",
-    image: "https://images.unsplash.com/photo-1559757175-7cb056fba93d?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1631815587646-b85a1bb027e1?auto=format&fit=crop&w=800&q=80",
   },
   {
     icon: "groups",
@@ -711,19 +755,41 @@ function Trust() {
 
         <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-3 gap-4 sm:gap-8 border-y border-outline-variant py-8 sm:py-10">
           {stats.map((s) => (
-            <div key={s.label}>
-              <div className="text-[28px] sm:text-5xl lg:text-6xl font-bold tracking-tight text-gradient-primary">{s.value}</div>
-              <div className="mt-2 label-caps text-on-surface-variant">{s.label}</div>
+            <div
+              key={s.label}
+              className="group relative rounded-2xl p-3 sm:p-5 cursor-default transition-all duration-500 hover:-translate-y-2 hover:scale-[1.04] hover:shadow-2xl hover:shadow-primary/25 hover:bg-primary overflow-hidden"
+            >
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
+                style={{
+                  background:
+                    "radial-gradient(80% 80% at 50% 0%, color-mix(in oklab, var(--tertiary-fixed) 35%, transparent), transparent 70%)",
+                }}
+              />
+              <div className="relative text-[28px] sm:text-5xl lg:text-6xl font-bold tracking-tight text-gradient-primary group-hover:[background:none] group-hover:[-webkit-text-fill-color:var(--primary-foreground)] group-hover:text-primary-foreground transition-colors">
+                {s.value}
+              </div>
+              <div className="relative mt-2 label-caps text-on-surface-variant group-hover:text-primary-foreground/80 transition-colors">
+                {s.label}
+              </div>
             </div>
           ))}
         </Reveal>
 
         <Reveal stagger className="mt-8 sm:mt-12 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
           {pillars.map((p) => (
-            <div key={p.title} className="group rounded-2xl p-6 sm:p-7 glass hover-lift hover:shadow-xl">
-              <Icon name={p.icon} className="text-3xl text-primary transition-transform group-hover:scale-110 group-hover:-rotate-6" />
-              <h3 className="mt-4 text-lg sm:text-xl font-semibold text-primary">{p.title}</h3>
-              <p className="mt-2 text-on-surface-variant leading-relaxed">{p.body}</p>
+            <div
+              key={p.title}
+              className="group relative rounded-2xl p-6 sm:p-7 bg-surface/70 backdrop-blur border border-outline-variant/60 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:border-transparent hover:bg-primary overflow-hidden"
+            >
+              <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] rotate-12 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(90deg, transparent 40%, color-mix(in oklab, var(--tertiary-fixed) 30%, transparent) 50%, transparent 60%)",
+                }}
+              />
+              <Icon name={p.icon} className="relative text-3xl text-primary transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 group-hover:text-tertiary-fixed-dim" />
+              <h3 className="relative mt-4 text-lg sm:text-xl font-semibold text-primary group-hover:text-primary-foreground transition-colors">{p.title}</h3>
+              <p className="relative mt-2 text-on-surface-variant group-hover:text-primary-foreground/85 leading-relaxed transition-colors">{p.body}</p>
             </div>
           ))}
         </Reveal>

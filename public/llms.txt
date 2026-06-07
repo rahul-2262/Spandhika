@@ -7,6 +7,7 @@ Spandhika is an Indian orthotics brand building smart, sensor-equipped insoles. 
 ## Pages
 
 - [Home](/): Overview of Spandhika, the SAARTHI smart insole, features, common foot problems it helps with, and waitlist signup.
+- [Custom vs Off-the-Shelf Orthotics](/blog/custom-vs-off-the-shelf-orthotics): Comparison guide on insole types, plantar fasciitis support, and smart orthotic benefits.
 
 ## Optional
 

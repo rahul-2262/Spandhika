@@ -327,12 +327,23 @@ function Hero() {
               }}
             />
 
-            {/* Scan line sweep */}
+            {/* Scan sweep — soft band */}
             <div
-              className="absolute left-0 right-0 h-24 -top-24 scan-sweep pointer-events-none"
+              className="absolute left-0 right-0 h-32 -top-32 scan-sweep pointer-events-none mix-blend-screen"
               style={{
                 background:
-                  "linear-gradient(to bottom, transparent, color-mix(in oklab, var(--primary) 22%, transparent), transparent)",
+                  "linear-gradient(to bottom, transparent 0%, color-mix(in oklab, var(--tertiary-fixed) 28%, transparent) 45%, color-mix(in oklab, var(--tertiary-fixed) 38%, transparent) 50%, color-mix(in oklab, var(--tertiary-fixed) 28%, transparent) 55%, transparent 100%)",
+              }}
+            />
+            {/* Scan sweep — leading bright line */}
+            <div
+              className="absolute left-0 right-0 -top-32 scan-sweep pointer-events-none"
+              style={{
+                height: "2px",
+                background:
+                  "linear-gradient(to right, transparent 0%, color-mix(in oklab, var(--tertiary-fixed) 90%, white) 30%, color-mix(in oklab, var(--tertiary-fixed) 95%, white) 70%, transparent 100%)",
+                boxShadow: "0 0 14px color-mix(in oklab, var(--tertiary-fixed) 70%, transparent), 0 0 28px color-mix(in oklab, var(--tertiary-fixed) 40%, transparent)",
+                animationDelay: "0.2s",
               }}
             />
           </div>

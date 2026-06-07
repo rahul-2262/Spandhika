@@ -591,90 +591,27 @@ function Range() {
           </p>
         </div>
 
-        <Reveal stagger className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <Reveal stagger className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {orthotics.map((o, i) => (
             <div
               key={o.title}
-              className={`group relative rounded-[28px] overflow-hidden bg-card border border-outline-variant/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_24px_60px_-20px_color-mix(in_oklab,var(--primary)_45%,transparent)] hover:border-transparent ${
+              className={`group relative rounded-2xl p-6 sm:p-7 glass hover-lift hover:shadow-xl hover:border-primary/20 transition-all duration-500 ${
                 !showAll && i >= 4 ? "hidden sm:block" : ""
               }`}
             >
-              {/* Green hover surface */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{
-                  background:
-                    "linear-gradient(150deg, var(--primary) 0%, color-mix(in oklab, var(--primary) 70%, black) 100%)",
-                }}
-              />
-              {/* Decorative dot grid (visible on default state, fades on hover) */}
-              <div className="absolute inset-0 opacity-40 group-hover:opacity-0 transition-opacity duration-500 pointer-events-none"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(color-mix(in oklab, var(--primary) 12%, transparent) 1px, transparent 1px)",
-                  backgroundSize: "16px 16px",
-                  maskImage: "radial-gradient(ellipse at top right, black 0%, transparent 65%)",
-                  WebkitMaskImage: "radial-gradient(ellipse at top right, black 0%, transparent 65%)",
-                }}
-              />
-              {/* Sheen */}
-              <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] rotate-12 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                style={{
-                  background:
-                    "linear-gradient(90deg, transparent 42%, color-mix(in oklab, var(--tertiary-fixed) 30%, transparent) 50%, transparent 58%)",
-                }}
-              />
-
-              {/* Oversized numeral watermark */}
-              <div
-                className="pointer-events-none absolute -top-6 -right-2 sm:-top-8 sm:-right-3 select-none text-[140px] sm:text-[180px] leading-none font-bold tracking-tighter text-primary/[0.06] group-hover:text-white/10 transition-colors"
-                aria-hidden
-              >
-                0{i + 1}
+              <div className="flex items-start justify-between gap-4">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-secondary-container text-primary flex items-center justify-center transition-transform duration-500 group-hover:-rotate-6">
+                  <Icon name={o.icon} className="text-2xl sm:text-3xl" />
+                </div>
+                <span className="label-caps text-[10px] text-on-surface-variant/70">0{i + 1}</span>
               </div>
 
-              <div className="relative p-6 sm:p-8 flex flex-col h-full">
-                {/* Header row */}
-                <div className="flex items-start justify-between gap-4">
-                  <div className="relative">
-                    <div
-                      className="absolute -inset-1.5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md"
-                      style={{ background: "color-mix(in oklab, var(--tertiary-fixed) 60%, transparent)" }}
-                    />
-                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-secondary-container to-tertiary-fixed/50 text-primary flex items-center justify-center shadow-inner shadow-white/40 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 group-hover:bg-white group-hover:shadow-lg group-hover:shadow-black/20">
-                      <Icon name={o.icon} className="text-3xl" />
-                    </div>
-                  </div>
-                  <span className="mt-2 label-caps text-[10px] tracking-[0.22em] text-on-surface-variant/70 group-hover:text-tertiary-fixed-dim transition-colors">
-                    Condition · 0{i + 1}
-                  </span>
-                </div>
-
-                {/* Body */}
-                <h3 className="mt-6 sm:mt-7 text-xl sm:text-2xl font-semibold text-primary leading-[1.15] tracking-tight group-hover:text-primary-foreground transition-colors">
-                  {o.title}
-                </h3>
-                <p className="mt-2.5 text-[15px] sm:text-base text-on-surface-variant leading-relaxed group-hover:text-primary-foreground/85 transition-colors">
-                  {o.desc}
-                </p>
-
-                {/* Spacer */}
-                <div className="flex-1 min-h-[16px]" />
-
-                {/* Underline */}
-                <div className="mt-6 h-px bg-outline-variant/60 group-hover:bg-white/20 overflow-hidden transition-colors">
-                  <div className="h-full w-0 bg-gradient-to-r from-tertiary-fixed-dim to-white group-hover:w-full transition-[width] duration-700 ease-out" />
-                </div>
-
-                {/* Footer */}
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="inline-flex items-center gap-2 text-sm font-medium text-primary group-hover:text-primary-foreground transition-colors">
-                    Explore solution
-                  </span>
-                  <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/5 text-primary group-hover:bg-white group-hover:text-primary transition-all duration-300 group-hover:rotate-12">
-                    <Icon name="arrow_outward" className="text-lg" />
-                  </span>
-                </div>
-              </div>
+              <h3 className="mt-5 sm:mt-6 text-lg sm:text-xl font-semibold text-primary leading-snug tracking-tight">
+                {o.title}
+              </h3>
+              <p className="mt-2 text-[14px] sm:text-[15px] text-on-surface-variant leading-relaxed">
+                {o.desc}
+              </p>
             </div>
           ))}
         </Reveal>
@@ -788,18 +725,12 @@ function Trust() {
           {stats.map((s) => (
             <div
               key={s.label}
-              className="group relative rounded-2xl p-3 sm:p-5 cursor-default transition-all duration-500 hover:-translate-y-2 hover:scale-[1.04] hover:shadow-2xl hover:shadow-primary/25 hover:bg-primary overflow-hidden"
+              className="group rounded-2xl p-3 sm:p-5 transition-all duration-500 hover-lift"
             >
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
-                style={{
-                  background:
-                    "radial-gradient(80% 80% at 50% 0%, color-mix(in oklab, var(--tertiary-fixed) 35%, transparent), transparent 70%)",
-                }}
-              />
-              <div className="relative text-[28px] sm:text-5xl lg:text-6xl font-bold tracking-tight text-gradient-primary group-hover:[background:none] group-hover:[-webkit-text-fill-color:var(--primary-foreground)] group-hover:text-primary-foreground transition-colors">
+              <div className="text-[28px] sm:text-5xl lg:text-6xl font-bold tracking-tight text-gradient-primary">
                 {s.value}
               </div>
-              <div className="relative mt-2 label-caps text-on-surface-variant group-hover:text-primary-foreground/80 transition-colors">
+              <div className="mt-2 label-caps text-on-surface-variant">
                 {s.label}
               </div>
             </div>
@@ -810,17 +741,11 @@ function Trust() {
           {pillars.map((p) => (
             <div
               key={p.title}
-              className="group relative rounded-2xl p-6 sm:p-7 bg-surface/70 backdrop-blur border border-outline-variant/60 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:border-transparent hover:bg-primary overflow-hidden"
+              className="group rounded-2xl p-6 sm:p-7 glass hover-lift hover:shadow-xl hover:border-primary/20 transition-all duration-500"
             >
-              <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] rotate-12 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                style={{
-                  background:
-                    "linear-gradient(90deg, transparent 40%, color-mix(in oklab, var(--tertiary-fixed) 30%, transparent) 50%, transparent 60%)",
-                }}
-              />
-              <Icon name={p.icon} className="relative text-3xl text-primary transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 group-hover:text-tertiary-fixed-dim" />
-              <h3 className="relative mt-4 text-lg sm:text-xl font-semibold text-primary group-hover:text-primary-foreground transition-colors">{p.title}</h3>
-              <p className="relative mt-2 text-on-surface-variant group-hover:text-primary-foreground/85 leading-relaxed transition-colors">{p.body}</p>
+              <Icon name={p.icon} className="text-3xl text-primary transition-transform duration-500 group-hover:-rotate-6" />
+              <h3 className="mt-4 text-lg sm:text-xl font-semibold text-primary">{p.title}</h3>
+              <p className="mt-2 text-on-surface-variant leading-relaxed">{p.body}</p>
             </div>
           ))}
         </Reveal>

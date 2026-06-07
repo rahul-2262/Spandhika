@@ -974,7 +974,7 @@ function Contact() {
         <div className="mt-10 lg:mt-16 grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Contact info + Map */}
           <Reveal className="space-y-6">
-            <div className="rounded-2xl overflow-hidden h-64 sm:h-80 glass-strong border border-outline-variant">
+            <div className="relative rounded-2xl overflow-hidden h-64 sm:h-80 glass-strong border border-outline-variant">
               <iframe
                 src="https://www.openstreetmap.org/export/embed.html?bbox=76.4712%2C31.6339%2C76.5712%2C31.7339&layer=mapnik&marker=31.6839%2C76.5212"
                 width="100%"
@@ -983,8 +983,17 @@ function Contact() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Spandhika location map"
+                title="Spandhika location map — Hamirpur, Himachal Pradesh"
               />
+              <a
+                href="https://www.openstreetmap.org/?mlat=31.6839&mlon=76.5212#map=13/31.6839/76.5212"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full glass-strong px-3 py-1.5 text-xs text-primary hover:opacity-90"
+              >
+                <Icon name="location_on" className="text-sm" />
+                Hamirpur, Himachal Pradesh
+              </a>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="rounded-2xl glass p-5 sm:p-6 hover-lift">

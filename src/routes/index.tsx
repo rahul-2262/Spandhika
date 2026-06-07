@@ -595,7 +595,7 @@ const features = [
 
 function Features() {
   return (
-    <section id="features" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-20 lg:py-28 bg-primary text-primary-foreground relative overflow-hidden before:absolute before:inset-x-0 before:-top-px before:h-12 before:bg-gradient-to-b before:from-background before:to-transparent before:pointer-events-none after:absolute after:inset-x-0 after:-bottom-px after:h-12 after:bg-gradient-to-t after:from-background after:to-transparent after:pointer-events-none">
+    <section id="features" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-20 lg:py-28 bg-primary text-primary-foreground relative overflow-hidden">
       <div className="blob bg-tertiary-fixed w-[500px] h-[500px] -bottom-40 -right-40 opacity-20" />
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 relative">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
@@ -1152,7 +1152,7 @@ function Contact() {
 
 function Purpose() {
   return (
-    <section id="purpose" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-20 lg:py-28 bg-primary text-primary-foreground relative overflow-hidden before:absolute before:inset-x-0 before:-top-px before:h-12 before:bg-gradient-to-b before:from-background before:to-transparent before:pointer-events-none after:absolute after:inset-x-0 after:-bottom-px after:h-12 after:bg-gradient-to-t after:from-background after:to-transparent after:pointer-events-none">
+    <section id="purpose" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-20 lg:py-28 bg-primary text-primary-foreground relative overflow-hidden">
       <div className="blob bg-tertiary-fixed w-[600px] h-[600px] -top-60 left-1/2 -translate-x-1/2 opacity-20" />
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 relative text-center">
         <div className="inline-flex items-center gap-2 label-caps text-tertiary-fixed-dim justify-center">

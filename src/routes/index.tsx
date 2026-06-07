@@ -89,7 +89,7 @@ function Nav() {
     { href: "#contact", label: "Contact" },
   ];
   return (
-    <header className="sticky top-0 z-50 glass border-b border-white/40">
+    <header className="fixed inset-x-0 top-0 z-50 glass-strong border-b border-white/40 backdrop-blur-xl">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 flex items-center justify-between h-14 sm:h-20">
         <a href="#top" className="flex items-center gap-2 font-semibold tracking-tight text-primary" onClick={() => setOpen(false)}>
           <img src={logoAsset.url} alt="Spandhika Orthotics" className="h-9 sm:h-12 w-auto" />
@@ -368,29 +368,183 @@ function Hero() {
   );
 }
 
+function SignCard({ sign, index }: { sign: (typeof signs)[number]; index: number }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div
+      className={`group relative rounded-3xl p-5 sm:p-7 bg-surface/70 backdrop-blur border border-outline-variant/60 hover:shadow-2xl hover:border-primary/30 transition-all overflow-hidden ${open ? "shadow-2xl border-primary/30" : ""}`}
+    >
+      <div className="absolute top-4 right-4 sm:top-5 sm:right-5 label-caps text-on-surface-variant/60 text-[10px] tracking-[0.2em]">
+        0{index + 1}
+      </div>
+      <div className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{ background: "radial-gradient(60% 60% at 50% 0%, color-mix(in oklab, var(--primary) 14%, transparent), transparent 70%)" }}
+      />
+      <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-secondary-container to-tertiary-fixed/40 text-primary flex items-center justify-center shadow-inner shadow-white/40 transition-all duration-500 group-hover:-rotate-6">
+        <Icon name={sign.icon} className="text-2xl sm:text-3xl" />
+        <span className="absolute inset-0 rounded-2xl ring-1 ring-primary/10" />
+      </div>
+      <h3 className="relative mt-5 sm:mt-6 text-base sm:text-xl font-semibold text-primary leading-snug">{sign.title}</h3>
+      <p className="relative mt-2 sm:mt-2.5 text-sm sm:text-base text-on-surface-variant leading-relaxed">{sign.body}</p>
+
+      <div
+        className="relative grid transition-all duration-500 ease-out"
+        style={{ gridTemplateRows: open ? "1fr" : "0fr", opacity: open ? 1 : 0, marginTop: open ? "1rem" : 0 }}
+      >
+        <div className="overflow-hidden">
+          <div className="rounded-2xl bg-secondary-container/50 border border-outline-variant/40 p-4 text-sm text-on-surface-variant leading-relaxed space-y-3">
+            <p>{sign.details}</p>
+            <div>
+              <div className="label-caps text-[10px] text-primary/70 mb-1.5">Common causes</div>
+              <ul className="flex flex-wrap gap-1.5">
+                {sign.causes.map((c) => (
+                  <li key={c} className="inline-flex items-center text-[11px] rounded-full bg-card/80 border border-outline-variant/60 px-2.5 py-1 text-primary">
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <div className="label-caps text-[10px] text-primary/70 mb-1">How SAARTHI helps</div>
+              <p className="text-[13px] text-on-surface">{sign.helps}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative mt-5 h-px bg-outline-variant/60 overflow-hidden">
+        <div className={`absolute inset-y-0 left-0 bg-gradient-to-r from-primary to-tertiary-fixed-dim transition-[width] duration-700 ease-out ${open ? "w-full" : "w-0 group-hover:w-full"}`} />
+      </div>
+
+      <div className="relative mt-4 flex items-center justify-between">
+        <span className="label-caps text-[10px] text-on-surface-variant">{open ? "Hide details" : "Early signal"}</span>
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          aria-label={open ? "Hide details" : "Show more details"}
+          className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/5 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+        >
+          <Icon name="expand_more" className={`text-base transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function OrthoticCard({
+  item,
+  index,
+  hidden,
+}: {
+  item: (typeof orthotics)[number];
+  index: number;
+  hidden: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div
+      className={`group relative rounded-2xl p-6 sm:p-7 glass hover:shadow-xl hover:border-primary/20 transition-all duration-500 ${open ? "shadow-xl border-primary/20" : ""} ${hidden ? "hidden sm:block" : ""}`}
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-secondary-container text-primary flex items-center justify-center transition-transform duration-500 group-hover:-rotate-6">
+          <Icon name={item.icon} className="text-2xl sm:text-3xl" />
+        </div>
+        <span className="label-caps text-[10px] text-on-surface-variant/70">0{index + 1}</span>
+      </div>
+
+      <h3 className="mt-5 sm:mt-6 text-lg sm:text-xl font-semibold text-primary leading-snug tracking-tight">
+        {item.title}
+      </h3>
+      <p className="mt-2 text-[14px] sm:text-[15px] text-on-surface-variant leading-relaxed">
+        {item.desc}
+      </p>
+
+      <div
+        className="grid transition-all duration-500 ease-out"
+        style={{ gridTemplateRows: open ? "1fr" : "0fr", opacity: open ? 1 : 0, marginTop: open ? "1.25rem" : 0 }}
+      >
+        <div className="overflow-hidden">
+          <div className="rounded-xl bg-secondary-container/50 border border-outline-variant/40 p-4 text-sm text-on-surface-variant leading-relaxed space-y-3">
+            <p>{item.details}</p>
+            <div>
+              <div className="label-caps text-[10px] text-primary/70 mb-1.5">Common causes</div>
+              <ul className="flex flex-wrap gap-1.5">
+                {item.causes.map((c) => (
+                  <li key={c} className="inline-flex items-center text-[11px] rounded-full bg-card/80 border border-outline-variant/60 px-2.5 py-1 text-primary">
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <div className="label-caps text-[10px] text-primary/70 mb-1">Our solution</div>
+              <p className="text-[13px] text-on-surface">{item.solution}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-5 flex items-center justify-between">
+        <span className="label-caps text-[10px] text-on-surface-variant">
+          {open ? "Hide details" : "Targeted support"}
+        </span>
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          aria-label={open ? "Hide details" : "Show more details"}
+          className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-primary/5 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+        >
+          <Icon name="expand_more" className={`text-base transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+
+
 
 const signs = [
   {
     icon: "accessible_forward",
     title: "Heel pain after waking up",
     body: "That first painful step in the morning is often plantar fasciitis — and it doesn't fix itself.",
+    details:
+      "The plantar fascia tightens overnight; the first weight-bearing steps re-stretch inflamed tissue, causing sharp heel pain. Persistent symptoms can lead to heel spurs, gait compensation, and knee or hip strain.",
+    causes: ["Poor arch support", "Long standing hours", "Sudden activity spikes", "Worn-out footwear"],
+    helps: "Deep heel cup, contoured medial arch, and shock-absorbing forefoot pad to redistribute load.",
   },
   {
     icon: "schedule",
     title: "Foot fatigue after long hours",
     body: "Burning, aching, heavy feet after work or a long day on your feet is a signal — not normal.",
+    details:
+      "Repetitive standing without cushioning overloads the metatarsals and intrinsic foot muscles, reducing circulation and triggering burning, swelling, and end-of-day fatigue.",
+    causes: ["Hard floors", "Flat shoe insoles", "Poor pressure distribution", "Weak foot musculature"],
+    helps: "Energy-return foam plus a 32-zone pressure map that balances load across the whole footprint.",
   },
   {
     icon: "swap_horiz",
     title: "Uneven shoe wear",
     body: "If one shoe wears down faster, your weight distribution is off — and your body is compensating.",
+    details:
+      "Asymmetric wear patterns reveal overpronation, supination, or a leg-length discrepancy. Untreated, the kinetic chain compensates upward — ankles, knees, hips, and lower back follow.",
+    causes: ["Overpronation", "Supination", "Leg-length difference", "Muscle imbalance"],
+    helps: "Adaptive arch support and a carbon stability plate that re-centers the strike pattern.",
   },
   {
     icon: "airline_seat_legroom_reduced",
     title: "Knee or lower back discomfort",
     body: "Pain that feels unrelated often starts at the ground. Your feet are the foundation of every step.",
+    details:
+      "Misaligned feet rotate the tibia and femur subtly with every step. Over thousands of steps a day, that small rotation becomes chronic knee, hip, and lumbar strain.",
+    causes: ["Collapsed arches", "Heel-strike imbalance", "Poor shock absorption", "Forward pelvic tilt"],
+    helps: "Posture-aware support that aligns the foot, shin, and hip through a neutral gait cycle.",
   },
 ];
+
 
 function Problem() {
   return (
@@ -410,50 +564,9 @@ function Problem() {
           </p>
         </div>
 
-        <Reveal stagger className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <Reveal stagger className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-start">
           {signs.map((s, i) => (
-            <div
-              key={s.title}
-              className="group relative rounded-3xl p-5 sm:p-7 bg-surface/70 backdrop-blur border border-outline-variant/60 hover-lift hover:shadow-2xl hover:border-primary/30 transition-all overflow-hidden"
-            >
-              {/* Index ribbon */}
-              <div className="absolute top-4 right-4 sm:top-5 sm:right-5 label-caps text-on-surface-variant/60 text-[10px] tracking-[0.2em]">
-                0{i + 1}
-              </div>
-
-              {/* Hover glow */}
-              <div className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{
-                  background: "radial-gradient(60% 60% at 50% 0%, color-mix(in oklab, var(--primary) 18%, transparent), transparent 70%)",
-                }}
-              />
-
-              {/* Icon */}
-              <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-secondary-container to-tertiary-fixed/40 text-primary flex items-center justify-center shadow-inner shadow-white/40 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 group-hover:shadow-lg group-hover:shadow-primary/20">
-                <Icon name={s.icon} className="text-2xl sm:text-3xl" />
-                <span className="absolute inset-0 rounded-2xl ring-1 ring-primary/10" />
-              </div>
-
-              <h3 className="relative mt-5 sm:mt-6 text-base sm:text-xl font-semibold text-primary leading-snug">
-                {s.title}
-              </h3>
-              <p className="relative mt-2 sm:mt-2.5 text-sm sm:text-base text-on-surface-variant leading-relaxed">
-                {s.body}
-              </p>
-
-              {/* Bottom accent line that grows on hover */}
-              <div className="relative mt-5 h-px bg-outline-variant/60 overflow-hidden">
-                <div className="absolute inset-y-0 left-0 w-0 bg-gradient-to-r from-primary to-tertiary-fixed-dim group-hover:w-full transition-[width] duration-700 ease-out" />
-              </div>
-
-              {/* Footer cue */}
-              <div className="relative mt-4 flex items-center justify-between">
-                <span className="label-caps text-[10px] text-on-surface-variant">Early signal</span>
-                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/5 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                  <Icon name="arrow_outward" className="text-base group-hover:rotate-12 transition-transform" />
-                </span>
-              </div>
-            </div>
+            <SignCard key={s.title} sign={s} index={i} />
           ))}
         </Reveal>
 
@@ -564,12 +677,60 @@ function Features() {
 }
 
 const orthotics = [
-  { title: "Ball of Foot Pain", desc: "Targeted metatarsal support", icon: "radio_button_checked" },
-  { title: "Bunions", desc: "Pressure relief and alignment", icon: "adjust" },
-  { title: "Diabetic Foot", desc: "Maximum cushioning and care", icon: "favorite" },
-  { title: "Fallen Arches", desc: "Firm medial arch elevation", icon: "show_chart" },
-  { title: "Flat Feet", desc: "Structured stability control", icon: "horizontal_rule" },
-  { title: "Heel Pain", desc: "Deep heel cup and shock absorption", icon: "vertical_align_bottom" },
+  {
+    title: "Ball of Foot Pain",
+    desc: "Targeted metatarsal support",
+    icon: "radio_button_checked",
+    details:
+      "Metatarsalgia is sharp, burning, or aching pain under the ball of the foot, often from overloading the metatarsal heads during walking, running, or long standing hours.",
+    causes: ["High-impact activity", "Tight calves", "High heels", "Morton's neuroma"],
+    solution: "A pre-metatarsal pad that offloads the metatarsal heads, paired with a deep forefoot cushion to absorb peak pressure.",
+  },
+  {
+    title: "Bunions",
+    desc: "Pressure relief and alignment",
+    icon: "adjust",
+    details:
+      "A bunion (hallux valgus) is a bony bump at the base of the big toe caused by gradual misalignment of the first metatarsal joint, often worsened by narrow footwear.",
+    causes: ["Narrow toe boxes", "Genetic foot structure", "Overpronation", "Weak intrinsic muscles"],
+    solution: "Soft cushioning around the joint plus a medial flare that re-centers the big toe and reduces lateral pressure.",
+  },
+  {
+    title: "Diabetic Foot",
+    desc: "Maximum cushioning and care",
+    icon: "favorite",
+    details:
+      "Diabetic neuropathy reduces sensation in the feet, so small pressure points and friction can develop into ulcers without warning. Even pressure distribution is critical.",
+    causes: ["Peripheral neuropathy", "Reduced circulation", "Calluses", "Foot deformities"],
+    solution: "Multi-density EVA with seamless top cover and a 32-zone pressure map to flag high-load areas before tissue damage starts.",
+  },
+  {
+    title: "Fallen Arches",
+    desc: "Firm medial arch elevation",
+    icon: "show_chart",
+    details:
+      "Fallen arches (acquired flatfoot) develop when the posterior tibial tendon weakens, letting the midfoot collapse inward and causing pain along the arch and ankle.",
+    causes: ["Aging", "Excess body load", "Tendon injury", "Repetitive impact"],
+    solution: "Firm medial arch lift with a heel-stabilizing cup that supports the posterior tibial tendon through the gait cycle.",
+  },
+  {
+    title: "Flat Feet",
+    desc: "Structured stability control",
+    icon: "horizontal_rule",
+    details:
+      "Flat feet collapse the arch on weight-bearing, leading to overpronation. Over time this rotates the knee and hip inward, straining the medial chain.",
+    causes: ["Hereditary structure", "Ligament laxity", "Childhood foot development", "Overpronation"],
+    solution: "Carbon arch plate plus a stability frame that controls medial roll while keeping forefoot flexibility intact.",
+  },
+  {
+    title: "Heel Pain",
+    desc: "Deep heel cup and shock absorption",
+    icon: "vertical_align_bottom",
+    details:
+      "Heel pain typically stems from plantar fasciitis, fat pad atrophy, or heel spurs. Repeated impact without cushioning inflames the tissue at the heel insertion.",
+    causes: ["Plantar fasciitis", "Fat pad thinning", "Heel spurs", "Hard, flat shoes"],
+    solution: "Deep heel cup that cradles the fat pad, plus a viscoelastic insert that absorbs heel-strike shock at every step.",
+  },
 ];
 
 function Range() {
@@ -591,28 +752,9 @@ function Range() {
           </p>
         </div>
 
-        <Reveal stagger className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <Reveal stagger className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 items-start">
           {orthotics.map((o, i) => (
-            <div
-              key={o.title}
-              className={`group relative rounded-2xl p-6 sm:p-7 glass hover-lift hover:shadow-xl hover:border-primary/20 transition-all duration-500 ${
-                !showAll && i >= 4 ? "hidden sm:block" : ""
-              }`}
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-secondary-container text-primary flex items-center justify-center transition-transform duration-500 group-hover:-rotate-6">
-                  <Icon name={o.icon} className="text-2xl sm:text-3xl" />
-                </div>
-                <span className="label-caps text-[10px] text-on-surface-variant/70">0{i + 1}</span>
-              </div>
-
-              <h3 className="mt-5 sm:mt-6 text-lg sm:text-xl font-semibold text-primary leading-snug tracking-tight">
-                {o.title}
-              </h3>
-              <p className="mt-2 text-[14px] sm:text-[15px] text-on-surface-variant leading-relaxed">
-                {o.desc}
-              </p>
-            </div>
+            <OrthoticCard key={o.title} item={o} index={i} hidden={!showAll && i >= 4} />
           ))}
         </Reveal>
 
@@ -741,9 +883,9 @@ function Trust() {
           {pillars.map((p) => (
             <div
               key={p.title}
-              className="group rounded-2xl p-6 sm:p-7 glass hover-lift hover:shadow-xl hover:border-primary/20 transition-all duration-500"
+              className="group rounded-2xl p-6 sm:p-7 glass border border-white/40 transition-[background-color,box-shadow,backdrop-filter,transform,border-color] duration-500 ease-out hover:bg-card/70 hover:backdrop-blur-2xl hover:border-white/70 hover:shadow-[0_18px_40px_-22px_color-mix(in_oklab,var(--primary)_30%,transparent)] hover:-translate-y-1"
             >
-              <Icon name={p.icon} className="text-3xl text-primary transition-transform duration-500 group-hover:-rotate-6" />
+              <Icon name={p.icon} className="text-3xl text-primary transition-transform duration-500 group-hover:-rotate-3" />
               <h3 className="mt-4 text-lg sm:text-xl font-semibold text-primary">{p.title}</h3>
               <p className="mt-2 text-on-surface-variant leading-relaxed">{p.body}</p>
             </div>
@@ -832,17 +974,26 @@ function Contact() {
         <div className="mt-10 lg:mt-16 grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Contact info + Map */}
           <Reveal className="space-y-6">
-            <div className="rounded-2xl overflow-hidden h-64 sm:h-80 glass-strong border border-outline-variant">
+            <div className="relative rounded-2xl overflow-hidden h-64 sm:h-80 glass-strong border border-outline-variant">
               <iframe
-                src="https://www.openstreetmap.org/export/embed.html?bbox=77.1%2C28.5%2C77.3%2C28.7&layer=mapnik"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=76.4712%2C31.6339%2C76.5712%2C31.7339&layer=mapnik&marker=31.6839%2C76.5212"
                 width="100%"
                 height="100%"
                 style={{ border: 0, filter: "grayscale(30%) contrast(1.1)" }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Spandhika location map"
+                title="Spandhika location map — Hamirpur, Himachal Pradesh"
               />
+              <a
+                href="https://www.openstreetmap.org/?mlat=31.6839&mlon=76.5212#map=13/31.6839/76.5212"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full glass-strong px-3 py-1.5 text-xs text-primary hover:opacity-90"
+              >
+                <Icon name="location_on" className="text-sm" />
+                Hamirpur, Himachal Pradesh
+              </a>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="rounded-2xl glass p-5 sm:p-6 hover-lift">
@@ -1071,7 +1222,7 @@ function Index() {
   return (
     <div className="min-h-screen text-foreground overflow-x-hidden">
       <Nav />
-      <main>
+      <main className="pt-14 sm:pt-20 scroll-pt-14 sm:scroll-pt-20">
         <Hero />
         <Problem />
         <Features />

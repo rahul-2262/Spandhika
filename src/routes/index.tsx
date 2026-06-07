@@ -707,10 +707,57 @@ function Trust() {
 function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [submitted, setSubmitted] = useState<(typeof formData & { ref: string; date: string }) | null>(null);
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
+    const ref = `SPD-${Date.now().toString(36).toUpperCase()}`;
+    const date = new Date().toLocaleString();
+    setSubmitted({ ...formData, ref, date });
     setSent(true);
+  }
+
+  function downloadReceipt() {
+    if (!submitted) return;
+    const lines = [
+      "SPANDHIKA ORTHOTICS — MESSAGE RECEIPT",
+      "=======================================",
+      "",
+      `Reference: ${submitted.ref}`,
+      `Date:      ${submitted.date}`,
+      "",
+      "FROM",
+      "----",
+      `Name:  ${submitted.name}`,
+      `Email: ${submitted.email}`,
+      "",
+      "SUBJECT",
+      "-------",
+      submitted.subject,
+      "",
+      "MESSAGE",
+      "-------",
+      submitted.message,
+      "",
+      "---",
+      "Thank you for reaching out. We'll respond to the email above shortly.",
+      "spandhikaorthotics@gmail.com",
+    ].join("\n");
+    const blob = new Blob([lines], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `spandhika-receipt-${submitted.ref}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function resetForm() {
+    setSent(false);
+    setSubmitted(null);
+    setFormData({ name: "", email: "", subject: "", message: "" });
   }
 
   return (

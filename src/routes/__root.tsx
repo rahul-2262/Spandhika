@@ -79,13 +79,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Spandhika — Better movement starts from your feet." },
       { name: "description", content: "Spandhika is a smart orthotic insole that listens to how you walk and helps you move better." },
-      { property: "og:site_name", content: "Spandhika Orthotics" },
-      { property: "og:type", content: "website" },
       { property: "og:title", content: "Spandhika — Better movement starts from your feet." },
-      { property: "og:description", content: "Smart orthotic insoles for posture, comfort, and everyday movement." },
+      { property: "og:description", content: "Spandhika is a smart orthotic insole that listens to how you walk and helps you move better." },
+      { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Spandhika — Better movement starts from your feet." },
-      { name: "twitter:description", content: "Smart orthotic insoles for posture, comfort, and everyday movement." },
+      { name: "twitter:description", content: "Spandhika is a smart orthotic insole that listens to how you walk and helps you move better." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/c2a7a4df-bd0a-4c64-b800-92cf6737c273" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/c2a7a4df-bd0a-4c64-b800-92cf6737c273" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -98,38 +99,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap",
-      },
-    ],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "Spandhika Orthotics",
-          url: "https://spandhikaorthotics.in",
-          description: "Spandhika designs smart orthotic insoles that help people move and stand better.",
-        }),
-      },
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          name: "Spandhika",
-          url: "https://spandhikaorthotics.in",
-        }),
-      },
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Product",
-          name: "SAARTHI Smart Orthotic Insole",
-          brand: { "@type": "Brand", name: "Spandhika" },
-          description: "SAARTHI is a smart orthotic insole that maps foot pressure, detects gait issues, and helps improve posture, comfort, and everyday movement.",
-          category: "Orthotic Insole",
-        }),
       },
     ],
   }),

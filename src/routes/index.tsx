@@ -976,7 +976,7 @@ function Contact() {
           <Reveal className="space-y-6">
             <div className="rounded-2xl overflow-hidden h-64 sm:h-80 glass-strong border border-outline-variant">
               <iframe
-                src="https://www.openstreetmap.org/export/embed.html?bbox=77.1%2C28.5%2C77.3%2C28.7&layer=mapnik"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=76.4712%2C31.6339%2C76.5712%2C31.7339&layer=mapnik&marker=31.6839%2C76.5212"
                 width="100%"
                 height="100%"
                 style={{ border: 0, filter: "grayscale(30%) contrast(1.1)" }}

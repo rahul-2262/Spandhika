@@ -56,6 +56,7 @@ import logoAsset from "@/assets/spandhika-logo.png.asset.json";
 import heroFootAsset from "@/assets/hero-foot-pressure.png.asset.json";
 const heroFoot = heroFootAsset.url;
 import explodedInsole from "@/assets/exploded-insole.jpg";
+import footPainImg from "@/assets/foot-pain.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -680,7 +681,7 @@ const audiences = [
     icon: "healing",
     title: "People with foot pain",
     body: "Targeted support for plantar fasciitis, fatigue, and recurring discomfort.",
-    image: "https://images.unsplash.com/photo-1631815587646-b85a1bb027e1?auto=format&fit=crop&w=800&q=80",
+    image: footPainImg,
   },
   {
     icon: "groups",

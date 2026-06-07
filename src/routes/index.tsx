@@ -427,50 +427,9 @@ function Problem() {
           </p>
         </div>
 
-        <Reveal stagger className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <Reveal stagger className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-start">
           {signs.map((s, i) => (
-            <div
-              key={s.title}
-              className="group relative rounded-3xl p-5 sm:p-7 bg-surface/70 backdrop-blur border border-outline-variant/60 hover-lift hover:shadow-2xl hover:border-primary/30 transition-all overflow-hidden"
-            >
-              {/* Index ribbon */}
-              <div className="absolute top-4 right-4 sm:top-5 sm:right-5 label-caps text-on-surface-variant/60 text-[10px] tracking-[0.2em]">
-                0{i + 1}
-              </div>
-
-              {/* Hover glow */}
-              <div className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{
-                  background: "radial-gradient(60% 60% at 50% 0%, color-mix(in oklab, var(--primary) 18%, transparent), transparent 70%)",
-                }}
-              />
-
-              {/* Icon */}
-              <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-secondary-container to-tertiary-fixed/40 text-primary flex items-center justify-center shadow-inner shadow-white/40 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 group-hover:shadow-lg group-hover:shadow-primary/20">
-                <Icon name={s.icon} className="text-2xl sm:text-3xl" />
-                <span className="absolute inset-0 rounded-2xl ring-1 ring-primary/10" />
-              </div>
-
-              <h3 className="relative mt-5 sm:mt-6 text-base sm:text-xl font-semibold text-primary leading-snug">
-                {s.title}
-              </h3>
-              <p className="relative mt-2 sm:mt-2.5 text-sm sm:text-base text-on-surface-variant leading-relaxed">
-                {s.body}
-              </p>
-
-              {/* Bottom accent line that grows on hover */}
-              <div className="relative mt-5 h-px bg-outline-variant/60 overflow-hidden">
-                <div className="absolute inset-y-0 left-0 w-0 bg-gradient-to-r from-primary to-tertiary-fixed-dim group-hover:w-full transition-[width] duration-700 ease-out" />
-              </div>
-
-              {/* Footer cue */}
-              <div className="relative mt-4 flex items-center justify-between">
-                <span className="label-caps text-[10px] text-on-surface-variant">Early signal</span>
-                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/5 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                  <Icon name="arrow_outward" className="text-base group-hover:rotate-12 transition-transform" />
-                </span>
-              </div>
-            </div>
+            <SignCard key={s.title} sign={s} index={i} />
           ))}
         </Reveal>
 

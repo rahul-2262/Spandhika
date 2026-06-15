@@ -271,6 +271,25 @@ function FootFactBanner() {
   );
 }
 
+function HeroCta() {
+  return (
+    <div className="relative z-10 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 border-b border-primary/10">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 py-3 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p className="text-sm sm:text-base text-on-surface font-medium text-center sm:text-left">
+          Be the first to walk smarter — join the SAARTHI waitlist today.
+        </p>
+        <a
+          href="#waitlist"
+          className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm font-medium shadow-lg shadow-primary/20 hover:scale-[1.02] hover:shadow-primary/30 transition-all whitespace-nowrap"
+        >
+          Join Waitlist
+          <Icon name="arrow_forward" className="text-base" />
+        </a>
+      </div>
+    </div>
+  );
+}
+
 function Hero() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -282,6 +301,7 @@ function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
       <FootFactBanner />
+      <HeroCta />
       <div className="blob bg-tertiary-fixed-dim w-[460px] h-[460px] -top-32 -right-24" />
       <div className="blob bg-secondary-container w-[420px] h-[420px] top-40 -left-32" style={{ animationDelay: "2s" }} />
       <div className="blob bg-on-primary-container/40 w-[360px] h-[360px] bottom-0 left-1/3" style={{ animationDelay: "4s" }} />

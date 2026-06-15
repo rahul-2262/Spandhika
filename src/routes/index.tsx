@@ -233,6 +233,44 @@ const heroStats = [
   { value: "1M+", label: "Data points / day" },
 ];
 
+// Researched foot-health facts & quotes (APMA, NIH, WHO, Mayo, Cleveland Clinic, J. Foot & Ankle Research)
+const footFacts: { text: string; source: string }[] = [
+  { text: "The average person takes 8,000–10,000 steps a day — roughly 115,000 miles in a lifetime, or 4 times around the Earth.", source: "APMA" },
+  { text: "Each foot has 26 bones, 33 joints, and over 100 muscles, tendons and ligaments — a quarter of all the bones in your body are in your feet.", source: "NIH" },
+  { text: "Around 75% of people experience foot pain at some point in their lives, yet most ignore it until it affects posture and mobility.", source: "APMA" },
+  { text: "Plantar fasciitis affects nearly 1 in 10 adults and is the most common cause of heel pain worldwide.", source: "J. Foot & Ankle Research" },
+  { text: "Flat feet and high arches can silently misalign the knees, hips and lower back — foot mechanics influence the entire kinetic chain.", source: "Harvard Health" },
+  { text: "Diabetic foot complications cause a lower-limb amputation somewhere in the world every 30 seconds.", source: "WHO" },
+  { text: "Walking 30 minutes a day can reduce the risk of heart disease, diabetes and stroke — but only if your gait is balanced.", source: "WHO" },
+  { text: "Wearing the wrong shoes is linked to over 60% of chronic foot problems in adults.", source: "APMA" },
+  { text: "Your feet sweat up to half a pint of moisture every day — ventilation and the right insole really do matter.", source: "Cleveland Clinic" },
+  { text: "“When your feet hurt, you hurt all over.” — Socrates", source: "Quote" },
+  { text: "Poor posture often starts at the feet — uneven pressure distribution can cause back pain you'd never connect to your stride.", source: "Mayo Clinic" },
+  { text: "Children's feet grow rapidly until age 12 — ill-fitting shoes during these years can shape lifelong foot problems.", source: "Pediatric Orthopaedics" },
+];
+
+function FootFactBanner() {
+  const [fact, setFact] = useState<{ text: string; source: string } | null>(null);
+  useEffect(() => {
+    setFact(footFacts[Math.floor(Math.random() * footFacts.length)]);
+  }, []);
+  if (!fact) return <div className="h-10 sm:h-11" aria-hidden />;
+  return (
+    <div className="relative z-10 border-b border-outline-variant/50 bg-secondary-container/40 backdrop-blur-sm">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 py-2.5 sm:py-3 flex items-center gap-3">
+        <span className="inline-flex items-center gap-1.5 label-caps text-[10px] text-primary shrink-0">
+          <Icon name="lightbulb" className="text-sm" />
+          <span className="hidden sm:inline">Did you know</span>
+        </span>
+        <p key={fact.text} className="fade-up text-xs sm:text-sm text-on-surface-variant leading-snug flex-1">
+          <span>{fact.text}</span>
+          <span className="ml-2 text-on-surface-variant/60">— {fact.source}</span>
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function Hero() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -243,6 +281,7 @@ function Hero() {
   }
   return (
     <section id="top" className="relative overflow-hidden">
+      <FootFactBanner />
       <div className="blob bg-tertiary-fixed-dim w-[460px] h-[460px] -top-32 -right-24" />
       <div className="blob bg-secondary-container w-[420px] h-[420px] top-40 -left-32" style={{ animationDelay: "2s" }} />
       <div className="blob bg-on-primary-container/40 w-[360px] h-[360px] bottom-0 left-1/3" style={{ animationDelay: "4s" }} />

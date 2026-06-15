@@ -301,6 +301,7 @@ function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
       <FootFactBanner />
+      <HeroCta />
       <div className="blob bg-tertiary-fixed-dim w-[460px] h-[460px] -top-32 -right-24" />
       <div className="blob bg-secondary-container w-[420px] h-[420px] top-40 -left-32" style={{ animationDelay: "2s" }} />
       <div className="blob bg-on-primary-container/40 w-[360px] h-[360px] bottom-0 left-1/3" style={{ animationDelay: "4s" }} />

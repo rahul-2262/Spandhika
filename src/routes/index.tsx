@@ -576,8 +576,9 @@ function Hero() {
                 className="fade-up text-center sm:text-left"
                 style={{ animationDelay: `${560 + i * 80}ms` }}
               >
-                <div className="text-2xl sm:text-3xl font-bold tracking-tight text-gradient-primary">{s.value}</div>
-                <div className="mt-1 label-caps text-on-surface-variant text-[10px]">{s.label}</div>
+                <div className="data-num text-2xl sm:text-3xl font-bold tracking-tight text-gradient-primary">{s.value}</div>
+                <div className="mt-1 data-label text-[10px]">{s.label}</div>
+
               </div>
             ))}
           </div>
@@ -1334,12 +1335,13 @@ function Trust() {
               key={s.label}
               className="group rounded-2xl p-2 sm:p-4 lg:p-5 transition-all duration-500 hover-lift text-center sm:text-left"
             >
-              <div className="text-[28px] sm:text-5xl lg:text-6xl font-bold tracking-tight text-gradient-primary">
+              <div className="data-num text-[28px] sm:text-5xl lg:text-6xl font-bold tracking-tight text-gradient-primary">
                 {s.value}
               </div>
-              <div className="mt-2 label-caps text-on-surface-variant text-[10px] sm:text-xs whitespace-nowrap">
+              <div className="mt-2 data-label text-[10px] sm:text-xs whitespace-nowrap">
                 {s.label}
               </div>
+
             </div>
           ))}
         </Reveal>
@@ -1412,6 +1414,60 @@ function Trust() {
             ))}
           </div>
         </Reveal>
+
+        {/* Spec sheet — SAARTHI at a glance */}
+        <Reveal className="mt-10 sm:mt-12 rounded-2xl glass border border-white/40 p-6 sm:p-8">
+          <div className="flex items-center justify-between gap-4 flex-wrap">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-secondary-container text-primary flex items-center justify-center">
+                <Icon name="description" />
+              </div>
+              <div>
+                <div className="data-label">Spec sheet · SAARTHI™ v1</div>
+                <h3 className="mt-1 text-lg sm:text-xl font-semibold text-primary">At a glance</h3>
+              </div>
+            </div>
+            <span className="data-label">Rev 2026.Q3</span>
+          </div>
+
+          <div className="mt-6 grid md:grid-cols-2 gap-x-10 gap-y-0">
+            <div className="spec-sheet">
+              {[
+                { k: "Pressure zones", v: "32" },
+                { k: "Gait variables tracked", v: "24" },
+                { k: "Sampling rate", v: "100 Hz" },
+                { k: "Balance accuracy", v: "94%" },
+                { k: "Daily data points", v: "1,000,000+" },
+              ].map((r) => (
+                <div key={r.k} className="spec-row">
+                  <span className="k">{r.k}</span>
+                  <span className="v">{r.v}</span>
+                </div>
+              ))}
+            </div>
+            <div className="spec-sheet">
+              {[
+                { k: "Battery life", v: "7 days" },
+                { k: "Connectivity", v: "BLE 5.2" },
+                { k: "Top sheet", v: "Breathable knit" },
+                { k: "Base material", v: "Medical-grade EVA" },
+                { k: "Made in", v: "India 🇮🇳" },
+              ].map((r) => (
+                <div key={r.k} className="spec-row">
+                  <span className="k">{r.k}</span>
+                  <span className="v">{r.v}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <p className="mt-6 data-label text-on-surface-variant/80">
+            Specifications indicative · final values confirmed at launch
+          </p>
+        </Reveal>
+
+
+
 
         {/* Privacy deep-dive */}
         <Reveal className="mt-10 sm:mt-12 rounded-2xl glass border border-white/40 p-6 sm:p-8">

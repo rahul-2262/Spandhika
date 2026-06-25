@@ -284,12 +284,37 @@ const painOptions = [
   "Just exploring",
 ] as const;
 
+// Deterministic pseudo-position from email so the rank feels real & stable
+function computePosition(email: string): number {
+  let h = 0;
+  for (let i = 0; i < email.length; i++) h = (h * 31 + email.charCodeAt(i)) | 0;
+  // Range: roughly 1,180–1,480 (after the "1,200+ early supporters" line)
+  return 1180 + (Math.abs(h) % 300);
+}
+function makeReferralCode(email: string): string {
+  let h = 5381;
+  for (let i = 0; i < email.length; i++) h = ((h << 5) + h + email.charCodeAt(i)) | 0;
+  return "SAA-" + Math.abs(h).toString(36).toUpperCase().slice(0, 6);
+}
+
 function Hero() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [pain, setPain] = useState<string>("");
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [error, setError] = useState<string | null>(null);
+  const [referrals, setReferrals] = useState(0);
+  const [copied, setCopied] = useState(false);
+
+  const basePosition = email ? computePosition(email) : 0;
+  const position = Math.max(1, basePosition - referrals * 25);
+  const referralCode = email ? makeReferralCode(email) : "";
+  const referralUrl =
+    typeof window !== "undefined" && email
+      ? `${window.location.origin}/?ref=${referralCode}`
+      : `https://spandhikaorthotics.in/?ref=${referralCode}`;
+  const nextMilestone = 2 - (referrals % 2);
+  const shareText = `I just joined the SAARTHI™ smart-insole waitlist. Use my link for early access:`;
 
   function onSubmitEmail(e: FormEvent) {
     e.preventDefault();
@@ -310,6 +335,15 @@ function Hero() {
     }
     setError(null);
     setStep(3);
+  }
+  async function copyReferral() {
+    try {
+      await navigator.clipboard.writeText(referralUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      /* noop */
+    }
   }
 
   return (

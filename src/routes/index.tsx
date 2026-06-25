@@ -1377,7 +1377,7 @@ function OrthotistPressurePreview() {
   }
 
   return (
-    <div className="mt-10 sm:mt-12 glass-strong rounded-2xl border border-white/40 overflow-hidden">
+    <div id="orthotist-preview" className="scroll-mt-24 mt-10 sm:mt-12 glass-strong rounded-2xl border border-white/40 overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr]">
         {/* Left: interactive SVG */}
         <div className="relative p-5 sm:p-7 lg:border-r border-white/40 bg-gradient-to-br from-primary-container/40 to-transparent">

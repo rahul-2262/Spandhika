@@ -455,14 +455,94 @@ function Hero() {
             )}
 
             {step === 3 && (
-              <div className="rounded-3xl glass p-5 text-left flex items-start gap-3">
-                <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center shrink-0">
-                  <Icon name="check" />
+              <div className="rounded-3xl glass p-5 sm:p-6 text-left space-y-5">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center shrink-0">
+                    <Icon name="check" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="font-semibold text-primary">You're on the early-access list.</div>
+                    <div className="text-sm text-on-surface-variant mt-0.5 break-words">
+                      We'll email <span className="font-medium text-on-surface">{email}</span> when pre-orders open in Q3 2026.
+                    </div>
+                  </div>
                 </div>
+
+                {/* Rank / position counter */}
+                <div className="rounded-2xl border border-outline-variant/60 bg-surface/40 p-4">
+                  <div className="flex items-end justify-between gap-3">
+                    <div>
+                      <div className="label-caps text-on-surface-variant">Your position</div>
+                      <div className="mt-1 font-mono tabular-nums text-3xl sm:text-4xl font-bold text-primary leading-none">
+                        #{position.toLocaleString()}
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="label-caps text-on-surface-variant">Referrals</div>
+                      <div className="mt-1 font-mono tabular-nums text-2xl font-semibold text-on-surface">
+                        {referrals}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-3 h-1.5 rounded-full bg-outline-variant/40 overflow-hidden">
+                    <div
+                      className="h-full bg-primary transition-all duration-500"
+                      style={{ width: `${((referrals % 2) / 2) * 100}%` }}
+                    />
+                  </div>
+                  <div className="mt-2 text-xs text-on-surface-variant">
+                    Refer <span className="font-semibold text-on-surface">2 friends</span> → jump{" "}
+                    <span className="font-semibold text-primary">50 places</span>. {nextMilestone === 2
+                      ? "Invite 2 to unlock your next jump."
+                      : `${nextMilestone} more referral to jump 50 places.`}
+                  </div>
+                </div>
+
+                {/* Referral link + share */}
                 <div>
-                  <div className="font-semibold text-primary">You're on the early-access list.</div>
-                  <div className="text-sm text-on-surface-variant mt-0.5">
-                    We'll email <span className="font-medium text-on-surface">{email}</span> when pre-orders open in Q3 2026.
+                  <div className="label-caps text-on-surface-variant mb-2">Your referral link</div>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <div className="flex-1 rounded-full glass px-4 py-2.5 text-sm font-mono truncate">
+                      {referralUrl}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={copyReferral}
+                      className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-4 py-2.5 text-sm font-semibold hover:scale-[1.02] transition"
+                    >
+                      <Icon name={copied ? "check" : "content_copy"} className="text-base" />
+                      {copied ? "Copied" : "Copy link"}
+                    </button>
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <a
+                      href={`https://wa.me/?text=${encodeURIComponent(shareText + " " + referralUrl)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setReferrals((r) => r + 1)}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-3 py-1.5 text-sm hover:border-primary/40 hover:text-primary transition"
+                    >
+                      <Icon name="chat" className="text-base" /> WhatsApp
+                    </a>
+                    <a
+                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(referralUrl)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setReferrals((r) => r + 1)}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-3 py-1.5 text-sm hover:border-primary/40 hover:text-primary transition"
+                    >
+                      <Icon name="share" className="text-base" /> Twitter / X
+                    </a>
+                    <a
+                      href={`mailto:?subject=${encodeURIComponent("Early access to SAARTHI™")}&body=${encodeURIComponent(shareText + "\n\n" + referralUrl)}`}
+                      onClick={() => setReferrals((r) => r + 1)}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-outline-variant px-3 py-1.5 text-sm hover:border-primary/40 hover:text-primary transition"
+                    >
+                      <Icon name="mail" className="text-base" /> Email
+                    </a>
+                  </div>
+                  <div className="mt-2 text-[11px] text-on-surface-variant">
+                    Code: <span className="font-mono">{referralCode}</span> · Each confirmed referral moves you up 25 places.
                   </div>
                 </div>
               </div>

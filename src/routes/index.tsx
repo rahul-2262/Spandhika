@@ -108,6 +108,7 @@ function Nav() {
     { href: "#problem", label: "The problem" },
     { href: "#saarthi", label: "Features" },
     { href: "#audience", label: "Who it's for" },
+    { href: "#partners", label: "For partners" },
     { href: "#purpose", label: "Our Story" },
     { href: "#contact", label: "Contact" },
   ];

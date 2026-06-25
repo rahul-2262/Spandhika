@@ -55,7 +55,8 @@ function Reveal({
 import logoAsset from "@/assets/spandhika-logo.png.asset.json";
 import heroFootAsset from "@/assets/hero-foot-pressure.png.asset.json";
 const heroFoot = heroFootAsset.url;
-import explodedInsole from "@/assets/exploded-insole.jpg";
+import insoleAsset from "@/assets/insole.png.asset.json";
+const explodedInsole = insoleAsset.url;
 import footPainImg from "@/assets/foot-pain.jpg";
 
 export const Route = createFileRoute("/")({
@@ -692,7 +693,7 @@ function Features() {
             <div className="relative rounded-[2rem] overflow-hidden bg-[#f4f1e6] border border-on-primary-container/20">
               <img
                 src={explodedInsole}
-                alt="Exploded view of the SAARTHI smart insole showing fabric cover, sensor array, foam, carbon arch plate, and base"
+                alt="SAARTHI smart insole exploded view alongside the companion app showing pressure maps, gait charts, and balance metrics"
                 width={1280}
                 height={1024}
                 loading="lazy"

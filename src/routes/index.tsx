@@ -687,11 +687,16 @@ function Problem() {
           </p>
         </div>
 
-        <Reveal stagger className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-start">
+        {/* Mobile: horizontal snap-scroll · Desktop: 4-col grid */}
+        <Reveal
+          stagger
+          className="mt-10 sm:mt-14 flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-stretch overflow-x-auto sm:overflow-visible snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0 pb-2 sm:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           {signs.map((s, i) => (
             <SignCard key={s.title} sign={s} index={i} />
           ))}
         </Reveal>
+
 
       </div>
     </section>

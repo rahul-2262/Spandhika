@@ -1335,12 +1335,13 @@ function Trust() {
               key={s.label}
               className="group rounded-2xl p-2 sm:p-4 lg:p-5 transition-all duration-500 hover-lift text-center sm:text-left"
             >
-              <div className="text-[28px] sm:text-5xl lg:text-6xl font-bold tracking-tight text-gradient-primary">
+              <div className="data-num text-[28px] sm:text-5xl lg:text-6xl font-bold tracking-tight text-gradient-primary">
                 {s.value}
               </div>
-              <div className="mt-2 label-caps text-on-surface-variant text-[10px] sm:text-xs whitespace-nowrap">
+              <div className="mt-2 data-label text-[10px] sm:text-xs whitespace-nowrap">
                 {s.label}
               </div>
+
             </div>
           ))}
         </Reveal>

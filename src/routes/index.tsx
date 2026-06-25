@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import React, { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { z } from "zod";
 
@@ -550,68 +550,45 @@ function Hero() {
 }
 
 function SignCard({ sign, index }: { sign: (typeof signs)[number]; index: number }) {
-  const [open, setOpen] = useState(false);
   return (
-    <div
-      className={`group relative rounded-3xl p-5 sm:p-7 bg-surface/70 backdrop-blur border border-outline-variant/60 hover:shadow-2xl hover:border-primary/30 transition-all overflow-hidden ${open ? "shadow-2xl border-primary/30" : ""}`}
+    <Link
+      to="/signs/$slug"
+      params={{ slug: sign.slug }}
+      className="group relative flex h-full flex-col rounded-3xl p-5 sm:p-7 bg-surface/70 backdrop-blur border border-outline-variant/60 hover:shadow-2xl hover:border-primary/30 transition-all overflow-hidden snap-start shrink-0 w-[78vw] sm:w-auto"
     >
       <div className="absolute top-4 right-4 sm:top-5 sm:right-5 label-caps text-on-surface-variant/60 text-[10px] tracking-[0.2em]">
         0{index + 1}
       </div>
-      <div className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+      <div
+        className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
         style={{ background: "radial-gradient(60% 60% at 50% 0%, color-mix(in oklab, var(--primary) 14%, transparent), transparent 70%)" }}
       />
       <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-secondary-container to-tertiary-fixed/40 text-primary flex items-center justify-center shadow-inner shadow-white/40 transition-all duration-500 group-hover:-rotate-6">
         <Icon name={sign.icon} className="text-2xl sm:text-3xl" />
         <span className="absolute inset-0 rounded-2xl ring-1 ring-primary/10" />
       </div>
-      <h3 className="relative mt-5 sm:mt-6 text-base sm:text-xl font-semibold text-primary leading-snug">{sign.title}</h3>
-      <p className="relative mt-2 sm:mt-2.5 text-sm sm:text-base text-on-surface-variant leading-relaxed">{sign.body}</p>
-
-      <div
-        className="relative grid transition-all duration-500 ease-out"
-        style={{ gridTemplateRows: open ? "1fr" : "0fr", opacity: open ? 1 : 0, marginTop: open ? "1rem" : 0 }}
-      >
-        <div className="overflow-hidden">
-          <div className="rounded-2xl bg-secondary-container/50 border border-outline-variant/40 p-4 text-sm text-on-surface-variant leading-relaxed space-y-3">
-            <p>{sign.details}</p>
-            <div>
-              <div className="label-caps text-[10px] text-primary/70 mb-1.5">Common causes</div>
-              <ul className="flex flex-wrap gap-1.5">
-                {sign.causes.map((c) => (
-                  <li key={c} className="inline-flex items-center text-[11px] rounded-full bg-card/80 border border-outline-variant/60 px-2.5 py-1 text-primary">
-                    {c}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <div className="label-caps text-[10px] text-primary/70 mb-1">How SAARTHI helps</div>
-              <p className="text-[13px] text-on-surface">{sign.helps}</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <h3 className="relative mt-5 sm:mt-6 text-base sm:text-xl font-semibold text-primary leading-snug">
+        {sign.title}
+      </h3>
+      <p className="relative mt-2 sm:mt-2.5 text-sm sm:text-base text-on-surface-variant leading-relaxed">
+        {sign.body}
+      </p>
 
       <div className="relative mt-5 h-px bg-outline-variant/60 overflow-hidden">
-        <div className={`absolute inset-y-0 left-0 bg-gradient-to-r from-primary to-tertiary-fixed-dim transition-[width] duration-700 ease-out ${open ? "w-full" : "w-0 group-hover:w-full"}`} />
+        <div className="absolute inset-y-0 left-0 w-0 group-hover:w-full bg-gradient-to-r from-primary to-tertiary-fixed-dim transition-[width] duration-700 ease-out" />
       </div>
 
-      <div className="relative mt-4 flex items-center justify-between">
-        <span className="label-caps text-[10px] text-on-surface-variant">{open ? "Hide details" : "Early signal"}</span>
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-label={open ? "Hide details" : "Show more details"}
-          className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/5 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-        >
-          <Icon name="expand_more" className={`text-base transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
-        </button>
+      <div className="relative mt-4 mt-auto flex items-center justify-between pt-4">
+        <span className="label-caps text-[10px] text-on-surface-variant">Early signal</span>
+        <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-primary group-hover:gap-2.5 transition-all">
+          Read more
+          <Icon name="arrow_forward" className="text-base" />
+        </span>
       </div>
-    </div>
+    </Link>
   );
 }
+
 
 function OrthoticCard({
   item,
@@ -687,44 +664,9 @@ function OrthoticCard({
 
 
 
-const signs = [
-  {
-    icon: "accessible_forward",
-    title: "Heel pain after waking up",
-    body: "That first painful step in the morning is often plantar fasciitis — and it doesn't fix itself.",
-    details:
-      "The plantar fascia tightens overnight; the first weight-bearing steps re-stretch inflamed tissue, causing sharp heel pain. Persistent symptoms can lead to heel spurs, gait compensation, and knee or hip strain.",
-    causes: ["Poor arch support", "Long standing hours", "Sudden activity spikes", "Worn-out footwear"],
-    helps: "Deep heel cup, contoured medial arch, and shock-absorbing forefoot pad to redistribute load.",
-  },
-  {
-    icon: "schedule",
-    title: "Foot fatigue after long hours",
-    body: "Burning, aching, heavy feet after work or a long day on your feet is a signal — not normal.",
-    details:
-      "Repetitive standing without cushioning overloads the metatarsals and intrinsic foot muscles, reducing circulation and triggering burning, swelling, and end-of-day fatigue.",
-    causes: ["Hard floors", "Flat shoe insoles", "Poor pressure distribution", "Weak foot musculature"],
-    helps: "Energy-return foam plus a 32-zone pressure map that balances load across the whole footprint.",
-  },
-  {
-    icon: "swap_horiz",
-    title: "Uneven shoe wear",
-    body: "If one shoe wears down faster, your weight distribution is off — and your body is compensating.",
-    details:
-      "Asymmetric wear patterns reveal overpronation, supination, or a leg-length discrepancy. Untreated, the kinetic chain compensates upward — ankles, knees, hips, and lower back follow.",
-    causes: ["Overpronation", "Supination", "Leg-length difference", "Muscle imbalance"],
-    helps: "Adaptive arch support and a carbon stability plate that re-centers the strike pattern.",
-  },
-  {
-    icon: "airline_seat_legroom_reduced",
-    title: "Knee or lower back discomfort",
-    body: "Pain that feels unrelated often starts at the ground. Your feet are the foundation of every step.",
-    details:
-      "Misaligned feet rotate the tibia and femur subtly with every step. Over thousands of steps a day, that small rotation becomes chronic knee, hip, and lumbar strain.",
-    causes: ["Collapsed arches", "Heel-strike imbalance", "Poor shock absorption", "Forward pelvic tilt"],
-    helps: "Posture-aware support that aligns the foot, shin, and hip through a neutral gait cycle.",
-  },
-];
+import { signs } from "@/data/signs";
+
+
 
 
 function Problem() {
@@ -745,11 +687,16 @@ function Problem() {
           </p>
         </div>
 
-        <Reveal stagger className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-start">
+        {/* Mobile: horizontal snap-scroll · Desktop: 4-col grid */}
+        <Reveal
+          stagger
+          className="mt-10 sm:mt-14 flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-stretch overflow-x-auto sm:overflow-visible snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0 pb-2 sm:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           {signs.map((s, i) => (
             <SignCard key={s.title} sign={s} index={i} />
           ))}
         </Reveal>
+
 
       </div>
     </section>

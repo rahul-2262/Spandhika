@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import React, { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { z } from "zod";
 
 function useInView<T extends HTMLElement>() {
   const ref = useRef<T | null>(null);
@@ -273,14 +274,44 @@ function FootFactBanner() {
 }
 
 
+const emailSchema = z.string().trim().email("Enter a valid email").max(255);
+const nameSchema = z.string().trim().max(80).optional();
+const painOptions = [
+  "Heel / arch pain",
+  "Knee or back pain",
+  "Diabetic foot care",
+  "Sports & performance",
+  "Just exploring",
+] as const;
+
 function Hero() {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  function onSubmit(e: FormEvent) {
+  const [name, setName] = useState("");
+  const [pain, setPain] = useState<string>("");
+  const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [error, setError] = useState<string | null>(null);
+
+  function onSubmitEmail(e: FormEvent) {
     e.preventDefault();
-    if (!email) return;
-    setSubmitted(true);
+    const parsed = emailSchema.safeParse(email);
+    if (!parsed.success) {
+      setError(parsed.error.issues[0]?.message ?? "Invalid email");
+      return;
+    }
+    setError(null);
+    setStep(2);
   }
+  function onSubmitDetails(e: FormEvent) {
+    e.preventDefault();
+    const parsed = nameSchema.safeParse(name);
+    if (!parsed.success) {
+      setError("Name too long");
+      return;
+    }
+    setError(null);
+    setStep(3);
+  }
+
   return (
     <section id="top" className="relative overflow-hidden">
       <FootFactBanner />
@@ -291,57 +322,133 @@ function Hero() {
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20 pt-10 pb-16 sm:pt-16 sm:pb-24 lg:pt-28 lg:pb-32 grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center relative">
         <div className="text-center lg:text-left order-2 lg:order-none">
           <div className="fade-up flex justify-center lg:justify-start" style={{ animationDelay: "60ms" }}>
-            <Eyebrow>Smart orthotic insoles</Eyebrow>
+            <Eyebrow>Premium smart insole · Made in India</Eyebrow>
           </div>
           <h1
-            className="mt-4 sm:mt-6 text-[34px] sm:text-5xl lg:text-[64px] leading-[1.08] tracking-[-0.02em] font-bold text-primary fade-up"
+            className="mt-4 sm:mt-6 text-[32px] sm:text-5xl lg:text-[60px] leading-[1.06] tracking-[-0.02em] font-bold text-primary fade-up"
             style={{ animationDelay: "120ms" }}
           >
-            Better movement starts from{" "}
-            <span className="text-gradient-primary">your feet.</span>
+            Meet <span className="text-gradient-primary">SAARTHI™</span> — the smart insole that reads your every step.
           </h1>
           <p
             className="mt-4 sm:mt-6 text-[15px] sm:text-lg text-on-surface-variant max-w-xl mx-auto lg:mx-0 leading-relaxed fade-up"
             style={{ animationDelay: "220ms" }}
           >
-            Most people ignore foot problems until they affect posture, comfort, and daily life.
-            Spandhika is a smart orthotic insole that listens to how you walk — and helps you move better.
+            Real-time pressure mapping, gait analytics, and condition-specific support — engineered in
+            biomechanics, designed for everyday Indian feet.
           </p>
 
-          <form
+          {/* Mobile-first waitlist form */}
+          <div
             id="waitlist"
-            onSubmit={onSubmit}
-            className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto lg:mx-0 fade-up"
+            className="mt-6 sm:mt-8 max-w-lg mx-auto lg:mx-0 fade-up"
             style={{ animationDelay: "320ms" }}
           >
-            <label className="sr-only" htmlFor="email">Email</label>
-            <input
-              id="email"
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
-              className="flex-1 rounded-full glass px-5 py-3.5 text-base placeholder:text-on-surface-variant/70 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
-            />
-            <button
-              type="submit"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3.5 font-medium shadow-lg shadow-primary/20 hover:scale-[1.02] hover:shadow-primary/30 transition-all"
-            >
-              {submitted ? "You're in" : "Join Waitlist"}
-              <Icon name={submitted ? "check" : "arrow_forward"} className="text-base" />
-            </button>
-          </form>
+            {step === 1 && (
+              <form onSubmit={onSubmitEmail} className="flex flex-col sm:flex-row gap-3" noValidate>
+                <label className="sr-only" htmlFor="email">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  inputMode="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  className="flex-1 rounded-full glass px-5 py-3.5 text-base placeholder:text-on-surface-variant/70 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                />
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3.5 font-semibold shadow-lg shadow-primary/20 hover:scale-[1.02] hover:shadow-primary/30 transition-all whitespace-nowrap"
+                >
+                  Get Early Access
+                  <Icon name="arrow_forward" className="text-base" />
+                </button>
+              </form>
+            )}
+
+            {step === 2 && (
+              <form onSubmit={onSubmitDetails} className="rounded-3xl glass p-4 sm:p-5 space-y-3 text-left" noValidate>
+                <div className="text-sm text-on-surface-variant">
+                  One quick step so we can tailor your early access.
+                </div>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Your name (optional)"
+                  autoComplete="name"
+                  maxLength={80}
+                  className="w-full rounded-full glass px-5 py-3 text-base focus:outline-none focus:ring-2 focus:ring-primary/30"
+                />
+                <div>
+                  <div className="label-caps text-on-surface-variant mb-2">What brings you here?</div>
+                  <div className="flex flex-wrap gap-2">
+                    {painOptions.map((p) => (
+                      <button
+                        type="button"
+                        key={p}
+                        onClick={() => setPain(p)}
+                        className={`rounded-full border px-3 py-1.5 text-sm transition ${
+                          pain === p
+                            ? "bg-primary text-primary-foreground border-primary"
+                            : "border-outline-variant hover:border-primary/40"
+                        }`}
+                      >
+                        {p}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-2 pt-1">
+                  <button
+                    type="submit"
+                    className="flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 font-semibold"
+                  >
+                    Confirm my spot
+                    <Icon name="arrow_forward" className="text-base" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setStep(3)}
+                    className="rounded-full px-4 py-3 text-sm text-on-surface-variant hover:text-primary"
+                  >
+                    Skip
+                  </button>
+                </div>
+              </form>
+            )}
+
+            {step === 3 && (
+              <div className="rounded-3xl glass p-5 text-left flex items-start gap-3">
+                <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center shrink-0">
+                  <Icon name="check" />
+                </div>
+                <div>
+                  <div className="font-semibold text-primary">You're on the early-access list.</div>
+                  <div className="text-sm text-on-surface-variant mt-0.5">
+                    We'll email <span className="font-medium text-on-surface">{email}</span> when pre-orders open in Q3 2026.
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {error && <div className="mt-2 text-sm text-red-600">{error}</div>}
+          </div>
 
           <div
-            className="mt-5 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-sm text-on-surface-variant fade-up"
+            className="mt-4 flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-sm text-on-surface-variant fade-up"
             style={{ animationDelay: "400ms" }}
           >
-            <a href="#features" className="inline-flex items-center gap-1 text-primary font-medium group">
-              Learn about SAARTHI features
-              <Icon name="arrow_forward" className="text-base group-hover:translate-x-0.5 transition-transform" />
-            </a>
-            <span>No spam · Launching 2026</span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+              Join 1,200+ early supporters
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <Icon name="lock" className="text-base" />
+              No spam · Pre-orders open Q3 2026
+            </span>
           </div>
 
           {/* Trust analytics strip */}
@@ -361,6 +468,7 @@ function Hero() {
             ))}
           </div>
         </div>
+
 
         <div
           className="relative h-[340px] sm:h-[520px] lg:h-[600px] order-1 lg:order-none mx-auto w-full max-w-[440px] sm:max-w-none fade-up"

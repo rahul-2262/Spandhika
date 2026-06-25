@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import React, { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { z } from "zod";
 

@@ -106,9 +106,9 @@ function Nav() {
   const [open, setOpen] = useState(false);
   const links = [
     { href: "#problem", label: "The problem" },
-    { href: "#features", label: "Features" },
+    { href: "#saarthi", label: "Features" },
     { href: "#audience", label: "Who it's for" },
-    { href: "#purpose", label: "Purpose" },
+    { href: "#purpose", label: "Our Story" },
     { href: "#contact", label: "Contact" },
   ];
   return (

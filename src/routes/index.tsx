@@ -1293,7 +1293,7 @@ const partners = [
       "Bulk-fit kits and trade pricing for established practices",
     ],
     cta: { label: "Talk to our orthotics team", href: "mailto:spandhikaorthotics@gmail.com?subject=Orthotist%20partnership" },
-    secondary: { label: "See sample dataset", href: "#saarthi" },
+    secondary: { label: "Try interactive preview", href: "#orthotist-preview" },
   },
   {
     icon: "domain",

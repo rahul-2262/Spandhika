@@ -40,7 +40,8 @@ export const Route = createFileRoute("/signs/$slug")({
 });
 
 function SignDetail() {
-  const { sign } = Route.useLoaderData();
+  const { sign } = Route.useLoaderData() as { sign: (typeof signs)[number] };
+
   return (
     <main className="pt-28 pb-24 px-4 sm:px-6 lg:px-20 max-w-[960px] mx-auto">
       <Link to="/" hash="problem" className="label-caps text-[11px] text-on-surface-variant hover:text-primary inline-flex items-center gap-1">

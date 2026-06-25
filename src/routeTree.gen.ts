@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SignsSlugRouteImport } from './routes/signs.$slug'
 import { Route as BlogCustomVsOffTheShelfOrthoticsRouteImport } from './routes/blog.custom-vs-off-the-shelf-orthotics'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -21,6 +22,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignsSlugRoute = SignsSlugRouteImport.update({
+  id: '/signs/$slug',
+  path: '/signs/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogCustomVsOffTheShelfOrthoticsRoute =
@@ -34,34 +40,47 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/custom-vs-off-the-shelf-orthotics': typeof BlogCustomVsOffTheShelfOrthoticsRoute
+  '/signs/$slug': typeof SignsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/custom-vs-off-the-shelf-orthotics': typeof BlogCustomVsOffTheShelfOrthoticsRoute
+  '/signs/$slug': typeof SignsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/custom-vs-off-the-shelf-orthotics': typeof BlogCustomVsOffTheShelfOrthoticsRoute
+  '/signs/$slug': typeof SignsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sitemap.xml' | '/blog/custom-vs-off-the-shelf-orthotics'
+  fullPaths:
+    | '/'
+    | '/sitemap.xml'
+    | '/blog/custom-vs-off-the-shelf-orthotics'
+    | '/signs/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sitemap.xml' | '/blog/custom-vs-off-the-shelf-orthotics'
+  to:
+    | '/'
+    | '/sitemap.xml'
+    | '/blog/custom-vs-off-the-shelf-orthotics'
+    | '/signs/$slug'
   id:
     | '__root__'
     | '/'
     | '/sitemap.xml'
     | '/blog/custom-vs-off-the-shelf-orthotics'
+    | '/signs/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   BlogCustomVsOffTheShelfOrthoticsRoute: typeof BlogCustomVsOffTheShelfOrthoticsRoute
+  SignsSlugRoute: typeof SignsSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -80,6 +99,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/signs/$slug': {
+      id: '/signs/$slug'
+      path: '/signs/$slug'
+      fullPath: '/signs/$slug'
+      preLoaderRoute: typeof SignsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/custom-vs-off-the-shelf-orthotics': {
       id: '/blog/custom-vs-off-the-shelf-orthotics'
       path: '/blog/custom-vs-off-the-shelf-orthotics'
@@ -94,6 +120,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   BlogCustomVsOffTheShelfOrthoticsRoute: BlogCustomVsOffTheShelfOrthoticsRoute,
+  SignsSlugRoute: SignsSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1266,6 +1266,129 @@ function Audience() {
   );
 }
 
+// ---------------- Partners / B2B ----------------
+
+const partners = [
+  {
+    icon: "local_hospital",
+    eyebrow: "For clinics",
+    title: "Turn a 20-minute consult into a data-backed care plan.",
+    body: "Bring objective gait and plantar-pressure data into every patient visit. SAARTHI gives your podiatrists, physios, and chiropractors a shared baseline to prescribe, adjust, and measure outcomes — without buying a force plate.",
+    bullets: [
+      "Chairside pressure & gait snapshot in under 5 minutes",
+      "Patient-friendly PDF reports you can hand over after the visit",
+      "Track progress across sessions to prove the intervention worked",
+    ],
+    cta: { label: "Request a clinic pilot", href: "mailto:spandhikaorthotics@gmail.com?subject=Clinic%20pilot%20enquiry" },
+    secondary: { label: "Download clinic brief", href: "mailto:spandhikaorthotics@gmail.com?subject=Send%20me%20the%20clinic%20brief" },
+  },
+  {
+    icon: "engineering",
+    eyebrow: "For orthotists & P&O labs",
+    title: "Spec smarter custom orthoses with real walking data.",
+    body: "Replace static foam-box impressions with dynamic, in-shoe pressure mapping across the full gait cycle. SAARTHI hands your lab a clean dataset to design, refine, and validate every custom device you build.",
+    bullets: [
+      "Dynamic pressure maps across stance, mid-stance & propulsion",
+      "Compare pre- vs post-fitting data to justify design choices",
+      "Bulk-fit kits and trade pricing for established practices",
+    ],
+    cta: { label: "Talk to our orthotics team", href: "mailto:spandhikaorthotics@gmail.com?subject=Orthotist%20partnership" },
+    secondary: { label: "See sample dataset", href: "#saarthi" },
+  },
+  {
+    icon: "domain",
+    eyebrow: "For hospitals & rehab centres",
+    title: "Standardise gait assessment across your department.",
+    body: "Equip your rehab, diabetic-foot, sports-medicine, and geriatric teams with a single, repeatable measurement standard. SAARTHI integrates into existing pathways for diabetic neuropathy screening, post-op rehab, and fall-risk assessment.",
+    bullets: [
+      "Validated for diabetic foot, post-op rehab & fall-risk programmes",
+      "Department-wide licensing with clinician training included",
+      "Aggregated, de-identified analytics for your quality team",
+    ],
+    cta: { label: "Book a hospital demo", href: "mailto:spandhikaorthotics@gmail.com?subject=Hospital%20demo%20request" },
+    secondary: { label: "Procurement & pricing", href: "mailto:spandhikaorthotics@gmail.com?subject=Hospital%20procurement" },
+  },
+];
+
+function Partners() {
+  return (
+    <section id="partners" className="scroll-mt-20 sm:scroll-mt-24 py-12 sm:py-16 lg:py-24 border-y border-white/40 bg-gradient-to-b from-primary-container/30 to-transparent">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
+        <Eyebrow>For partners</Eyebrow>
+        <div className="mt-4 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+          <h2 className="max-w-2xl text-[26px] sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
+            Built for the people who put feet first.
+          </h2>
+          <p className="max-w-md text-on-surface-variant text-[15px] sm:text-base">
+            Whether you run a single-room clinic or a multi-site hospital network, SAARTHI plugs into the way you already work — and gives you the data to back every recommendation.
+          </p>
+        </div>
+
+        <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 items-stretch">
+          {partners.map((p) => (
+            <article key={p.title} className="group glass rounded-2xl p-6 sm:p-7 flex flex-col hover-lift hover:shadow-xl border border-white/40">
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-md transition-transform group-hover:-rotate-6">
+                  <Icon name={p.icon} className="text-xl" />
+                </div>
+                <span className="data-label text-primary/70">{p.eyebrow}</span>
+              </div>
+              <h3 className="mt-4 text-lg sm:text-xl font-semibold text-primary leading-snug">{p.title}</h3>
+              <p className="mt-3 text-sm text-on-surface-variant leading-relaxed">{p.body}</p>
+              <ul className="mt-5 space-y-2.5 text-sm text-on-surface">
+                {p.bullets.map((b) => (
+                  <li key={b} className="flex gap-2.5">
+                    <Icon name="check_circle" className="text-primary text-base mt-0.5 shrink-0" />
+                    <span className="leading-relaxed">{b}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6 pt-5 border-t border-white/40 flex flex-col sm:flex-row gap-2.5 sm:items-center">
+                <a
+                  href={p.cta.href}
+                  className="inline-flex items-center justify-center gap-1.5 rounded-full bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:opacity-90 transition"
+                >
+                  {p.cta.label}
+                  <Icon name="arrow_forward" className="text-base" />
+                </a>
+                <a
+                  href={p.secondary.href}
+                  className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium text-primary hover:bg-primary/5 transition"
+                >
+                  {p.secondary.label}
+                </a>
+              </div>
+            </article>
+          ))}
+        </Reveal>
+
+        <div className="mt-10 sm:mt-14 glass-strong rounded-2xl p-6 sm:p-8 border border-white/40 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+          <div>
+            <p className="data-label text-primary/70">Procurement & partnerships</p>
+            <p className="mt-2 text-base sm:text-lg text-primary font-medium max-w-xl">
+              Volume pricing, clinician onboarding, white-glove rollout, and co-branded patient reports — available for verified healthcare partners.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2.5">
+            <a
+              href="mailto:spandhikaorthotics@gmail.com?subject=Partnership%20enquiry"
+              className="inline-flex items-center gap-1.5 rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm font-medium hover:opacity-90 transition"
+            >
+              <Icon name="mail" className="text-base" /> Start a conversation
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-1.5 rounded-full glass px-5 py-2.5 text-sm font-medium text-primary hover:shadow-md transition"
+            >
+              Book a 20-min walkthrough
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const stats = [
   { value: "32", label: "Pressure zones" },
   { value: "24", label: "Gait variables" },

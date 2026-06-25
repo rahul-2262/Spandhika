@@ -576,8 +576,9 @@ function Hero() {
                 className="fade-up text-center sm:text-left"
                 style={{ animationDelay: `${560 + i * 80}ms` }}
               >
-                <div className="text-2xl sm:text-3xl font-bold tracking-tight text-gradient-primary">{s.value}</div>
-                <div className="mt-1 label-caps text-on-surface-variant text-[10px]">{s.label}</div>
+                <div className="data-num text-2xl sm:text-3xl font-bold tracking-tight text-gradient-primary">{s.value}</div>
+                <div className="mt-1 data-label text-[10px]">{s.label}</div>
+
               </div>
             ))}
           </div>

@@ -774,6 +774,184 @@ const features = [
   },
 ];
 
+function PressureGaitDemo() {
+  const phases = ["Heel strike", "Midstance", "Toe-off", "Swing"] as const;
+  const [phase, setPhase] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setPhase((p) => (p + 1) % phases.length), 1100);
+    return () => clearInterval(id);
+  }, []);
+
+  // Heat zones per gait phase: [heel, lateral-mid, medial-mid, ball-lat, ball-med, hallux]
+  const intensity: Record<number, number[]> = {
+    0: [1.0, 0.45, 0.35, 0.15, 0.10, 0.08], // heel strike
+    1: [0.55, 0.85, 0.80, 0.45, 0.40, 0.20], // midstance
+    2: [0.15, 0.35, 0.40, 0.95, 1.00, 0.85], // toe-off
+    3: [0.10, 0.12, 0.10, 0.10, 0.08, 0.06], // swing
+  };
+  const zones = intensity[phase];
+  const labels = [
+    { id: "Heel", val: zones[0] },
+    { id: "Midfoot", val: (zones[1] + zones[2]) / 2 },
+    { id: "Forefoot", val: (zones[3] + zones[4]) / 2 },
+    { id: "Hallux", val: zones[5] },
+  ];
+
+  return (
+    <Reveal className="mt-14 lg:mt-20">
+      <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-stretch">
+        {/* Left: foot + live heatmap */}
+        <div className="lg:col-span-7 relative rounded-[2rem] overflow-hidden border border-on-primary-container/15 bg-[#0b1f1c]/60 backdrop-blur p-5 sm:p-8">
+          <div className="flex items-center justify-between gap-3 mb-4">
+            <div>
+              <div className="label-caps text-tertiary-fixed-dim">Live demo</div>
+              <div className="text-base sm:text-lg font-semibold">Pressure map · gait cycle</div>
+            </div>
+            <div className="flex items-center gap-2 text-[11px] font-mono tabular-nums text-on-primary-container/80">
+              <span className="w-2 h-2 rounded-full bg-tertiary-fixed-dim pressure-pulse" />
+              200 Hz · 32 zones
+            </div>
+          </div>
+
+          <div className="relative mx-auto aspect-[3/4] max-w-[360px]">
+            {/* sweep line */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[40%]">
+              <div className="heat-sweep absolute inset-x-0 h-6 bg-gradient-to-b from-transparent via-tertiary-fixed/50 to-transparent blur-md" />
+            </div>
+            <svg viewBox="0 0 200 280" className="w-full h-full">
+              <defs>
+                <radialGradient id="heatRed" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#ff3b30" stopOpacity="0.95" />
+                  <stop offset="60%" stopColor="#ff7a18" stopOpacity="0.55" />
+                  <stop offset="100%" stopColor="#ff7a18" stopOpacity="0" />
+                </radialGradient>
+                <radialGradient id="heatYellow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#ffd60a" stopOpacity="0.9" />
+                  <stop offset="100%" stopColor="#ffd60a" stopOpacity="0" />
+                </radialGradient>
+                <radialGradient id="heatCool" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#34d399" stopOpacity="0.65" />
+                  <stop offset="100%" stopColor="#34d399" stopOpacity="0" />
+                </radialGradient>
+              </defs>
+
+              {/* foot outline */}
+              <path
+                d="M100 8 C140 8 165 40 162 90 C160 130 175 160 175 200 C175 245 145 272 100 272 C55 272 25 245 25 200 C25 160 40 130 38 90 C35 40 60 8 100 8 Z"
+                fill="rgba(255,255,255,0.04)"
+                stroke="rgba(220,255,240,0.25)"
+                strokeWidth="1.2"
+              />
+              {/* sensor dots grid */}
+              {Array.from({ length: 64 }).map((_, i) => {
+                const col = i % 8;
+                const row = Math.floor(i / 8);
+                const cx = 40 + col * 17;
+                const cy = 30 + row * 30;
+                return <circle key={i} cx={cx} cy={cy} r="1.2" fill="rgba(220,255,240,0.18)" />;
+              })}
+
+              {/* dynamic heat zones */}
+              {[
+                { cx: 100, cy: 240, r: 42, fill: "url(#heatRed)",    v: zones[0] }, // heel
+                { cx: 130, cy: 165, r: 34, fill: "url(#heatYellow)", v: zones[1] }, // lateral mid
+                { cx: 72,  cy: 165, r: 34, fill: "url(#heatCool)",   v: zones[2] }, // medial mid
+                { cx: 130, cy: 95,  r: 32, fill: "url(#heatYellow)", v: zones[3] }, // ball lat
+                { cx: 78,  cy: 80,  r: 36, fill: "url(#heatRed)",    v: zones[4] }, // ball med
+                { cx: 95,  cy: 38,  r: 26, fill: "url(#heatRed)",    v: zones[5] }, // hallux
+              ].map((z, i) => (
+                <circle
+                  key={i}
+                  cx={z.cx}
+                  cy={z.cy}
+                  r={z.r}
+                  fill={z.fill}
+                  className="heat-zone"
+                  style={{
+                    opacity: 0.15 + z.v * 0.85,
+                    transition: "opacity 700ms ease, transform 700ms ease",
+                    animationDelay: `${i * 0.25}s`,
+                  }}
+                />
+              ))}
+            </svg>
+          </div>
+
+          {/* phase strip */}
+          <div className="mt-5 grid grid-cols-4 gap-2">
+            {phases.map((p, i) => (
+              <div
+                key={p}
+                className={`rounded-lg border px-2 py-2 text-center text-[11px] font-mono tabular-nums transition-all duration-500 ${
+                  i === phase
+                    ? "bg-tertiary-fixed/20 border-tertiary-fixed text-tertiary-fixed-dim"
+                    : "bg-on-primary-container/5 border-on-primary-container/10 text-on-primary-container/60"
+                }`}
+              >
+                <div className="text-[9px] opacity-70">0{i + 1}</div>
+                <div>{p}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right: live readouts */}
+        <div className="lg:col-span-5 rounded-[2rem] overflow-hidden border border-on-primary-container/15 bg-on-primary-container/[0.04] backdrop-blur p-5 sm:p-7 flex flex-col">
+          <div className="label-caps text-tertiary-fixed-dim">Telemetry</div>
+          <div className="text-lg font-semibold mb-5">What SAARTHI sees, in real time</div>
+
+          <ul className="space-y-3">
+            {labels.map((l) => {
+              const pct = Math.round(l.val * 100);
+              return (
+                <li key={l.id} className="rounded-xl bg-primary-container/30 border border-on-primary-container/10 px-4 py-3">
+                  <div className="flex items-baseline justify-between text-sm">
+                    <span className="font-medium">{l.id}</span>
+                    <span className="font-mono tabular-nums text-tertiary-fixed-dim">{pct.toString().padStart(2, "0")}%</span>
+                  </div>
+                  <div className="mt-2 h-1.5 rounded-full bg-on-primary-container/10 overflow-hidden">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-tertiary-fixed-dim via-amber-400 to-red-500 transition-[width] duration-700 ease-out"
+                      style={{ width: `${pct}%` }}
+                    />
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* live waveform */}
+          <div className="mt-6 rounded-xl bg-primary-container/30 border border-on-primary-container/10 px-4 py-3">
+            <div className="flex items-baseline justify-between text-sm">
+              <span className="font-medium">Cadence</span>
+              <span className="font-mono tabular-nums text-tertiary-fixed-dim">
+                {[112, 118, 124, 96][phase]} spm
+              </span>
+            </div>
+            <div className="mt-3 flex items-end gap-1 h-10">
+              {Array.from({ length: 28 }).map((_, i) => (
+                <span
+                  key={i}
+                  className="flex-1 rounded-sm bg-tertiary-fixed/70 origin-bottom"
+                  style={{
+                    animation: `wave-bar 1.4s ease-in-out ${i * 0.05}s infinite`,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+
+          <p className="mt-5 text-[12px] text-on-primary-container/70 leading-relaxed">
+            Demo visualization. Live device streams 32-channel pressure at 200 Hz; companion app shows per-step balance, asymmetry, and strain trends.
+          </p>
+        </div>
+      </div>
+    </Reveal>
+  );
+}
+
+
+
 function Features() {
   return (
     <section id="features" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-20 lg:py-28 bg-primary text-primary-foreground relative overflow-hidden">

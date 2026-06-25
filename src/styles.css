@@ -304,9 +304,38 @@
 @utility marquee {
   animation: marquee-x 28s linear infinite;
 }
+@keyframes heat-zone {
+  0%, 100% { opacity: 0.35; transform: scale(0.9); }
+  50%      { opacity: 1;    transform: scale(1.15); }
+}
+@utility heat-zone {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: heat-zone 2.8s ease-in-out infinite;
+}
+@keyframes gait-step {
+  0%, 24%   { opacity: 0.18; transform: translateY(0); }
+  25%, 49%  { opacity: 1;    transform: translateY(-2px); }
+  50%, 100% { opacity: 0.18; transform: translateY(0); }
+}
+@keyframes heat-sweep {
+  0%   { transform: translateY(-15%); opacity: 0; }
+  20%  { opacity: 0.55; }
+  80%  { opacity: 0.55; }
+  100% { transform: translateY(115%); opacity: 0; }
+}
+@utility heat-sweep {
+  animation: heat-sweep 3.6s ease-in-out infinite;
+}
+@keyframes wave-bar {
+  0%, 100% { transform: scaleY(0.35); }
+  50%      { transform: scaleY(1); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal, .stagger > *, .hover-lift, .link-underline::after { transition: none !important; }
-  .float-slow, .float-slow-rev, .scan-sweep, .ring-pulse, .marquee, .blob { animation: none !important; }
+  .float-slow, .float-slow-rev, .scan-sweep, .ring-pulse, .marquee, .blob, .heat-zone, .heat-sweep { animation: none !important; }
 }
+
 
 

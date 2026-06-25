@@ -1027,9 +1027,49 @@ const stats = [
 ];
 
 const pillars = [
-  { icon: "science", title: "Rooted in biomechanics", body: "Decades of foot-and-gait research, distilled into something you can wear." },
-  { icon: "favorite", title: "Comfort-first design", body: "If it doesn't feel right, it isn't right. Every choice starts with comfort." },
-  { icon: "lock", title: "Privacy by design", body: "Your movement data is yours. We use it to help, never to sell." },
+  {
+    icon: "science",
+    title: "Rooted in biomechanics",
+    body: "Designed on the principles of gait analysis, plantar pressure distribution, and lower-limb kinematics — the same fundamentals used in clinical podiatry and sports medicine.",
+  },
+  {
+    icon: "verified",
+    title: "Engineered to clinical standards",
+    body: "Materials, sensor placement, and arch geometry are developed with biomechanics references and benchmarked against established orthotic design practices.",
+  },
+  {
+    icon: "lock",
+    title: "Privacy by design",
+    body: "Your movement data stays yours. Stored encrypted, never sold to third parties, never used for ads. You can export or delete everything from your account at any time.",
+  },
+];
+
+const advisors = [
+  {
+    initials: "BM",
+    role: "Biomechanics Advisor",
+    focus: "Gait analysis · Lower-limb kinematics",
+    note: "Guides our pressure-mapping methodology and arch-support geometry.",
+  },
+  {
+    initials: "PT",
+    role: "Physiotherapy Advisor",
+    focus: "Sports rehab · Plantar fasciitis",
+    note: "Validates clinical use cases and patient-comfort protocols.",
+  },
+  {
+    initials: "PD",
+    role: "Product Design Lead",
+    focus: "Wearables · Sensor integration",
+    note: "Translates biomechanics into a wearable people actually want to use.",
+  },
+];
+
+const credentials = [
+  { icon: "school", label: "Biomechanics-informed", sub: "Designed on peer-reviewed gait research" },
+  { icon: "flag", label: "Made in India", sub: "Designed, prototyped, and assembled locally" },
+  { icon: "factory", label: "Quality-tested materials", sub: "Medical-grade EVA, breathable fabric cover" },
+  { icon: "shield", label: "Privacy by design", sub: "Encrypted in transit · You own your data" },
 ];
 
 function Trust() {
@@ -1038,10 +1078,10 @@ function Trust() {
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-20">
         <Eyebrow>Why trust Spandhika</Eyebrow>
         <h2 className="mt-4 max-w-3xl text-[26px] sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary">
-          Built with research. Designed for real life.
+          Built with biomechanics. Designed for real life.
         </h2>
         <p className="mt-5 max-w-3xl text-on-surface-variant text-[15px] sm:text-lg">
-          Inspired by biomechanics and shaped by real-world movement challenges. We're combining what scientists know about gait with what people actually feel at the end of a long day.
+          SAARTHI is shaped by clinical biomechanics, product engineering, and the people who actually spend their days on their feet — combining what researchers know about gait with what real bodies feel at the end of a long day.
         </p>
 
         <Reveal stagger className="mt-8 sm:mt-12 grid grid-cols-3 gap-3 sm:gap-6 lg:gap-8 border-y border-outline-variant py-8 sm:py-10">
@@ -1073,6 +1113,89 @@ function Trust() {
           ))}
         </Reveal>
 
+        {/* Advisors */}
+        <div className="mt-14 sm:mt-20">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+            <div>
+              <Eyebrow>Advisors & expertise</Eyebrow>
+              <h3 className="mt-3 text-[22px] sm:text-3xl lg:text-4xl font-semibold tracking-tight text-primary">
+                Guided by clinical and engineering experts.
+              </h3>
+            </div>
+            <p className="max-w-md text-on-surface-variant text-[15px] sm:text-base">
+              Our advisory circle spans biomechanics, physiotherapy, and wearable product design — keeping SAARTHI grounded in clinical reality.
+            </p>
+          </div>
+
+          <Reveal stagger className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 items-start">
+            {advisors.map((a) => (
+              <div
+                key={a.role}
+                className="rounded-2xl p-6 glass border border-white/40 hover-lift transition-all duration-500"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-secondary-container text-primary flex items-center justify-center font-semibold tracking-tight">
+                    {a.initials}
+                  </div>
+                  <div>
+                    <div className="text-primary font-semibold">{a.role}</div>
+                    <div className="text-xs text-on-surface-variant">{a.focus}</div>
+                  </div>
+                </div>
+                <p className="mt-4 text-sm text-on-surface-variant leading-relaxed">{a.note}</p>
+              </div>
+            ))}
+          </Reveal>
+
+          <p className="mt-4 text-xs text-on-surface-variant/80">
+            Named advisor profiles and institutional partners will be published as collaborations are formalised.
+          </p>
+        </div>
+
+        {/* Credentials strip */}
+        <Reveal className="mt-12 sm:mt-16 rounded-2xl glass-strong border border-white/40 p-6 sm:p-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+            {credentials.map((c) => (
+              <div key={c.label} className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-xl bg-secondary-container text-primary flex items-center justify-center shrink-0">
+                  <Icon name={c.icon} />
+                </div>
+                <div>
+                  <div className="text-sm sm:text-base font-semibold text-primary leading-tight">{c.label}</div>
+                  <div className="mt-1 text-xs text-on-surface-variant leading-snug">{c.sub}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        {/* Privacy deep-dive */}
+        <Reveal className="mt-10 sm:mt-12 rounded-2xl glass border border-white/40 p-6 sm:p-8">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-secondary-container text-primary flex items-center justify-center">
+              <Icon name="lock" />
+            </div>
+            <h3 className="text-lg sm:text-xl font-semibold text-primary">Privacy by design — in detail</h3>
+          </div>
+          <p className="mt-4 text-on-surface-variant text-[15px] leading-relaxed max-w-3xl">
+            Your gait, posture, and pressure patterns are personal. We treat your data with the same care a clinician would.
+          </p>
+          <ul className="mt-6 grid sm:grid-cols-2 gap-x-8 gap-y-3 text-sm text-on-surface-variant">
+            {[
+              "Encrypted in transit and at rest",
+              "You own your data — export or delete anytime",
+              "No selling or sharing with advertisers",
+              "Account-scoped — only you and people you invite can view",
+              "Aggregated, anonymised analytics only for product improvement (opt-out available)",
+              "Minimal data collection — we ask only for what's needed to help you move better",
+            ].map((p) => (
+              <li key={p} className="flex items-start gap-2">
+                <Icon name="check_circle" className="text-base text-tertiary-fixed-dim mt-0.5" />
+                <span>{p}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
 
         <blockquote className="mt-12 sm:mt-16 max-w-4xl">
           <p className="text-[20px] sm:text-3xl lg:text-4xl font-medium text-primary leading-snug tracking-tight">

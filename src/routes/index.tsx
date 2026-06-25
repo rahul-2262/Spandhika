@@ -1362,6 +1362,10 @@ function Partners() {
           ))}
         </Reveal>
 
+        <OrthotistPressurePreview />
+
+
+
         <div className="mt-10 sm:mt-14 glass-strong rounded-2xl p-6 sm:p-8 border border-white/40 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
           <div>
             <p className="data-label text-primary/70">Procurement & partnerships</p>

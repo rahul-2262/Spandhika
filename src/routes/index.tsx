@@ -1962,6 +1962,7 @@ function Index() {
         <Features />
         <Range />
         <Audience />
+        <Partners />
         <Trust />
         <Contact />
         <Purpose />

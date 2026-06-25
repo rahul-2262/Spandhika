@@ -836,6 +836,11 @@ function Features() {
 
         </div>
 
+        {/* Live pressure-map / gait demo */}
+        <PressureGaitDemo />
+
+
+
         <Reveal stagger className="mt-14 grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 items-start">
           {features.map((f) => (
             <div

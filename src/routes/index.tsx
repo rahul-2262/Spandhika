@@ -1293,7 +1293,7 @@ const partners = [
       "Bulk-fit kits and trade pricing for established practices",
     ],
     cta: { label: "Talk to our orthotics team", href: "mailto:spandhikaorthotics@gmail.com?subject=Orthotist%20partnership" },
-    secondary: { label: "See sample dataset", href: "#saarthi" },
+    secondary: { label: "Try interactive preview", href: "#orthotist-preview" },
   },
   {
     icon: "domain",
@@ -1309,6 +1309,251 @@ const partners = [
     secondary: { label: "Procurement & pricing", href: "mailto:spandhikaorthotics@gmail.com?subject=Hospital%20procurement" },
   },
 ];
+
+// Interactive pressure-map preview for Orthotists & P&O labs.
+// Lightweight: pure SVG + local state; no data fetching.
+
+type Zone = {
+  id: string;
+  label: string;
+  cx: number;
+  cy: number;
+  r: number;
+  // Pressure in kPa per gait phase: heel-strike, mid-stance, toe-off.
+  pressure: [number, number, number];
+  dwell: [number, number, number]; // ms
+};
+
+const PRESSURE_ZONES: Zone[] = [
+  { id: "heel-lat", label: "Lateral heel", cx: 60, cy: 240, r: 22, pressure: [285, 110, 12], dwell: [180, 90, 0] },
+  { id: "heel-med", label: "Medial heel", cx: 92, cy: 238, r: 20, pressure: [252, 128, 18], dwell: [180, 110, 0] },
+  { id: "midfoot", label: "Midfoot arch", cx: 78, cy: 178, r: 18, pressure: [42, 168, 88], dwell: [60, 220, 90] },
+  { id: "met-5", label: "5th metatarsal", cx: 44, cy: 118, r: 16, pressure: [18, 210, 244], dwell: [10, 180, 220] },
+  { id: "met-1", label: "1st metatarsal", cx: 108, cy: 108, r: 18, pressure: [22, 232, 298], dwell: [10, 200, 260] },
+  { id: "hallux", label: "Hallux (big toe)", cx: 118, cy: 56, r: 16, pressure: [8, 92, 312], dwell: [0, 60, 280] },
+  { id: "toes-lat", label: "Lateral toes", cx: 56, cy: 52, r: 14, pressure: [6, 70, 188], dwell: [0, 50, 180] },
+];
+
+const PHASES = [
+  { id: 0, label: "Heel strike", short: "HS", time: "0–15%" },
+  { id: 1, label: "Mid-stance", short: "MS", time: "15–50%" },
+  { id: 2, label: "Toe-off", short: "TO", time: "50–62%" },
+] as const;
+
+function pressureColor(value: number) {
+  // 0–320 kPa → cool to hot
+  const t = Math.min(1, value / 320);
+  const hue = 220 - t * 220; // 220 (blue) → 0 (red)
+  const alpha = 0.25 + t * 0.65;
+  return `hsla(${hue}, 90%, ${55 - t * 15}%, ${alpha})`;
+}
+
+function OrthotistPressurePreview() {
+  const [phase, setPhase] = useState<0 | 1 | 2>(1);
+  const [active, setActive] = useState<string>("met-1");
+  const [email, setEmail] = useState("");
+  const [sent, setSent] = useState(false);
+
+  const zone = PRESSURE_ZONES.find((z) => z.id === active) ?? PRESSURE_ZONES[0];
+  const peak = Math.max(...PRESSURE_ZONES.map((z) => z.pressure[phase]));
+  const peakZone = PRESSURE_ZONES.find((z) => z.pressure[phase] === peak)!;
+  const cop = PRESSURE_ZONES.reduce(
+    (acc, z) => {
+      const w = z.pressure[phase];
+      acc.x += z.cx * w;
+      acc.y += z.cy * w;
+      acc.w += w;
+      return acc;
+    },
+    { x: 0, y: 0, w: 0 },
+  );
+  const copX = cop.x / cop.w;
+  const copY = cop.y / cop.w;
+
+  function submit(e: FormEvent) {
+    e.preventDefault();
+    if (!email || !email.includes("@")) return;
+    setSent(true);
+  }
+
+  return (
+    <div id="orthotist-preview" className="scroll-mt-24 mt-10 sm:mt-12 glass-strong rounded-2xl border border-white/40 overflow-hidden">
+      <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr]">
+        {/* Left: interactive SVG */}
+        <div className="relative p-5 sm:p-7 lg:border-r border-white/40 bg-gradient-to-br from-primary-container/40 to-transparent">
+          <div className="flex items-center justify-between gap-3 flex-wrap">
+            <div>
+              <p className="data-label text-primary/70">Interactive preview</p>
+              <h3 className="mt-1 text-base sm:text-lg font-semibold text-primary">
+                Plantar pressure map — single gait cycle
+              </h3>
+            </div>
+            <div className="inline-flex rounded-full glass p-1 text-xs">
+              {PHASES.map((p) => (
+                <button
+                  key={p.id}
+                  type="button"
+                  onClick={() => setPhase(p.id as 0 | 1 | 2)}
+                  className={`px-3 py-1.5 rounded-full transition font-medium ${
+                    phase === p.id ? "bg-primary text-primary-foreground shadow" : "text-on-surface-variant hover:text-primary"
+                  }`}
+                >
+                  {p.short}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-4 relative mx-auto" style={{ maxWidth: 320 }}>
+            <svg viewBox="0 0 180 290" className="w-full h-auto" role="img" aria-label="Interactive plantar pressure map">
+              <defs>
+                <radialGradient id="footFill" cx="50%" cy="50%" r="60%">
+                  <stop offset="0%" stopColor="hsl(var(--primary-container))" stopOpacity="0.55" />
+                  <stop offset="100%" stopColor="hsl(var(--primary-container))" stopOpacity="0.15" />
+                </radialGradient>
+              </defs>
+              {/* Foot outline (right foot, plantar view) */}
+              <path
+                d="M85 12 C 130 12, 150 50, 145 100 C 142 135, 150 165, 138 200 C 128 235, 118 268, 92 278 C 60 282, 38 258, 32 220 C 28 180, 36 150, 38 120 C 40 80, 48 12, 85 12 Z"
+                fill="url(#footFill)"
+                stroke="hsl(var(--primary) / 0.4)"
+                strokeWidth="1.2"
+              />
+
+              {/* Heat zones */}
+              {PRESSURE_ZONES.map((z) => {
+                const v = z.pressure[phase];
+                const r = z.r + (v / 320) * 10;
+                return (
+                  <g key={z.id} className="cursor-pointer" onMouseEnter={() => setActive(z.id)} onClick={() => setActive(z.id)}>
+                    <circle cx={z.cx} cy={z.cy} r={r} fill={pressureColor(v)} className="transition-all duration-500">
+                      <animate attributeName="opacity" values="0.85;1;0.85" dur="2.2s" repeatCount="indefinite" />
+                    </circle>
+                    <circle
+                      cx={z.cx}
+                      cy={z.cy}
+                      r={z.r * 0.55}
+                      fill="hsl(var(--primary))"
+                      fillOpacity={active === z.id ? 0.9 : 0.25}
+                      className="transition-opacity"
+                    />
+                  </g>
+                );
+              })}
+
+              {/* Center of pressure */}
+              <g style={{ transition: "transform 0.6s ease" }}>
+                <circle cx={copX} cy={copY} r="5" fill="hsl(var(--primary))" stroke="white" strokeWidth="2" />
+                <circle cx={copX} cy={copY} r="11" fill="none" stroke="hsl(var(--primary) / 0.5)" strokeWidth="1">
+                  <animate attributeName="r" values="8;16;8" dur="1.8s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.8;0;0.8" dur="1.8s" repeatCount="indefinite" />
+                </circle>
+              </g>
+            </svg>
+
+            {/* Color legend */}
+            <div className="mt-3 flex items-center gap-3">
+              <span className="data-label text-on-surface-variant text-[10px]">0 kPa</span>
+              <div
+                className="flex-1 h-2 rounded-full"
+                style={{
+                  background: "linear-gradient(to right, hsla(220,90%,55%,0.5), hsla(140,90%,50%,0.7), hsla(50,90%,50%,0.8), hsla(0,90%,45%,0.9))",
+                }}
+              />
+              <span className="data-label text-on-surface-variant text-[10px]">320+ kPa</span>
+            </div>
+            <p className="mt-2 text-[11px] text-on-surface-variant text-center">
+              Tap a zone to inspect · {PHASES[phase].label} ({PHASES[phase].time} of gait cycle)
+            </p>
+          </div>
+        </div>
+
+        {/* Right: data readout + access fallback */}
+        <div className="p-5 sm:p-7 flex flex-col">
+          <div className="flex items-baseline justify-between gap-3">
+            <p className="data-label text-primary/70">Live readout</p>
+            <span className="data-label text-on-surface-variant">{PHASES[phase].label}</span>
+          </div>
+
+          <div className="mt-3 grid grid-cols-3 gap-2">
+            <div className="rounded-xl glass p-3">
+              <p className="data-label text-on-surface-variant">Active zone</p>
+              <p className="mt-1 text-sm font-semibold text-primary leading-tight">{zone.label}</p>
+            </div>
+            <div className="rounded-xl glass p-3">
+              <p className="data-label text-on-surface-variant">Pressure</p>
+              <p className="mt-1 data-num text-primary">{zone.pressure[phase]}<span className="text-xs ml-1 text-on-surface-variant">kPa</span></p>
+            </div>
+            <div className="rounded-xl glass p-3">
+              <p className="data-label text-on-surface-variant">Dwell</p>
+              <p className="mt-1 data-num text-primary">{zone.dwell[phase]}<span className="text-xs ml-1 text-on-surface-variant">ms</span></p>
+            </div>
+          </div>
+
+          <div className="mt-4 rounded-xl bg-primary/5 border border-primary/15 p-3">
+            <div className="flex items-center justify-between text-xs">
+              <span className="data-label text-primary/70">Peak load this phase</span>
+              <span className="font-semibold text-primary">{peakZone.label} · {peak} kPa</span>
+            </div>
+            <div className="mt-2 h-1.5 rounded-full bg-primary/10 overflow-hidden">
+              <div
+                className="h-full bg-primary transition-all duration-500"
+                style={{ width: `${Math.min(100, (peak / 320) * 100)}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Locked dataset / access fallback */}
+          <div className="mt-5 relative rounded-xl border border-dashed border-primary/30 p-4 bg-card/40">
+            <div className="flex items-center gap-2">
+              <Icon name="lock" className="text-primary text-base" />
+              <p className="data-label text-primary/80">Full dataset preview</p>
+            </div>
+            <pre className="mt-3 text-[11px] leading-relaxed font-mono text-on-surface-variant overflow-hidden max-h-24 select-none">
+{`t=0.00s  phase=HS  peak=285kPa @ heel-lat  cop=(76,238)
+t=0.18s  phase=MS  peak=232kPa @ met-1    cop=(94,162)
+t=0.42s  phase=TO  peak=312kPa @ hallux   cop=(118, 78)
+t=0.62s  swing     contact=0%             ...`}
+            </pre>
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-card to-transparent" />
+          </div>
+
+          {sent ? (
+            <div className="mt-4 rounded-xl bg-primary/10 border border-primary/20 p-4 flex items-start gap-3">
+              <Icon name="check_circle" className="text-primary text-lg mt-0.5" />
+              <div>
+                <p className="text-sm font-semibold text-primary">Access request received.</p>
+                <p className="mt-1 text-xs text-on-surface-variant">
+                  We'll send the full pressure/gait dataset, CSV + JSON schema, and lab onboarding kit to <span className="font-mono">{email}</span> within one business day.
+                </p>
+              </div>
+            </div>
+          ) : (
+            <form onSubmit={submit} className="mt-4 flex flex-col sm:flex-row gap-2">
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="lab@yourclinic.com"
+                className="flex-1 rounded-full glass px-4 py-2.5 text-sm text-primary placeholder:text-on-surface-variant/70 border border-white/40 focus:outline-none focus:ring-2 focus:ring-primary/30"
+              />
+              <button
+                type="submit"
+                className="inline-flex items-center justify-center gap-1.5 rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm font-medium hover:opacity-90 transition whitespace-nowrap"
+              >
+                Request access <Icon name="arrow_forward" className="text-base" />
+              </button>
+            </form>
+          )}
+          <p className="mt-2 text-[11px] text-on-surface-variant">
+            Sample dataset shared with verified P&O labs only. We'll verify your practice before sending raw data.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function Partners() {
   return (
@@ -1361,6 +1606,10 @@ function Partners() {
             </article>
           ))}
         </Reveal>
+
+        <OrthotistPressurePreview />
+
+
 
         <div className="mt-10 sm:mt-14 glass-strong rounded-2xl p-6 sm:p-8 border border-white/40 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
           <div>

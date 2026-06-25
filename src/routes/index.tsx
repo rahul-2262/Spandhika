@@ -55,7 +55,8 @@ function Reveal({
 import logoAsset from "@/assets/spandhika-logo.png.asset.json";
 import heroFootAsset from "@/assets/hero-foot-pressure.png.asset.json";
 const heroFoot = heroFootAsset.url;
-import explodedInsole from "@/assets/exploded-insole.jpg";
+import insoleAsset from "@/assets/insole.png.asset.json";
+const explodedInsole = insoleAsset.url;
 import footPainImg from "@/assets/foot-pain.jpg";
 
 export const Route = createFileRoute("/")({

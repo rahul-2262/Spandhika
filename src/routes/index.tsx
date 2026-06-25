@@ -106,9 +106,9 @@ function Nav() {
   const [open, setOpen] = useState(false);
   const links = [
     { href: "#problem", label: "The problem" },
-    { href: "#features", label: "Features" },
+    { href: "#saarthi", label: "Features" },
     { href: "#audience", label: "Who it's for" },
-    { href: "#purpose", label: "Purpose" },
+    { href: "#purpose", label: "Our Story" },
     { href: "#contact", label: "Contact" },
   ];
   return (
@@ -127,7 +127,7 @@ function Nav() {
         <div className="flex items-center gap-2">
           <a
             href="#waitlist"
-            className="hidden sm:inline-flex items-center gap-1 rounded-full bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:opacity-90 transition"
+            className="inline-flex items-center gap-1 rounded-full bg-primary text-primary-foreground px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm font-medium hover:opacity-90 transition"
           >
             Join waitlist
           </a>

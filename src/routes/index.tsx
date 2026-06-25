@@ -1464,6 +1464,9 @@ function Trust() {
           <p className="mt-6 data-label text-on-surface-variant/80">
             Specifications indicative · final values confirmed at launch
           </p>
+        </Reveal>
+
+
 
 
         {/* Privacy deep-dive */}
